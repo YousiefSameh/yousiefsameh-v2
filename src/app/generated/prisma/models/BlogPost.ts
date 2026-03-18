@@ -525,14 +525,6 @@ export type BlogPostCreatetagsInput = {
   set: string[]
 }
 
-export type StringFieldUpdateOperationsInput = {
-  set?: string
-}
-
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type EnumBlogPostCategoryFieldUpdateOperationsInput = {
   set?: $Enums.BlogPostCategory
 }
@@ -552,10 +544,6 @@ export type NullableIntFieldUpdateOperationsInput = {
 
 export type NullableBoolFieldUpdateOperationsInput = {
   set?: boolean | null
-}
-
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
 }
 
 

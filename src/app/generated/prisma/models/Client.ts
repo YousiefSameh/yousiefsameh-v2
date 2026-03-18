@@ -383,10 +383,6 @@ export type ClientNullableScalarRelationFilter = {
   isNot?: Prisma.ClientWhereInput | null
 }
 
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string
-}
-
 export type ClientCreateNestedOneWithoutProjectsInput = {
   create?: Prisma.XOR<Prisma.ClientCreateWithoutProjectsInput, Prisma.ClientUncheckedCreateWithoutProjectsInput>
   connectOrCreate?: Prisma.ClientCreateOrConnectWithoutProjectsInput
