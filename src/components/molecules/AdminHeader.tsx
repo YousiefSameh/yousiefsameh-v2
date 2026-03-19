@@ -29,7 +29,7 @@ export function AdminHeader({ user }: { user: User }) {
 
   return (
     <header className="h-16 border-b border-border bg-background px-6 flex items-center justify-between">
-      <div className="lg:hidden">
+      <div className="lg:hidden pl-12">
         <span className="text-xl font-bold tracking-tight">
           Yousief<span className="text-primary">.</span>
         </span>
