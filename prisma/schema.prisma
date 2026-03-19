@@ -236,13 +236,6 @@ model Project {
   status            ProjectStatus   @default(COMPLETED)
   liveUrl           String?         @map("live_url")
   repoUrl           String?         @map("repo_url")
-  problem           String?
-  solution          String?
-  researchNotes     String?         @map("research_notes")
-  designProcess     String?         @map("design_process")
-  architectureNotes String?         @map("architecture_notes")
-  challenges        String?
-  learnings         String?
   isFeatured        Boolean?        @default(false) @map("is_featured")
   displayOrder      Int?            @default(0) @map("display_order")
   year              Int?
@@ -250,12 +243,7 @@ model Project {
   updatedAt         DateTime?       @default(now()) @map("updated_at") @db.Timestamptz
   galleryImages     String[]        @default([]) @map("gallery_images")
   clientId          String?         @map("client_id") @db.Uuid
-  type              ProjectType?    @default(PORTFOLIO)
-  accessToken       String?         @map("access_token")
-  startDate         DateTime?       @map("start_date") @db.Timestamptz
-  dueDate           DateTime?       @map("due_date") @db.Timestamptz
-  budget            Decimal?        @db.Decimal
-  invoiceStatus     InvoiceStatus?  @map("invoice_status")
+  type              ProjectType?    @default(PORTFOLIO) 
 
   client        Client?        @relation(fields: [clientId], references: [id])
   files         ProjectFile[]
