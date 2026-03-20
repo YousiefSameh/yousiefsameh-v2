@@ -1,8 +1,9 @@
+import type { NextResponse } from "next/server";
+
 export interface APIResponse<T> {
   success: boolean;
-  data: T;
+  data?: T;
   message?: string;
-  error?: string;
   pagination?: {
     page: number;
     limit: number;
@@ -12,3 +13,7 @@ export interface APIResponse<T> {
     hasPrevPage: boolean;
   };
 }
+
+export type APIErrorResponse = { success: false; error: string };
+
+export type APIResult<T> = NextResponse<APIResponse<T> | APIErrorResponse>;

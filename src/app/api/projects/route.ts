@@ -1,10 +1,10 @@
-import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { apiSuccess, apiError } from "@/lib/api";
 import {
-  ProjectCategory,
-  ProjectStatus,
-  ProjectType,
-} from "@/app/generated/prisma/client";
+  parseQueryParams,
+  publicProjectQuerySchema,
+} from "@/lib/parseQueryParams";
+import { Prisma } from "@/app/generated/prisma/client";
 
 /**
  * @summary: Get all projects (for guests)
@@ -21,23 +21,17 @@ export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
 
-    const page = Math.max(1, Number(searchParams.get("page") ?? 1));
-    const limit = Math.min(
-      50,
-      Math.max(1, Number(searchParams.get("limit") ?? 9)),
-    );
+    const parsed = parseQueryParams(publicProjectQuerySchema, searchParams);
+    if (!parsed.success) return apiError(parsed.error, 400);
+
+    const { page, limit, featured, category, status, type } = parsed.data;
     const skip = (page - 1) * limit;
 
-    const featured = searchParams.get("featured");
-    const category = searchParams.get("category");
-    const status = searchParams.get("status");
-    const type = searchParams.get("type");
-
-    const where = {
-      ...(featured === "true" && { isFeatured: true }),
-      ...(category && { category: category as ProjectCategory }),
-      ...(status && { status: status as ProjectStatus }),
-      ...(type && { type: type as ProjectType }),
+    const where: Prisma.ProjectWhereInput = {
+      ...(featured !== undefined && { isFeatured: featured }),
+      ...(category && { category }),
+      ...(status && { status }),
+      ...(type && { type }),
     };
 
     const [total, projects] = await prisma.$transaction([
@@ -84,24 +78,16 @@ export async function GET(request: Request) {
 
     const totalPages = Math.ceil(total / limit);
 
-    return NextResponse.json({
-      success: true,
-      data: projects,
-      message: "Projects fetched successfully",
-      pagination: {
-        page,
-        limit,
-        total,
-        totalPages,
-        hasNextPage: page < totalPages,
-        hasPrevPage: page > 1,
-      },
+    return apiSuccess(projects, "Projects fetched successfully", 200, {
+      page,
+      limit,
+      total,
+      totalPages,
+      hasNextPage: page < totalPages,
+      hasPrevPage: page > 1,
     });
   } catch (error) {
     console.error("[GET /api/projects]", error);
-    return NextResponse.json(
-      { success: false, error: "Failed to fetch projects" },
-      { status: 500 },
-    );
+    return apiError("Failed to fetch projects", 500);
   }
 }

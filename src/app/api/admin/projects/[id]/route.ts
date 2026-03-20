@@ -1,13 +1,20 @@
-import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 import { requireAdmin } from "@/lib/requireAdmin";
+import { apiError, apiSuccess } from "@/lib/api";
+import { projectBaseSchema } from "@/validations/projects.validation";
 
-type Params = { params: Promise<{ id: string }> };
+type Params = { params: { id: string } };
 
 const adminInclude = {
   client: {
-    select: { id: true, name: true, email: true, company: true, avatarUrl: true },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      company: true,
+      avatarUrl: true,
+    },
   },
   files: { orderBy: { createdAt: "asc" as const } },
   tasks: { orderBy: { displayOrder: "asc" as const } },
@@ -24,10 +31,10 @@ export async function GET(_req: Request, { params }: Params) {
   try {
     const user = await requireAdmin();
     if (!user) {
-      return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
+      return apiError("Unauthorized", 401);
     }
 
-    const { id } = await params;
+    const { id } = params;
 
     const project = await prisma.project.findUnique({
       where: { id },
@@ -35,16 +42,13 @@ export async function GET(_req: Request, { params }: Params) {
     });
 
     if (!project) {
-      return NextResponse.json({ success: false, error: "Project not found" }, { status: 404 });
+      return apiError("Project not found", 404);
     }
 
-    return NextResponse.json({ success: true, message: "Project fetched successfully", data: project });
+    return apiSuccess(project, "Project fetched successfully", 200);
   } catch (error) {
     console.error("[GET /api/admin/projects/:id]", error);
-    return NextResponse.json(
-      { success: false, error: "Failed to fetch project" },
-      { status: 500 },
-    );
+    return apiError("Failed to fetch project", 500);
   }
 }
 
@@ -58,33 +62,33 @@ export async function PATCH(request: Request, { params }: Params) {
   try {
     const user = await requireAdmin();
     if (!user) {
-      return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
+      return apiError("Unauthorized", 401);
     }
 
-    const { id } = await params;
+    const { id } = params;
     const body = await request.json();
 
-    const { ...projectFields } = body;
+    const validation = projectBaseSchema.partial().safeParse(body);
+    if (!validation.success) return apiError("Invalid form data.", 400);
 
     const project = await prisma.project.update({
       where: { id },
-      data: { ...projectFields, updatedAt: new Date() },
+      data: { ...validation.data, updatedAt: new Date() },
       include: adminInclude,
     });
 
-    return NextResponse.json({ success: true, message: "Project updated successfully", data: project });
+    return apiSuccess(project, "Project updated successfully", 200);
   } catch (error) {
-    if (error instanceof PrismaClientKnownRequestError && error?.code === "P2025") {
-      return NextResponse.json({ success: false, error: "Project not found" }, { status: 404 });
-    }
-    if (error instanceof PrismaClientKnownRequestError && error?.code === "P2002") {
-      return NextResponse.json({ success: false, error: "Slug already exists" }, { status: 409 });
+    if (error instanceof PrismaClientKnownRequestError) {
+      if (error?.code === "P2025") {
+        return apiError("Project not found", 404);
+      }
+      if (error?.code === "P2002") {
+        return apiError("Slug already exists", 409);
+      }
     }
     console.error("[PATCH /api/admin/projects/:id]", error);
-    return NextResponse.json(
-      { success: false, error: "Failed to update project" },
-      { status: 500 },
-    );
+    return apiError("Failed to update project", 500);
   }
 }
 
@@ -97,22 +101,22 @@ export async function DELETE(_req: Request, { params }: Params) {
   try {
     const user = await requireAdmin();
     if (!user) {
-      return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
+      return apiError("Unauthorized", 401);
     }
 
-    const { id } = await params;
+    const { id } = params;
 
     await prisma.project.delete({ where: { id } });
 
-    return NextResponse.json({ success: true, message: "Project deleted successfully" }, { status: 200 });
+    return apiSuccess(null, "Project deleted successfully", 200);
   } catch (error) {
-    if (error instanceof PrismaClientKnownRequestError && error.code === "P2025") {
-      return NextResponse.json({ success: false, error: "Project not found" }, { status: 404 });
+    if (
+      error instanceof PrismaClientKnownRequestError &&
+      error.code === "P2025"
+    ) {
+      return apiError("Project not found", 404);
     }
     console.error("[DELETE /api/admin/projects/:id]", error);
-    return NextResponse.json(
-      { success: false, error: "Failed to delete project" },
-      { status: 500 },
-    );
+    return apiError("Failed to delete project", 500);
   }
 }

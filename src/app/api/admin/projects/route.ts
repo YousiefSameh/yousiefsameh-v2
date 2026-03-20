@@ -1,7 +1,11 @@
-import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { ProjectCategory, ProjectStatus, ProjectType } from "@/app/generated/prisma/client";
+import { Prisma, Project } from "@/app/generated/prisma/client";
 import { requireAdmin } from "@/lib/requireAdmin";
+import { projectBaseSchema } from "@/validations/projects.validation";
+import { APIResult } from "@/lib/types";
+import { apiSuccess, apiError } from "@/lib/api";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
+import { parseQueryParams, projectQuerySchema } from "@/lib/parseQueryParams";
 
 /**
  * @summary Get all projects (for admin)
@@ -13,30 +17,27 @@ import { requireAdmin } from "@/lib/requireAdmin";
  * @param type - The type of projects
  * @returns The data and pagination info or an error message
  */
-export async function GET(request: Request) {
+export async function GET(request: Request): Promise<APIResult<Project[]>> {
   try {
     const user = await requireAdmin();
     if (!user) {
-      return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
+      return apiError("Unauthorized", 401);
     }
 
     const { searchParams } = new URL(request.url);
 
-    const page = Math.max(1, Number(searchParams.get("page") ?? 1));
-    const limit = Math.min(50, Math.max(1, Number(searchParams.get("limit") ?? 10)));
+    const parsed = parseQueryParams(projectQuerySchema, searchParams);
+    if (!parsed.success) return apiError(parsed.error, 400);
+
+    const { page, limit, featured, category, status, type, clientId } =
+      parsed.data;
     const skip = (page - 1) * limit;
 
-    const featured = searchParams.get("featured");
-    const category = searchParams.get("category");
-    const status = searchParams.get("status");
-    const type = searchParams.get("type");
-    const clientId = searchParams.get("clientId");
-
-    const where = {
-      ...(featured === "true" && { isFeatured: true }),
-      ...(category && { category: category as ProjectCategory }),
-      ...(status && { status: status as ProjectStatus }),
-      ...(type && { type: type as ProjectType }),
+    const where: Prisma.ProjectWhereInput = {
+      ...(featured !== undefined && { isFeatured: featured }),
+      ...(category && { category }),
+      ...(status && { status }),
+      ...(type && { type }),
       ...(clientId && { clientId }),
     };
 
@@ -49,7 +50,13 @@ export async function GET(request: Request) {
         orderBy: [{ displayOrder: "asc" }, { createdAt: "desc" }],
         include: {
           client: {
-            select: { id: true, name: true, email: true, company: true, avatarUrl: true },
+            select: {
+              id: true,
+              name: true,
+              email: true,
+              company: true,
+              avatarUrl: true,
+            },
           },
           files: { orderBy: { createdAt: "asc" } },
           tasks: { orderBy: { displayOrder: "asc" } },
@@ -61,25 +68,17 @@ export async function GET(request: Request) {
 
     const totalPages = Math.ceil(total / limit);
 
-    return NextResponse.json({
-      success: true,
-      data: projects,
-      message: "Projects fetched successfully",
-      pagination: {
-        page,
-        limit,
-        total,
-        totalPages,
-        hasNextPage: page < totalPages,
-        hasPrevPage: page > 1,
-      },
+    return apiSuccess(projects, "Projects fetched successfully", 200, {
+      page,
+      limit,
+      total,
+      totalPages,
+      hasNextPage: page < totalPages,
+      hasPrevPage: page > 1,
     });
   } catch (error) {
     console.error("[GET /api/admin/projects]", error);
-    return NextResponse.json(
-      { success: false, error: "Failed to fetch projects" },
-      { status: 500 },
-    );
+    return apiError("Failed to fetch projects", 500);
   }
 }
 
@@ -92,60 +91,34 @@ export async function POST(request: Request) {
   try {
     const user = await requireAdmin();
     if (!user) {
-      return NextResponse.json({ success: false, error: "Unauthorized" }, { status: 401 });
+      return apiError("Unauthorized", 401);
     }
 
     const body = await request.json();
-    const {
-      title,
-      slug,
-      shortDescription,
-      fullDescription,
-      thumbnailUrl,
-      featuredImageUrl,
-      category,
-      techStack,
-      status,
-      liveUrl,
-      repoUrl,
-      isFeatured,
-      displayOrder,
-      year,
-      galleryImages,
-      clientId,
-      type,
-    } = body;
 
-    if (!title || !slug || !shortDescription || !category) {
-      return NextResponse.json(
-        { success: false, error: "title, slug, shortDescription and category are required" },
-        { status: 400 },
+    const validation = projectBaseSchema.safeParse(body);
+    if (!validation.success) {
+      return apiError(
+        validation.error.issues
+          .map((i) => `${i.path.join(".")}: ${i.message}`)
+          .join(", "),
+        400,
       );
     }
 
+    const projectData = validation.data;
+
     const project = await prisma.project.create({
-      data: {
-        title,
-        slug,
-        shortDescription,
-        fullDescription,
-        thumbnailUrl,
-        featuredImageUrl,
-        category,
-        techStack: techStack ?? [],
-        status,
-        liveUrl,
-        repoUrl,
-        isFeatured,
-        displayOrder,
-        year,
-        galleryImages: galleryImages ?? [],
-        clientId,
-        type,
-      },
+      data: projectData,
       include: {
         client: {
-          select: { id: true, name: true, email: true, company: true, avatarUrl: true },
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            company: true,
+            avatarUrl: true,
+          },
         },
         files: true,
         tasks: true,
@@ -154,15 +127,15 @@ export async function POST(request: Request) {
       },
     });
 
-    return NextResponse.json({ success: true, message: "Project Created Successfully", data: project }, { status: 201 });
+    return apiSuccess(project, "Project Created Successfully", 201);
   } catch (error: unknown) {
-    if ((error as { code?: string })?.code === "P2002") {
-      return NextResponse.json({ success: false, error: "Slug already exists" }, { status: 409 });
+    if (
+      error instanceof PrismaClientKnownRequestError &&
+      error.code === "P2002"
+    ) {
+      return apiError("Slug already exists", 409);
     }
     console.error("[POST /api/admin/projects]", error);
-    return NextResponse.json(
-      { success: false, error: "Failed to create project" },
-      { status: 500 },
-    );
+    return apiError("Failed to create project", 500);
   }
 }

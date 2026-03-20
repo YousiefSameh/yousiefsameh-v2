@@ -1,7 +1,7 @@
-import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
+import { apiError, apiSuccess } from "@/lib/api";
 
-type Params = { params: Promise<{ id: string }> };
+type Params = { params: { id: string } };
 
 /**
  * @summary Get a project by ID
@@ -10,7 +10,7 @@ type Params = { params: Promise<{ id: string }> };
  */
 export async function GET(_req: Request, { params }: Params) {
   try {
-    const { id } = await params;
+    const { id } = params;
 
     const project = await prisma.project.findUnique({
       where: { id },
@@ -50,18 +50,12 @@ export async function GET(_req: Request, { params }: Params) {
     });
 
     if (!project) {
-      return NextResponse.json(
-        { success: false, error: "Project not found" },
-        { status: 404 },
-      );
+      return apiError("Project not found", 404);
     }
 
-    return NextResponse.json({ success: true, message: "Project fetched successfully", data: project });
+    return apiSuccess(project, "Project fetched successfully", 200);
   } catch (error) {
     console.error("[GET /api/projects/:id]", error);
-    return NextResponse.json(
-      { success: false, error: "Failed to fetch project" },
-      { status: 500 },
-    );
+    return apiError("Failed to fetch project", 500);
   }
 }
