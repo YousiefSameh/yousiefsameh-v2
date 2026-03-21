@@ -1698,13 +1698,6 @@ export const ProjectScalarFieldEnum = {
   status: 'status',
   liveUrl: 'liveUrl',
   repoUrl: 'repoUrl',
-  problem: 'problem',
-  solution: 'solution',
-  researchNotes: 'researchNotes',
-  designProcess: 'designProcess',
-  architectureNotes: 'architectureNotes',
-  challenges: 'challenges',
-  learnings: 'learnings',
   isFeatured: 'isFeatured',
   displayOrder: 'displayOrder',
   year: 'year',
@@ -1712,12 +1705,7 @@ export const ProjectScalarFieldEnum = {
   updatedAt: 'updatedAt',
   galleryImages: 'galleryImages',
   clientId: 'clientId',
-  type: 'type',
-  accessToken: 'accessToken',
-  startDate: 'startDate',
-  dueDate: 'dueDate',
-  budget: 'budget',
-  invoiceStatus: 'invoiceStatus'
+  type: 'type'
 } as const
 
 export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
@@ -2011,34 +1999,6 @@ export type EnumProjectTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$Pris
  * Reference to a field of type 'ProjectType[]'
  */
 export type ListEnumProjectTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ProjectType[]'>
-    
-
-
-/**
- * Reference to a field of type 'Decimal'
- */
-export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
-    
-
-
-/**
- * Reference to a field of type 'Decimal[]'
- */
-export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
-    
-
-
-/**
- * Reference to a field of type 'InvoiceStatus'
- */
-export type EnumInvoiceStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InvoiceStatus'>
-    
-
-
-/**
- * Reference to a field of type 'InvoiceStatus[]'
- */
-export type ListEnumInvoiceStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InvoiceStatus[]'>
     
 
 

@@ -1,9 +1,14 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-/* @plugin "@tailwindcss/typography"; */
+@plugin "@tailwindcss/typography";
+
 
 @custom-variant dark (&:is(.dark *));
+@custom-variant data-checked (&:is([data-state=checked], [data-checked=true], [aria-checked=true]));
+@custom-variant data-unchecked (&:is([data-state=unchecked], [data-checked=false], [aria-checked=false]));
+@custom-variant data-disabled (&:is([data-disabled], [disabled]));
+
 
 :root {
   /* Premium dark theme with warm accent */
