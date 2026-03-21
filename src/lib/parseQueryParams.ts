@@ -4,11 +4,12 @@ import { ProjectCategory, ProjectStatus, ProjectType } from "@/app/generated/pri
 export const projectQuerySchema = z.object({
   page:     z.coerce.number().int().min(1).default(1),
   limit:    z.coerce.number().int().min(1).max(50).default(10),
-  featured: z.enum(["true", "false"]).optional().transform(v => v === "true"),
+  featured: z.enum(["true", "false"]).transform(v => v === "true").optional(),
   category: z.nativeEnum(ProjectCategory).optional(),
   status:   z.nativeEnum(ProjectStatus).optional(),
   type:     z.nativeEnum(ProjectType).optional(),
   clientId: z.string().uuid().optional(),
+  search:   z.string().optional(),
 });
 
 export type ProjectQuery = z.infer<typeof projectQuerySchema>;

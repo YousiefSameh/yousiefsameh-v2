@@ -1,24 +1,37 @@
+"use client";
+
 import type React from "react";
-import { headers } from "next/headers";
-import { redirect } from "next/navigation";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { AdminSidebar } from "@/components/molecules/AdminSidebar";
 import { AdminHeader } from "@/components/molecules/AdminHeader";
-import { auth } from "@/lib/auth";
 import QueryProvider from "./query-provider";
+import { authClient } from "@/lib/auth-client";
 
-export default async function AdminTemplate({
+export default function AdminTemplate({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
+  const router = useRouter();
+  const { data: session, isPending } = authClient.useSession();
   const user = session?.user;
 
-  if (!user) {
-    redirect("/auth/login");
+  useEffect(() => {
+    if (!isPending && !user) {
+      router.push("/auth/login");
+    }
+  }, [isPending, user, router]);
+
+  if (isPending) {
+    return (
+      <div className="flex h-screen w-full items-center justify-center bg-secondary/30 text-primary">
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-current border-t-transparent" />
+      </div>
+    );
   }
+
+  if (!user) return null;
 
   return (
     <div className="flex min-h-screen bg-secondary/30">

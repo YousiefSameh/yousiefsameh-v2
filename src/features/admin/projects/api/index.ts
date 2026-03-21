@@ -1,5 +1,3 @@
-// src/features/admin/projects/api/index.ts
-
 import axios from "axios";
 import { Project } from "@/app/generated/prisma/client";
 import { APIResponse } from "@/lib/types";
@@ -18,7 +16,7 @@ export type ProjectsResponse = APIResponse<Project[]>;
 export type ProjectResponse = APIResponse<Project>;
 
 export type GetProjectsParams = Partial<
-  Omit<ProjectQuery, "featured"> & { featured: boolean }
+  Omit<ProjectQuery, "featured"> & { featured: boolean; search: string }
 >;
 
 /**

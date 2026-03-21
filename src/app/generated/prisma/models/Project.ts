@@ -29,13 +29,11 @@ export type AggregateProject = {
 export type ProjectAvgAggregateOutputType = {
   displayOrder: number | null
   year: number | null
-  budget: runtime.Decimal | null
 }
 
 export type ProjectSumAggregateOutputType = {
   displayOrder: number | null
   year: number | null
-  budget: runtime.Decimal | null
 }
 
 export type ProjectMinAggregateOutputType = {
@@ -49,13 +47,6 @@ export type ProjectMinAggregateOutputType = {
   status: $Enums.ProjectStatus | null
   liveUrl: string | null
   repoUrl: string | null
-  problem: string | null
-  solution: string | null
-  researchNotes: string | null
-  designProcess: string | null
-  architectureNotes: string | null
-  challenges: string | null
-  learnings: string | null
   isFeatured: boolean | null
   displayOrder: number | null
   year: number | null
@@ -63,11 +54,6 @@ export type ProjectMinAggregateOutputType = {
   updatedAt: Date | null
   clientId: string | null
   type: $Enums.ProjectType | null
-  accessToken: string | null
-  startDate: Date | null
-  dueDate: Date | null
-  budget: runtime.Decimal | null
-  invoiceStatus: $Enums.InvoiceStatus | null
 }
 
 export type ProjectMaxAggregateOutputType = {
@@ -81,13 +67,6 @@ export type ProjectMaxAggregateOutputType = {
   status: $Enums.ProjectStatus | null
   liveUrl: string | null
   repoUrl: string | null
-  problem: string | null
-  solution: string | null
-  researchNotes: string | null
-  designProcess: string | null
-  architectureNotes: string | null
-  challenges: string | null
-  learnings: string | null
   isFeatured: boolean | null
   displayOrder: number | null
   year: number | null
@@ -95,11 +74,6 @@ export type ProjectMaxAggregateOutputType = {
   updatedAt: Date | null
   clientId: string | null
   type: $Enums.ProjectType | null
-  accessToken: string | null
-  startDate: Date | null
-  dueDate: Date | null
-  budget: runtime.Decimal | null
-  invoiceStatus: $Enums.InvoiceStatus | null
 }
 
 export type ProjectCountAggregateOutputType = {
@@ -115,13 +89,6 @@ export type ProjectCountAggregateOutputType = {
   status: number
   liveUrl: number
   repoUrl: number
-  problem: number
-  solution: number
-  researchNotes: number
-  designProcess: number
-  architectureNotes: number
-  challenges: number
-  learnings: number
   isFeatured: number
   displayOrder: number
   year: number
@@ -130,11 +97,6 @@ export type ProjectCountAggregateOutputType = {
   galleryImages: number
   clientId: number
   type: number
-  accessToken: number
-  startDate: number
-  dueDate: number
-  budget: number
-  invoiceStatus: number
   _all: number
 }
 
@@ -142,13 +104,11 @@ export type ProjectCountAggregateOutputType = {
 export type ProjectAvgAggregateInputType = {
   displayOrder?: true
   year?: true
-  budget?: true
 }
 
 export type ProjectSumAggregateInputType = {
   displayOrder?: true
   year?: true
-  budget?: true
 }
 
 export type ProjectMinAggregateInputType = {
@@ -162,13 +122,6 @@ export type ProjectMinAggregateInputType = {
   status?: true
   liveUrl?: true
   repoUrl?: true
-  problem?: true
-  solution?: true
-  researchNotes?: true
-  designProcess?: true
-  architectureNotes?: true
-  challenges?: true
-  learnings?: true
   isFeatured?: true
   displayOrder?: true
   year?: true
@@ -176,11 +129,6 @@ export type ProjectMinAggregateInputType = {
   updatedAt?: true
   clientId?: true
   type?: true
-  accessToken?: true
-  startDate?: true
-  dueDate?: true
-  budget?: true
-  invoiceStatus?: true
 }
 
 export type ProjectMaxAggregateInputType = {
@@ -194,13 +142,6 @@ export type ProjectMaxAggregateInputType = {
   status?: true
   liveUrl?: true
   repoUrl?: true
-  problem?: true
-  solution?: true
-  researchNotes?: true
-  designProcess?: true
-  architectureNotes?: true
-  challenges?: true
-  learnings?: true
   isFeatured?: true
   displayOrder?: true
   year?: true
@@ -208,11 +149,6 @@ export type ProjectMaxAggregateInputType = {
   updatedAt?: true
   clientId?: true
   type?: true
-  accessToken?: true
-  startDate?: true
-  dueDate?: true
-  budget?: true
-  invoiceStatus?: true
 }
 
 export type ProjectCountAggregateInputType = {
@@ -228,13 +164,6 @@ export type ProjectCountAggregateInputType = {
   status?: true
   liveUrl?: true
   repoUrl?: true
-  problem?: true
-  solution?: true
-  researchNotes?: true
-  designProcess?: true
-  architectureNotes?: true
-  challenges?: true
-  learnings?: true
   isFeatured?: true
   displayOrder?: true
   year?: true
@@ -243,11 +172,6 @@ export type ProjectCountAggregateInputType = {
   galleryImages?: true
   clientId?: true
   type?: true
-  accessToken?: true
-  startDate?: true
-  dueDate?: true
-  budget?: true
-  invoiceStatus?: true
   _all?: true
 }
 
@@ -350,13 +274,6 @@ export type ProjectGroupByOutputType = {
   status: $Enums.ProjectStatus
   liveUrl: string | null
   repoUrl: string | null
-  problem: string | null
-  solution: string | null
-  researchNotes: string | null
-  designProcess: string | null
-  architectureNotes: string | null
-  challenges: string | null
-  learnings: string | null
   isFeatured: boolean | null
   displayOrder: number | null
   year: number | null
@@ -365,11 +282,6 @@ export type ProjectGroupByOutputType = {
   galleryImages: string[]
   clientId: string | null
   type: $Enums.ProjectType | null
-  accessToken: string | null
-  startDate: Date | null
-  dueDate: Date | null
-  budget: runtime.Decimal | null
-  invoiceStatus: $Enums.InvoiceStatus | null
   _count: ProjectCountAggregateOutputType | null
   _avg: ProjectAvgAggregateOutputType | null
   _sum: ProjectSumAggregateOutputType | null
@@ -408,13 +320,6 @@ export type ProjectWhereInput = {
   status?: Prisma.EnumProjectStatusFilter<"Project"> | $Enums.ProjectStatus
   liveUrl?: Prisma.StringNullableFilter<"Project"> | string | null
   repoUrl?: Prisma.StringNullableFilter<"Project"> | string | null
-  problem?: Prisma.StringNullableFilter<"Project"> | string | null
-  solution?: Prisma.StringNullableFilter<"Project"> | string | null
-  researchNotes?: Prisma.StringNullableFilter<"Project"> | string | null
-  designProcess?: Prisma.StringNullableFilter<"Project"> | string | null
-  architectureNotes?: Prisma.StringNullableFilter<"Project"> | string | null
-  challenges?: Prisma.StringNullableFilter<"Project"> | string | null
-  learnings?: Prisma.StringNullableFilter<"Project"> | string | null
   isFeatured?: Prisma.BoolNullableFilter<"Project"> | boolean | null
   displayOrder?: Prisma.IntNullableFilter<"Project"> | number | null
   year?: Prisma.IntNullableFilter<"Project"> | number | null
@@ -423,11 +328,6 @@ export type ProjectWhereInput = {
   galleryImages?: Prisma.StringNullableListFilter<"Project">
   clientId?: Prisma.UuidNullableFilter<"Project"> | string | null
   type?: Prisma.EnumProjectTypeNullableFilter<"Project"> | $Enums.ProjectType | null
-  accessToken?: Prisma.StringNullableFilter<"Project"> | string | null
-  startDate?: Prisma.DateTimeNullableFilter<"Project"> | Date | string | null
-  dueDate?: Prisma.DateTimeNullableFilter<"Project"> | Date | string | null
-  budget?: Prisma.DecimalNullableFilter<"Project"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  invoiceStatus?: Prisma.EnumInvoiceStatusNullableFilter<"Project"> | $Enums.InvoiceStatus | null
   client?: Prisma.XOR<Prisma.ClientNullableScalarRelationFilter, Prisma.ClientWhereInput> | null
   files?: Prisma.ProjectFileListRelationFilter
   tasks?: Prisma.TaskListRelationFilter
@@ -448,13 +348,6 @@ export type ProjectOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   liveUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   repoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  problem?: Prisma.SortOrderInput | Prisma.SortOrder
-  solution?: Prisma.SortOrderInput | Prisma.SortOrder
-  researchNotes?: Prisma.SortOrderInput | Prisma.SortOrder
-  designProcess?: Prisma.SortOrderInput | Prisma.SortOrder
-  architectureNotes?: Prisma.SortOrderInput | Prisma.SortOrder
-  challenges?: Prisma.SortOrderInput | Prisma.SortOrder
-  learnings?: Prisma.SortOrderInput | Prisma.SortOrder
   isFeatured?: Prisma.SortOrderInput | Prisma.SortOrder
   displayOrder?: Prisma.SortOrderInput | Prisma.SortOrder
   year?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -463,11 +356,6 @@ export type ProjectOrderByWithRelationInput = {
   galleryImages?: Prisma.SortOrder
   clientId?: Prisma.SortOrderInput | Prisma.SortOrder
   type?: Prisma.SortOrderInput | Prisma.SortOrder
-  accessToken?: Prisma.SortOrderInput | Prisma.SortOrder
-  startDate?: Prisma.SortOrderInput | Prisma.SortOrder
-  dueDate?: Prisma.SortOrderInput | Prisma.SortOrder
-  budget?: Prisma.SortOrderInput | Prisma.SortOrder
-  invoiceStatus?: Prisma.SortOrderInput | Prisma.SortOrder
   client?: Prisma.ClientOrderByWithRelationInput
   files?: Prisma.ProjectFileOrderByRelationAggregateInput
   tasks?: Prisma.TaskOrderByRelationAggregateInput
@@ -491,13 +379,6 @@ export type ProjectWhereUniqueInput = Prisma.AtLeast<{
   status?: Prisma.EnumProjectStatusFilter<"Project"> | $Enums.ProjectStatus
   liveUrl?: Prisma.StringNullableFilter<"Project"> | string | null
   repoUrl?: Prisma.StringNullableFilter<"Project"> | string | null
-  problem?: Prisma.StringNullableFilter<"Project"> | string | null
-  solution?: Prisma.StringNullableFilter<"Project"> | string | null
-  researchNotes?: Prisma.StringNullableFilter<"Project"> | string | null
-  designProcess?: Prisma.StringNullableFilter<"Project"> | string | null
-  architectureNotes?: Prisma.StringNullableFilter<"Project"> | string | null
-  challenges?: Prisma.StringNullableFilter<"Project"> | string | null
-  learnings?: Prisma.StringNullableFilter<"Project"> | string | null
   isFeatured?: Prisma.BoolNullableFilter<"Project"> | boolean | null
   displayOrder?: Prisma.IntNullableFilter<"Project"> | number | null
   year?: Prisma.IntNullableFilter<"Project"> | number | null
@@ -506,11 +387,6 @@ export type ProjectWhereUniqueInput = Prisma.AtLeast<{
   galleryImages?: Prisma.StringNullableListFilter<"Project">
   clientId?: Prisma.UuidNullableFilter<"Project"> | string | null
   type?: Prisma.EnumProjectTypeNullableFilter<"Project"> | $Enums.ProjectType | null
-  accessToken?: Prisma.StringNullableFilter<"Project"> | string | null
-  startDate?: Prisma.DateTimeNullableFilter<"Project"> | Date | string | null
-  dueDate?: Prisma.DateTimeNullableFilter<"Project"> | Date | string | null
-  budget?: Prisma.DecimalNullableFilter<"Project"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  invoiceStatus?: Prisma.EnumInvoiceStatusNullableFilter<"Project"> | $Enums.InvoiceStatus | null
   client?: Prisma.XOR<Prisma.ClientNullableScalarRelationFilter, Prisma.ClientWhereInput> | null
   files?: Prisma.ProjectFileListRelationFilter
   tasks?: Prisma.TaskListRelationFilter
@@ -531,13 +407,6 @@ export type ProjectOrderByWithAggregationInput = {
   status?: Prisma.SortOrder
   liveUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   repoUrl?: Prisma.SortOrderInput | Prisma.SortOrder
-  problem?: Prisma.SortOrderInput | Prisma.SortOrder
-  solution?: Prisma.SortOrderInput | Prisma.SortOrder
-  researchNotes?: Prisma.SortOrderInput | Prisma.SortOrder
-  designProcess?: Prisma.SortOrderInput | Prisma.SortOrder
-  architectureNotes?: Prisma.SortOrderInput | Prisma.SortOrder
-  challenges?: Prisma.SortOrderInput | Prisma.SortOrder
-  learnings?: Prisma.SortOrderInput | Prisma.SortOrder
   isFeatured?: Prisma.SortOrderInput | Prisma.SortOrder
   displayOrder?: Prisma.SortOrderInput | Prisma.SortOrder
   year?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -546,11 +415,6 @@ export type ProjectOrderByWithAggregationInput = {
   galleryImages?: Prisma.SortOrder
   clientId?: Prisma.SortOrderInput | Prisma.SortOrder
   type?: Prisma.SortOrderInput | Prisma.SortOrder
-  accessToken?: Prisma.SortOrderInput | Prisma.SortOrder
-  startDate?: Prisma.SortOrderInput | Prisma.SortOrder
-  dueDate?: Prisma.SortOrderInput | Prisma.SortOrder
-  budget?: Prisma.SortOrderInput | Prisma.SortOrder
-  invoiceStatus?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ProjectCountOrderByAggregateInput
   _avg?: Prisma.ProjectAvgOrderByAggregateInput
   _max?: Prisma.ProjectMaxOrderByAggregateInput
@@ -574,13 +438,6 @@ export type ProjectScalarWhereWithAggregatesInput = {
   status?: Prisma.EnumProjectStatusWithAggregatesFilter<"Project"> | $Enums.ProjectStatus
   liveUrl?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
   repoUrl?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
-  problem?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
-  solution?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
-  researchNotes?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
-  designProcess?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
-  architectureNotes?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
-  challenges?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
-  learnings?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
   isFeatured?: Prisma.BoolNullableWithAggregatesFilter<"Project"> | boolean | null
   displayOrder?: Prisma.IntNullableWithAggregatesFilter<"Project"> | number | null
   year?: Prisma.IntNullableWithAggregatesFilter<"Project"> | number | null
@@ -589,11 +446,6 @@ export type ProjectScalarWhereWithAggregatesInput = {
   galleryImages?: Prisma.StringNullableListFilter<"Project">
   clientId?: Prisma.UuidNullableWithAggregatesFilter<"Project"> | string | null
   type?: Prisma.EnumProjectTypeNullableWithAggregatesFilter<"Project"> | $Enums.ProjectType | null
-  accessToken?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
-  startDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Project"> | Date | string | null
-  dueDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Project"> | Date | string | null
-  budget?: Prisma.DecimalNullableWithAggregatesFilter<"Project"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  invoiceStatus?: Prisma.EnumInvoiceStatusNullableWithAggregatesFilter<"Project"> | $Enums.InvoiceStatus | null
 }
 
 export type ProjectCreateInput = {
@@ -609,13 +461,6 @@ export type ProjectCreateInput = {
   status?: $Enums.ProjectStatus
   liveUrl?: string | null
   repoUrl?: string | null
-  problem?: string | null
-  solution?: string | null
-  researchNotes?: string | null
-  designProcess?: string | null
-  architectureNotes?: string | null
-  challenges?: string | null
-  learnings?: string | null
   isFeatured?: boolean | null
   displayOrder?: number | null
   year?: number | null
@@ -623,11 +468,6 @@ export type ProjectCreateInput = {
   updatedAt?: Date | string | null
   galleryImages?: Prisma.ProjectCreategalleryImagesInput | string[]
   type?: $Enums.ProjectType | null
-  accessToken?: string | null
-  startDate?: Date | string | null
-  dueDate?: Date | string | null
-  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  invoiceStatus?: $Enums.InvoiceStatus | null
   client?: Prisma.ClientCreateNestedOneWithoutProjectsInput
   files?: Prisma.ProjectFileCreateNestedManyWithoutProjectInput
   tasks?: Prisma.TaskCreateNestedManyWithoutProjectInput
@@ -648,13 +488,6 @@ export type ProjectUncheckedCreateInput = {
   status?: $Enums.ProjectStatus
   liveUrl?: string | null
   repoUrl?: string | null
-  problem?: string | null
-  solution?: string | null
-  researchNotes?: string | null
-  designProcess?: string | null
-  architectureNotes?: string | null
-  challenges?: string | null
-  learnings?: string | null
   isFeatured?: boolean | null
   displayOrder?: number | null
   year?: number | null
@@ -663,11 +496,6 @@ export type ProjectUncheckedCreateInput = {
   galleryImages?: Prisma.ProjectCreategalleryImagesInput | string[]
   clientId?: string | null
   type?: $Enums.ProjectType | null
-  accessToken?: string | null
-  startDate?: Date | string | null
-  dueDate?: Date | string | null
-  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  invoiceStatus?: $Enums.InvoiceStatus | null
   files?: Prisma.ProjectFileUncheckedCreateNestedManyWithoutProjectInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutProjectInput
   testimonials?: Prisma.TestimonialUncheckedCreateNestedManyWithoutProjectInput
@@ -687,13 +515,6 @@ export type ProjectUpdateInput = {
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   liveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   repoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  problem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  researchNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  designProcess?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  architectureNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  challenges?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  learnings?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isFeatured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   displayOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -701,11 +522,6 @@ export type ProjectUpdateInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   galleryImages?: Prisma.ProjectUpdategalleryImagesInput | string[]
   type?: Prisma.NullableEnumProjectTypeFieldUpdateOperationsInput | $Enums.ProjectType | null
-  accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  invoiceStatus?: Prisma.NullableEnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus | null
   client?: Prisma.ClientUpdateOneWithoutProjectsNestedInput
   files?: Prisma.ProjectFileUpdateManyWithoutProjectNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutProjectNestedInput
@@ -726,13 +542,6 @@ export type ProjectUncheckedUpdateInput = {
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   liveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   repoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  problem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  researchNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  designProcess?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  architectureNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  challenges?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  learnings?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isFeatured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   displayOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -741,11 +550,6 @@ export type ProjectUncheckedUpdateInput = {
   galleryImages?: Prisma.ProjectUpdategalleryImagesInput | string[]
   clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.NullableEnumProjectTypeFieldUpdateOperationsInput | $Enums.ProjectType | null
-  accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  invoiceStatus?: Prisma.NullableEnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus | null
   files?: Prisma.ProjectFileUncheckedUpdateManyWithoutProjectNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutProjectNestedInput
   testimonials?: Prisma.TestimonialUncheckedUpdateManyWithoutProjectNestedInput
@@ -765,13 +569,6 @@ export type ProjectCreateManyInput = {
   status?: $Enums.ProjectStatus
   liveUrl?: string | null
   repoUrl?: string | null
-  problem?: string | null
-  solution?: string | null
-  researchNotes?: string | null
-  designProcess?: string | null
-  architectureNotes?: string | null
-  challenges?: string | null
-  learnings?: string | null
   isFeatured?: boolean | null
   displayOrder?: number | null
   year?: number | null
@@ -780,11 +577,6 @@ export type ProjectCreateManyInput = {
   galleryImages?: Prisma.ProjectCreategalleryImagesInput | string[]
   clientId?: string | null
   type?: $Enums.ProjectType | null
-  accessToken?: string | null
-  startDate?: Date | string | null
-  dueDate?: Date | string | null
-  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  invoiceStatus?: $Enums.InvoiceStatus | null
 }
 
 export type ProjectUpdateManyMutationInput = {
@@ -800,13 +592,6 @@ export type ProjectUpdateManyMutationInput = {
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   liveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   repoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  problem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  researchNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  designProcess?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  architectureNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  challenges?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  learnings?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isFeatured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   displayOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -814,11 +599,6 @@ export type ProjectUpdateManyMutationInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   galleryImages?: Prisma.ProjectUpdategalleryImagesInput | string[]
   type?: Prisma.NullableEnumProjectTypeFieldUpdateOperationsInput | $Enums.ProjectType | null
-  accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  invoiceStatus?: Prisma.NullableEnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus | null
 }
 
 export type ProjectUncheckedUpdateManyInput = {
@@ -834,13 +614,6 @@ export type ProjectUncheckedUpdateManyInput = {
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   liveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   repoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  problem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  researchNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  designProcess?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  architectureNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  challenges?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  learnings?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isFeatured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   displayOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -849,11 +622,6 @@ export type ProjectUncheckedUpdateManyInput = {
   galleryImages?: Prisma.ProjectUpdategalleryImagesInput | string[]
   clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.NullableEnumProjectTypeFieldUpdateOperationsInput | $Enums.ProjectType | null
-  accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  invoiceStatus?: Prisma.NullableEnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus | null
 }
 
 export type ProjectListRelationFilter = {
@@ -884,13 +652,6 @@ export type ProjectCountOrderByAggregateInput = {
   status?: Prisma.SortOrder
   liveUrl?: Prisma.SortOrder
   repoUrl?: Prisma.SortOrder
-  problem?: Prisma.SortOrder
-  solution?: Prisma.SortOrder
-  researchNotes?: Prisma.SortOrder
-  designProcess?: Prisma.SortOrder
-  architectureNotes?: Prisma.SortOrder
-  challenges?: Prisma.SortOrder
-  learnings?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
   displayOrder?: Prisma.SortOrder
   year?: Prisma.SortOrder
@@ -899,17 +660,11 @@ export type ProjectCountOrderByAggregateInput = {
   galleryImages?: Prisma.SortOrder
   clientId?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  accessToken?: Prisma.SortOrder
-  startDate?: Prisma.SortOrder
-  dueDate?: Prisma.SortOrder
-  budget?: Prisma.SortOrder
-  invoiceStatus?: Prisma.SortOrder
 }
 
 export type ProjectAvgOrderByAggregateInput = {
   displayOrder?: Prisma.SortOrder
   year?: Prisma.SortOrder
-  budget?: Prisma.SortOrder
 }
 
 export type ProjectMaxOrderByAggregateInput = {
@@ -923,13 +678,6 @@ export type ProjectMaxOrderByAggregateInput = {
   status?: Prisma.SortOrder
   liveUrl?: Prisma.SortOrder
   repoUrl?: Prisma.SortOrder
-  problem?: Prisma.SortOrder
-  solution?: Prisma.SortOrder
-  researchNotes?: Prisma.SortOrder
-  designProcess?: Prisma.SortOrder
-  architectureNotes?: Prisma.SortOrder
-  challenges?: Prisma.SortOrder
-  learnings?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
   displayOrder?: Prisma.SortOrder
   year?: Prisma.SortOrder
@@ -937,11 +685,6 @@ export type ProjectMaxOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   clientId?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  accessToken?: Prisma.SortOrder
-  startDate?: Prisma.SortOrder
-  dueDate?: Prisma.SortOrder
-  budget?: Prisma.SortOrder
-  invoiceStatus?: Prisma.SortOrder
 }
 
 export type ProjectMinOrderByAggregateInput = {
@@ -955,13 +698,6 @@ export type ProjectMinOrderByAggregateInput = {
   status?: Prisma.SortOrder
   liveUrl?: Prisma.SortOrder
   repoUrl?: Prisma.SortOrder
-  problem?: Prisma.SortOrder
-  solution?: Prisma.SortOrder
-  researchNotes?: Prisma.SortOrder
-  designProcess?: Prisma.SortOrder
-  architectureNotes?: Prisma.SortOrder
-  challenges?: Prisma.SortOrder
-  learnings?: Prisma.SortOrder
   isFeatured?: Prisma.SortOrder
   displayOrder?: Prisma.SortOrder
   year?: Prisma.SortOrder
@@ -969,17 +705,11 @@ export type ProjectMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
   clientId?: Prisma.SortOrder
   type?: Prisma.SortOrder
-  accessToken?: Prisma.SortOrder
-  startDate?: Prisma.SortOrder
-  dueDate?: Prisma.SortOrder
-  budget?: Prisma.SortOrder
-  invoiceStatus?: Prisma.SortOrder
 }
 
 export type ProjectSumOrderByAggregateInput = {
   displayOrder?: Prisma.SortOrder
   year?: Prisma.SortOrder
-  budget?: Prisma.SortOrder
 }
 
 export type ProjectNullableScalarRelationFilter = {
@@ -1073,18 +803,6 @@ export type NullableEnumProjectTypeFieldUpdateOperationsInput = {
   set?: $Enums.ProjectType | null
 }
 
-export type NullableDecimalFieldUpdateOperationsInput = {
-  set?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  increment?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  decrement?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  multiply?: runtime.Decimal | runtime.DecimalJsLike | number | string
-  divide?: runtime.Decimal | runtime.DecimalJsLike | number | string
-}
-
-export type NullableEnumInvoiceStatusFieldUpdateOperationsInput = {
-  set?: $Enums.InvoiceStatus | null
-}
-
 export type ProjectCreateNestedOneWithoutTasksInput = {
   create?: Prisma.XOR<Prisma.ProjectCreateWithoutTasksInput, Prisma.ProjectUncheckedCreateWithoutTasksInput>
   connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutTasksInput
@@ -1142,13 +860,6 @@ export type ProjectCreateWithoutClientInput = {
   status?: $Enums.ProjectStatus
   liveUrl?: string | null
   repoUrl?: string | null
-  problem?: string | null
-  solution?: string | null
-  researchNotes?: string | null
-  designProcess?: string | null
-  architectureNotes?: string | null
-  challenges?: string | null
-  learnings?: string | null
   isFeatured?: boolean | null
   displayOrder?: number | null
   year?: number | null
@@ -1156,11 +867,6 @@ export type ProjectCreateWithoutClientInput = {
   updatedAt?: Date | string | null
   galleryImages?: Prisma.ProjectCreategalleryImagesInput | string[]
   type?: $Enums.ProjectType | null
-  accessToken?: string | null
-  startDate?: Date | string | null
-  dueDate?: Date | string | null
-  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  invoiceStatus?: $Enums.InvoiceStatus | null
   files?: Prisma.ProjectFileCreateNestedManyWithoutProjectInput
   tasks?: Prisma.TaskCreateNestedManyWithoutProjectInput
   testimonials?: Prisma.TestimonialCreateNestedManyWithoutProjectInput
@@ -1180,13 +886,6 @@ export type ProjectUncheckedCreateWithoutClientInput = {
   status?: $Enums.ProjectStatus
   liveUrl?: string | null
   repoUrl?: string | null
-  problem?: string | null
-  solution?: string | null
-  researchNotes?: string | null
-  designProcess?: string | null
-  architectureNotes?: string | null
-  challenges?: string | null
-  learnings?: string | null
   isFeatured?: boolean | null
   displayOrder?: number | null
   year?: number | null
@@ -1194,11 +893,6 @@ export type ProjectUncheckedCreateWithoutClientInput = {
   updatedAt?: Date | string | null
   galleryImages?: Prisma.ProjectCreategalleryImagesInput | string[]
   type?: $Enums.ProjectType | null
-  accessToken?: string | null
-  startDate?: Date | string | null
-  dueDate?: Date | string | null
-  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  invoiceStatus?: $Enums.InvoiceStatus | null
   files?: Prisma.ProjectFileUncheckedCreateNestedManyWithoutProjectInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutProjectInput
   testimonials?: Prisma.TestimonialUncheckedCreateNestedManyWithoutProjectInput
@@ -1247,13 +941,6 @@ export type ProjectScalarWhereInput = {
   status?: Prisma.EnumProjectStatusFilter<"Project"> | $Enums.ProjectStatus
   liveUrl?: Prisma.StringNullableFilter<"Project"> | string | null
   repoUrl?: Prisma.StringNullableFilter<"Project"> | string | null
-  problem?: Prisma.StringNullableFilter<"Project"> | string | null
-  solution?: Prisma.StringNullableFilter<"Project"> | string | null
-  researchNotes?: Prisma.StringNullableFilter<"Project"> | string | null
-  designProcess?: Prisma.StringNullableFilter<"Project"> | string | null
-  architectureNotes?: Prisma.StringNullableFilter<"Project"> | string | null
-  challenges?: Prisma.StringNullableFilter<"Project"> | string | null
-  learnings?: Prisma.StringNullableFilter<"Project"> | string | null
   isFeatured?: Prisma.BoolNullableFilter<"Project"> | boolean | null
   displayOrder?: Prisma.IntNullableFilter<"Project"> | number | null
   year?: Prisma.IntNullableFilter<"Project"> | number | null
@@ -1262,11 +949,6 @@ export type ProjectScalarWhereInput = {
   galleryImages?: Prisma.StringNullableListFilter<"Project">
   clientId?: Prisma.UuidNullableFilter<"Project"> | string | null
   type?: Prisma.EnumProjectTypeNullableFilter<"Project"> | $Enums.ProjectType | null
-  accessToken?: Prisma.StringNullableFilter<"Project"> | string | null
-  startDate?: Prisma.DateTimeNullableFilter<"Project"> | Date | string | null
-  dueDate?: Prisma.DateTimeNullableFilter<"Project"> | Date | string | null
-  budget?: Prisma.DecimalNullableFilter<"Project"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  invoiceStatus?: Prisma.EnumInvoiceStatusNullableFilter<"Project"> | $Enums.InvoiceStatus | null
 }
 
 export type ProjectCreateWithoutFilesInput = {
@@ -1282,13 +964,6 @@ export type ProjectCreateWithoutFilesInput = {
   status?: $Enums.ProjectStatus
   liveUrl?: string | null
   repoUrl?: string | null
-  problem?: string | null
-  solution?: string | null
-  researchNotes?: string | null
-  designProcess?: string | null
-  architectureNotes?: string | null
-  challenges?: string | null
-  learnings?: string | null
   isFeatured?: boolean | null
   displayOrder?: number | null
   year?: number | null
@@ -1296,11 +971,6 @@ export type ProjectCreateWithoutFilesInput = {
   updatedAt?: Date | string | null
   galleryImages?: Prisma.ProjectCreategalleryImagesInput | string[]
   type?: $Enums.ProjectType | null
-  accessToken?: string | null
-  startDate?: Date | string | null
-  dueDate?: Date | string | null
-  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  invoiceStatus?: $Enums.InvoiceStatus | null
   client?: Prisma.ClientCreateNestedOneWithoutProjectsInput
   tasks?: Prisma.TaskCreateNestedManyWithoutProjectInput
   testimonials?: Prisma.TestimonialCreateNestedManyWithoutProjectInput
@@ -1320,13 +990,6 @@ export type ProjectUncheckedCreateWithoutFilesInput = {
   status?: $Enums.ProjectStatus
   liveUrl?: string | null
   repoUrl?: string | null
-  problem?: string | null
-  solution?: string | null
-  researchNotes?: string | null
-  designProcess?: string | null
-  architectureNotes?: string | null
-  challenges?: string | null
-  learnings?: string | null
   isFeatured?: boolean | null
   displayOrder?: number | null
   year?: number | null
@@ -1335,11 +998,6 @@ export type ProjectUncheckedCreateWithoutFilesInput = {
   galleryImages?: Prisma.ProjectCreategalleryImagesInput | string[]
   clientId?: string | null
   type?: $Enums.ProjectType | null
-  accessToken?: string | null
-  startDate?: Date | string | null
-  dueDate?: Date | string | null
-  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  invoiceStatus?: $Enums.InvoiceStatus | null
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutProjectInput
   testimonials?: Prisma.TestimonialUncheckedCreateNestedManyWithoutProjectInput
   weeklyReports?: Prisma.WeeklyReportUncheckedCreateNestedManyWithoutProjectInput
@@ -1374,13 +1032,6 @@ export type ProjectUpdateWithoutFilesInput = {
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   liveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   repoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  problem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  researchNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  designProcess?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  architectureNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  challenges?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  learnings?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isFeatured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   displayOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1388,11 +1039,6 @@ export type ProjectUpdateWithoutFilesInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   galleryImages?: Prisma.ProjectUpdategalleryImagesInput | string[]
   type?: Prisma.NullableEnumProjectTypeFieldUpdateOperationsInput | $Enums.ProjectType | null
-  accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  invoiceStatus?: Prisma.NullableEnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus | null
   client?: Prisma.ClientUpdateOneWithoutProjectsNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutProjectNestedInput
   testimonials?: Prisma.TestimonialUpdateManyWithoutProjectNestedInput
@@ -1412,13 +1058,6 @@ export type ProjectUncheckedUpdateWithoutFilesInput = {
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   liveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   repoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  problem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  researchNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  designProcess?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  architectureNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  challenges?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  learnings?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isFeatured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   displayOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1427,11 +1066,6 @@ export type ProjectUncheckedUpdateWithoutFilesInput = {
   galleryImages?: Prisma.ProjectUpdategalleryImagesInput | string[]
   clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.NullableEnumProjectTypeFieldUpdateOperationsInput | $Enums.ProjectType | null
-  accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  invoiceStatus?: Prisma.NullableEnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus | null
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutProjectNestedInput
   testimonials?: Prisma.TestimonialUncheckedUpdateManyWithoutProjectNestedInput
   weeklyReports?: Prisma.WeeklyReportUncheckedUpdateManyWithoutProjectNestedInput
@@ -1450,13 +1084,6 @@ export type ProjectCreateWithoutTasksInput = {
   status?: $Enums.ProjectStatus
   liveUrl?: string | null
   repoUrl?: string | null
-  problem?: string | null
-  solution?: string | null
-  researchNotes?: string | null
-  designProcess?: string | null
-  architectureNotes?: string | null
-  challenges?: string | null
-  learnings?: string | null
   isFeatured?: boolean | null
   displayOrder?: number | null
   year?: number | null
@@ -1464,11 +1091,6 @@ export type ProjectCreateWithoutTasksInput = {
   updatedAt?: Date | string | null
   galleryImages?: Prisma.ProjectCreategalleryImagesInput | string[]
   type?: $Enums.ProjectType | null
-  accessToken?: string | null
-  startDate?: Date | string | null
-  dueDate?: Date | string | null
-  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  invoiceStatus?: $Enums.InvoiceStatus | null
   client?: Prisma.ClientCreateNestedOneWithoutProjectsInput
   files?: Prisma.ProjectFileCreateNestedManyWithoutProjectInput
   testimonials?: Prisma.TestimonialCreateNestedManyWithoutProjectInput
@@ -1488,13 +1110,6 @@ export type ProjectUncheckedCreateWithoutTasksInput = {
   status?: $Enums.ProjectStatus
   liveUrl?: string | null
   repoUrl?: string | null
-  problem?: string | null
-  solution?: string | null
-  researchNotes?: string | null
-  designProcess?: string | null
-  architectureNotes?: string | null
-  challenges?: string | null
-  learnings?: string | null
   isFeatured?: boolean | null
   displayOrder?: number | null
   year?: number | null
@@ -1503,11 +1118,6 @@ export type ProjectUncheckedCreateWithoutTasksInput = {
   galleryImages?: Prisma.ProjectCreategalleryImagesInput | string[]
   clientId?: string | null
   type?: $Enums.ProjectType | null
-  accessToken?: string | null
-  startDate?: Date | string | null
-  dueDate?: Date | string | null
-  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  invoiceStatus?: $Enums.InvoiceStatus | null
   files?: Prisma.ProjectFileUncheckedCreateNestedManyWithoutProjectInput
   testimonials?: Prisma.TestimonialUncheckedCreateNestedManyWithoutProjectInput
   weeklyReports?: Prisma.WeeklyReportUncheckedCreateNestedManyWithoutProjectInput
@@ -1542,13 +1152,6 @@ export type ProjectUpdateWithoutTasksInput = {
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   liveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   repoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  problem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  researchNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  designProcess?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  architectureNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  challenges?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  learnings?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isFeatured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   displayOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1556,11 +1159,6 @@ export type ProjectUpdateWithoutTasksInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   galleryImages?: Prisma.ProjectUpdategalleryImagesInput | string[]
   type?: Prisma.NullableEnumProjectTypeFieldUpdateOperationsInput | $Enums.ProjectType | null
-  accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  invoiceStatus?: Prisma.NullableEnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus | null
   client?: Prisma.ClientUpdateOneWithoutProjectsNestedInput
   files?: Prisma.ProjectFileUpdateManyWithoutProjectNestedInput
   testimonials?: Prisma.TestimonialUpdateManyWithoutProjectNestedInput
@@ -1580,13 +1178,6 @@ export type ProjectUncheckedUpdateWithoutTasksInput = {
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   liveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   repoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  problem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  researchNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  designProcess?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  architectureNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  challenges?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  learnings?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isFeatured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   displayOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1595,11 +1186,6 @@ export type ProjectUncheckedUpdateWithoutTasksInput = {
   galleryImages?: Prisma.ProjectUpdategalleryImagesInput | string[]
   clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.NullableEnumProjectTypeFieldUpdateOperationsInput | $Enums.ProjectType | null
-  accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  invoiceStatus?: Prisma.NullableEnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus | null
   files?: Prisma.ProjectFileUncheckedUpdateManyWithoutProjectNestedInput
   testimonials?: Prisma.TestimonialUncheckedUpdateManyWithoutProjectNestedInput
   weeklyReports?: Prisma.WeeklyReportUncheckedUpdateManyWithoutProjectNestedInput
@@ -1618,13 +1204,6 @@ export type ProjectCreateWithoutTestimonialsInput = {
   status?: $Enums.ProjectStatus
   liveUrl?: string | null
   repoUrl?: string | null
-  problem?: string | null
-  solution?: string | null
-  researchNotes?: string | null
-  designProcess?: string | null
-  architectureNotes?: string | null
-  challenges?: string | null
-  learnings?: string | null
   isFeatured?: boolean | null
   displayOrder?: number | null
   year?: number | null
@@ -1632,11 +1211,6 @@ export type ProjectCreateWithoutTestimonialsInput = {
   updatedAt?: Date | string | null
   galleryImages?: Prisma.ProjectCreategalleryImagesInput | string[]
   type?: $Enums.ProjectType | null
-  accessToken?: string | null
-  startDate?: Date | string | null
-  dueDate?: Date | string | null
-  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  invoiceStatus?: $Enums.InvoiceStatus | null
   client?: Prisma.ClientCreateNestedOneWithoutProjectsInput
   files?: Prisma.ProjectFileCreateNestedManyWithoutProjectInput
   tasks?: Prisma.TaskCreateNestedManyWithoutProjectInput
@@ -1656,13 +1230,6 @@ export type ProjectUncheckedCreateWithoutTestimonialsInput = {
   status?: $Enums.ProjectStatus
   liveUrl?: string | null
   repoUrl?: string | null
-  problem?: string | null
-  solution?: string | null
-  researchNotes?: string | null
-  designProcess?: string | null
-  architectureNotes?: string | null
-  challenges?: string | null
-  learnings?: string | null
   isFeatured?: boolean | null
   displayOrder?: number | null
   year?: number | null
@@ -1671,11 +1238,6 @@ export type ProjectUncheckedCreateWithoutTestimonialsInput = {
   galleryImages?: Prisma.ProjectCreategalleryImagesInput | string[]
   clientId?: string | null
   type?: $Enums.ProjectType | null
-  accessToken?: string | null
-  startDate?: Date | string | null
-  dueDate?: Date | string | null
-  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  invoiceStatus?: $Enums.InvoiceStatus | null
   files?: Prisma.ProjectFileUncheckedCreateNestedManyWithoutProjectInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutProjectInput
   weeklyReports?: Prisma.WeeklyReportUncheckedCreateNestedManyWithoutProjectInput
@@ -1710,13 +1272,6 @@ export type ProjectUpdateWithoutTestimonialsInput = {
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   liveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   repoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  problem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  researchNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  designProcess?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  architectureNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  challenges?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  learnings?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isFeatured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   displayOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1724,11 +1279,6 @@ export type ProjectUpdateWithoutTestimonialsInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   galleryImages?: Prisma.ProjectUpdategalleryImagesInput | string[]
   type?: Prisma.NullableEnumProjectTypeFieldUpdateOperationsInput | $Enums.ProjectType | null
-  accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  invoiceStatus?: Prisma.NullableEnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus | null
   client?: Prisma.ClientUpdateOneWithoutProjectsNestedInput
   files?: Prisma.ProjectFileUpdateManyWithoutProjectNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutProjectNestedInput
@@ -1748,13 +1298,6 @@ export type ProjectUncheckedUpdateWithoutTestimonialsInput = {
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   liveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   repoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  problem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  researchNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  designProcess?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  architectureNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  challenges?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  learnings?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isFeatured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   displayOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1763,11 +1306,6 @@ export type ProjectUncheckedUpdateWithoutTestimonialsInput = {
   galleryImages?: Prisma.ProjectUpdategalleryImagesInput | string[]
   clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.NullableEnumProjectTypeFieldUpdateOperationsInput | $Enums.ProjectType | null
-  accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  invoiceStatus?: Prisma.NullableEnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus | null
   files?: Prisma.ProjectFileUncheckedUpdateManyWithoutProjectNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutProjectNestedInput
   weeklyReports?: Prisma.WeeklyReportUncheckedUpdateManyWithoutProjectNestedInput
@@ -1786,13 +1324,6 @@ export type ProjectCreateWithoutWeeklyReportsInput = {
   status?: $Enums.ProjectStatus
   liveUrl?: string | null
   repoUrl?: string | null
-  problem?: string | null
-  solution?: string | null
-  researchNotes?: string | null
-  designProcess?: string | null
-  architectureNotes?: string | null
-  challenges?: string | null
-  learnings?: string | null
   isFeatured?: boolean | null
   displayOrder?: number | null
   year?: number | null
@@ -1800,11 +1331,6 @@ export type ProjectCreateWithoutWeeklyReportsInput = {
   updatedAt?: Date | string | null
   galleryImages?: Prisma.ProjectCreategalleryImagesInput | string[]
   type?: $Enums.ProjectType | null
-  accessToken?: string | null
-  startDate?: Date | string | null
-  dueDate?: Date | string | null
-  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  invoiceStatus?: $Enums.InvoiceStatus | null
   client?: Prisma.ClientCreateNestedOneWithoutProjectsInput
   files?: Prisma.ProjectFileCreateNestedManyWithoutProjectInput
   tasks?: Prisma.TaskCreateNestedManyWithoutProjectInput
@@ -1824,13 +1350,6 @@ export type ProjectUncheckedCreateWithoutWeeklyReportsInput = {
   status?: $Enums.ProjectStatus
   liveUrl?: string | null
   repoUrl?: string | null
-  problem?: string | null
-  solution?: string | null
-  researchNotes?: string | null
-  designProcess?: string | null
-  architectureNotes?: string | null
-  challenges?: string | null
-  learnings?: string | null
   isFeatured?: boolean | null
   displayOrder?: number | null
   year?: number | null
@@ -1839,11 +1358,6 @@ export type ProjectUncheckedCreateWithoutWeeklyReportsInput = {
   galleryImages?: Prisma.ProjectCreategalleryImagesInput | string[]
   clientId?: string | null
   type?: $Enums.ProjectType | null
-  accessToken?: string | null
-  startDate?: Date | string | null
-  dueDate?: Date | string | null
-  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  invoiceStatus?: $Enums.InvoiceStatus | null
   files?: Prisma.ProjectFileUncheckedCreateNestedManyWithoutProjectInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutProjectInput
   testimonials?: Prisma.TestimonialUncheckedCreateNestedManyWithoutProjectInput
@@ -1878,13 +1392,6 @@ export type ProjectUpdateWithoutWeeklyReportsInput = {
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   liveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   repoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  problem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  researchNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  designProcess?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  architectureNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  challenges?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  learnings?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isFeatured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   displayOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1892,11 +1399,6 @@ export type ProjectUpdateWithoutWeeklyReportsInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   galleryImages?: Prisma.ProjectUpdategalleryImagesInput | string[]
   type?: Prisma.NullableEnumProjectTypeFieldUpdateOperationsInput | $Enums.ProjectType | null
-  accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  invoiceStatus?: Prisma.NullableEnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus | null
   client?: Prisma.ClientUpdateOneWithoutProjectsNestedInput
   files?: Prisma.ProjectFileUpdateManyWithoutProjectNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutProjectNestedInput
@@ -1916,13 +1418,6 @@ export type ProjectUncheckedUpdateWithoutWeeklyReportsInput = {
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   liveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   repoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  problem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  researchNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  designProcess?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  architectureNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  challenges?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  learnings?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isFeatured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   displayOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -1931,11 +1426,6 @@ export type ProjectUncheckedUpdateWithoutWeeklyReportsInput = {
   galleryImages?: Prisma.ProjectUpdategalleryImagesInput | string[]
   clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   type?: Prisma.NullableEnumProjectTypeFieldUpdateOperationsInput | $Enums.ProjectType | null
-  accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  invoiceStatus?: Prisma.NullableEnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus | null
   files?: Prisma.ProjectFileUncheckedUpdateManyWithoutProjectNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutProjectNestedInput
   testimonials?: Prisma.TestimonialUncheckedUpdateManyWithoutProjectNestedInput
@@ -1954,13 +1444,6 @@ export type ProjectCreateManyClientInput = {
   status?: $Enums.ProjectStatus
   liveUrl?: string | null
   repoUrl?: string | null
-  problem?: string | null
-  solution?: string | null
-  researchNotes?: string | null
-  designProcess?: string | null
-  architectureNotes?: string | null
-  challenges?: string | null
-  learnings?: string | null
   isFeatured?: boolean | null
   displayOrder?: number | null
   year?: number | null
@@ -1968,11 +1451,6 @@ export type ProjectCreateManyClientInput = {
   updatedAt?: Date | string | null
   galleryImages?: Prisma.ProjectCreategalleryImagesInput | string[]
   type?: $Enums.ProjectType | null
-  accessToken?: string | null
-  startDate?: Date | string | null
-  dueDate?: Date | string | null
-  budget?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  invoiceStatus?: $Enums.InvoiceStatus | null
 }
 
 export type ProjectUpdateWithoutClientInput = {
@@ -1988,13 +1466,6 @@ export type ProjectUpdateWithoutClientInput = {
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   liveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   repoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  problem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  researchNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  designProcess?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  architectureNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  challenges?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  learnings?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isFeatured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   displayOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2002,11 +1473,6 @@ export type ProjectUpdateWithoutClientInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   galleryImages?: Prisma.ProjectUpdategalleryImagesInput | string[]
   type?: Prisma.NullableEnumProjectTypeFieldUpdateOperationsInput | $Enums.ProjectType | null
-  accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  invoiceStatus?: Prisma.NullableEnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus | null
   files?: Prisma.ProjectFileUpdateManyWithoutProjectNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutProjectNestedInput
   testimonials?: Prisma.TestimonialUpdateManyWithoutProjectNestedInput
@@ -2026,13 +1492,6 @@ export type ProjectUncheckedUpdateWithoutClientInput = {
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   liveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   repoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  problem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  researchNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  designProcess?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  architectureNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  challenges?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  learnings?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isFeatured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   displayOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2040,11 +1499,6 @@ export type ProjectUncheckedUpdateWithoutClientInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   galleryImages?: Prisma.ProjectUpdategalleryImagesInput | string[]
   type?: Prisma.NullableEnumProjectTypeFieldUpdateOperationsInput | $Enums.ProjectType | null
-  accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  invoiceStatus?: Prisma.NullableEnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus | null
   files?: Prisma.ProjectFileUncheckedUpdateManyWithoutProjectNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutProjectNestedInput
   testimonials?: Prisma.TestimonialUncheckedUpdateManyWithoutProjectNestedInput
@@ -2064,13 +1518,6 @@ export type ProjectUncheckedUpdateManyWithoutClientInput = {
   status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
   liveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   repoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  problem?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  solution?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  researchNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  designProcess?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  architectureNotes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  challenges?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  learnings?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isFeatured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   displayOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
@@ -2078,11 +1525,6 @@ export type ProjectUncheckedUpdateManyWithoutClientInput = {
   updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   galleryImages?: Prisma.ProjectUpdategalleryImagesInput | string[]
   type?: Prisma.NullableEnumProjectTypeFieldUpdateOperationsInput | $Enums.ProjectType | null
-  accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  budget?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  invoiceStatus?: Prisma.NullableEnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus | null
 }
 
 
@@ -2156,13 +1598,6 @@ export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   status?: boolean
   liveUrl?: boolean
   repoUrl?: boolean
-  problem?: boolean
-  solution?: boolean
-  researchNotes?: boolean
-  designProcess?: boolean
-  architectureNotes?: boolean
-  challenges?: boolean
-  learnings?: boolean
   isFeatured?: boolean
   displayOrder?: boolean
   year?: boolean
@@ -2171,11 +1606,6 @@ export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   galleryImages?: boolean
   clientId?: boolean
   type?: boolean
-  accessToken?: boolean
-  startDate?: boolean
-  dueDate?: boolean
-  budget?: boolean
-  invoiceStatus?: boolean
   client?: boolean | Prisma.Project$clientArgs<ExtArgs>
   files?: boolean | Prisma.Project$filesArgs<ExtArgs>
   tasks?: boolean | Prisma.Project$tasksArgs<ExtArgs>
@@ -2197,13 +1627,6 @@ export type ProjectSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   status?: boolean
   liveUrl?: boolean
   repoUrl?: boolean
-  problem?: boolean
-  solution?: boolean
-  researchNotes?: boolean
-  designProcess?: boolean
-  architectureNotes?: boolean
-  challenges?: boolean
-  learnings?: boolean
   isFeatured?: boolean
   displayOrder?: boolean
   year?: boolean
@@ -2212,11 +1635,6 @@ export type ProjectSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   galleryImages?: boolean
   clientId?: boolean
   type?: boolean
-  accessToken?: boolean
-  startDate?: boolean
-  dueDate?: boolean
-  budget?: boolean
-  invoiceStatus?: boolean
   client?: boolean | Prisma.Project$clientArgs<ExtArgs>
 }, ExtArgs["result"]["project"]>
 
@@ -2233,13 +1651,6 @@ export type ProjectSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   status?: boolean
   liveUrl?: boolean
   repoUrl?: boolean
-  problem?: boolean
-  solution?: boolean
-  researchNotes?: boolean
-  designProcess?: boolean
-  architectureNotes?: boolean
-  challenges?: boolean
-  learnings?: boolean
   isFeatured?: boolean
   displayOrder?: boolean
   year?: boolean
@@ -2248,11 +1659,6 @@ export type ProjectSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   galleryImages?: boolean
   clientId?: boolean
   type?: boolean
-  accessToken?: boolean
-  startDate?: boolean
-  dueDate?: boolean
-  budget?: boolean
-  invoiceStatus?: boolean
   client?: boolean | Prisma.Project$clientArgs<ExtArgs>
 }, ExtArgs["result"]["project"]>
 
@@ -2269,13 +1675,6 @@ export type ProjectSelectScalar = {
   status?: boolean
   liveUrl?: boolean
   repoUrl?: boolean
-  problem?: boolean
-  solution?: boolean
-  researchNotes?: boolean
-  designProcess?: boolean
-  architectureNotes?: boolean
-  challenges?: boolean
-  learnings?: boolean
   isFeatured?: boolean
   displayOrder?: boolean
   year?: boolean
@@ -2284,14 +1683,9 @@ export type ProjectSelectScalar = {
   galleryImages?: boolean
   clientId?: boolean
   type?: boolean
-  accessToken?: boolean
-  startDate?: boolean
-  dueDate?: boolean
-  budget?: boolean
-  invoiceStatus?: boolean
 }
 
-export type ProjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "shortDescription" | "fullDescription" | "thumbnailUrl" | "featuredImageUrl" | "category" | "techStack" | "status" | "liveUrl" | "repoUrl" | "problem" | "solution" | "researchNotes" | "designProcess" | "architectureNotes" | "challenges" | "learnings" | "isFeatured" | "displayOrder" | "year" | "createdAt" | "updatedAt" | "galleryImages" | "clientId" | "type" | "accessToken" | "startDate" | "dueDate" | "budget" | "invoiceStatus", ExtArgs["result"]["project"]>
+export type ProjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "slug" | "shortDescription" | "fullDescription" | "thumbnailUrl" | "featuredImageUrl" | "category" | "techStack" | "status" | "liveUrl" | "repoUrl" | "isFeatured" | "displayOrder" | "year" | "createdAt" | "updatedAt" | "galleryImages" | "clientId" | "type", ExtArgs["result"]["project"]>
 export type ProjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   client?: boolean | Prisma.Project$clientArgs<ExtArgs>
   files?: boolean | Prisma.Project$filesArgs<ExtArgs>
@@ -2329,13 +1723,6 @@ export type $ProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     status: $Enums.ProjectStatus
     liveUrl: string | null
     repoUrl: string | null
-    problem: string | null
-    solution: string | null
-    researchNotes: string | null
-    designProcess: string | null
-    architectureNotes: string | null
-    challenges: string | null
-    learnings: string | null
     isFeatured: boolean | null
     displayOrder: number | null
     year: number | null
@@ -2344,11 +1731,6 @@ export type $ProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     galleryImages: string[]
     clientId: string | null
     type: $Enums.ProjectType | null
-    accessToken: string | null
-    startDate: Date | null
-    dueDate: Date | null
-    budget: runtime.Decimal | null
-    invoiceStatus: $Enums.InvoiceStatus | null
   }, ExtArgs["result"]["project"]>
   composites: {}
 }
@@ -2789,13 +2171,6 @@ export interface ProjectFieldRefs {
   readonly status: Prisma.FieldRef<"Project", 'ProjectStatus'>
   readonly liveUrl: Prisma.FieldRef<"Project", 'String'>
   readonly repoUrl: Prisma.FieldRef<"Project", 'String'>
-  readonly problem: Prisma.FieldRef<"Project", 'String'>
-  readonly solution: Prisma.FieldRef<"Project", 'String'>
-  readonly researchNotes: Prisma.FieldRef<"Project", 'String'>
-  readonly designProcess: Prisma.FieldRef<"Project", 'String'>
-  readonly architectureNotes: Prisma.FieldRef<"Project", 'String'>
-  readonly challenges: Prisma.FieldRef<"Project", 'String'>
-  readonly learnings: Prisma.FieldRef<"Project", 'String'>
   readonly isFeatured: Prisma.FieldRef<"Project", 'Boolean'>
   readonly displayOrder: Prisma.FieldRef<"Project", 'Int'>
   readonly year: Prisma.FieldRef<"Project", 'Int'>
@@ -2804,11 +2179,6 @@ export interface ProjectFieldRefs {
   readonly galleryImages: Prisma.FieldRef<"Project", 'String[]'>
   readonly clientId: Prisma.FieldRef<"Project", 'String'>
   readonly type: Prisma.FieldRef<"Project", 'ProjectType'>
-  readonly accessToken: Prisma.FieldRef<"Project", 'String'>
-  readonly startDate: Prisma.FieldRef<"Project", 'DateTime'>
-  readonly dueDate: Prisma.FieldRef<"Project", 'DateTime'>
-  readonly budget: Prisma.FieldRef<"Project", 'Decimal'>
-  readonly invoiceStatus: Prisma.FieldRef<"Project", 'InvoiceStatus'>
 }
     
 

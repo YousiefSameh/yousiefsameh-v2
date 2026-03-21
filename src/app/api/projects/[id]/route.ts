@@ -1,7 +1,7 @@
 import prisma from "@/lib/prisma";
 import { apiError, apiSuccess } from "@/lib/api";
 
-type Params = { params: { id: string } };
+type Params = { params: Promise<{ id: string }> };
 
 /**
  * @summary Get a project by ID
@@ -10,7 +10,7 @@ type Params = { params: { id: string } };
  */
 export async function GET(_req: Request, { params }: Params) {
   try {
-    const { id } = params;
+    const { id } = await params;
 
     const project = await prisma.project.findUnique({
       where: { id },

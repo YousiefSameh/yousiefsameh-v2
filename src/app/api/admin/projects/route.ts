@@ -29,11 +29,20 @@ export async function GET(request: Request): Promise<APIResult<Project[]>> {
     const parsed = parseQueryParams(projectQuerySchema, searchParams);
     if (!parsed.success) return apiError(parsed.error, 400);
 
-    const { page, limit, featured, category, status, type, clientId } =
+    const { page, limit, featured, category, status, type, clientId, search } =
       parsed.data;
     const skip = (page - 1) * limit;
 
+    console.log("featured", featured, typeof featured);
+
     const where: Prisma.ProjectWhereInput = {
+      ...(search && {
+        OR: [
+          { title:            { contains: search, mode: "insensitive" } },
+          { shortDescription: { contains: search, mode: "insensitive" } },
+          { slug:             { contains: search, mode: "insensitive" } },
+        ],
+      }),
       ...(featured !== undefined && { isFeatured: featured }),
       ...(category && { category }),
       ...(status && { status }),
@@ -77,7 +86,7 @@ export async function GET(request: Request): Promise<APIResult<Project[]>> {
       hasPrevPage: page > 1,
     });
   } catch (error) {
-    console.error("[GET /api/admin/projects]", error);
+    console.error("[GET /api/admin/projects]", JSON.stringify(error, null, 2));
     return apiError("Failed to fetch projects", 500);
   }
 }

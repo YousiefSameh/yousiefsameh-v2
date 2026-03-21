@@ -4,7 +4,7 @@ import { requireAdmin } from "@/lib/requireAdmin";
 import { apiError, apiSuccess } from "@/lib/api";
 import { projectBaseSchema } from "@/validations/projects.validation";
 
-type Params = { params: { id: string } };
+type Params = { params: Promise<{ id: string }> };
 
 const adminInclude = {
   client: {
@@ -34,7 +34,7 @@ export async function GET(_req: Request, { params }: Params) {
       return apiError("Unauthorized", 401);
     }
 
-    const { id } = params;
+    const { id } = await params;
 
     const project = await prisma.project.findUnique({
       where: { id },
@@ -65,7 +65,7 @@ export async function PATCH(request: Request, { params }: Params) {
       return apiError("Unauthorized", 401);
     }
 
-    const { id } = params;
+    const { id } = await params;
     const body = await request.json();
 
     const validation = projectBaseSchema.partial().safeParse(body);
@@ -104,7 +104,7 @@ export async function DELETE(_req: Request, { params }: Params) {
       return apiError("Unauthorized", 401);
     }
 
-    const { id } = params;
+    const { id } = await params;
 
     await prisma.project.delete({ where: { id } });
 

@@ -215,13 +215,6 @@ export const ProjectScalarFieldEnum = {
   status: 'status',
   liveUrl: 'liveUrl',
   repoUrl: 'repoUrl',
-  problem: 'problem',
-  solution: 'solution',
-  researchNotes: 'researchNotes',
-  designProcess: 'designProcess',
-  architectureNotes: 'architectureNotes',
-  challenges: 'challenges',
-  learnings: 'learnings',
   isFeatured: 'isFeatured',
   displayOrder: 'displayOrder',
   year: 'year',
@@ -229,12 +222,7 @@ export const ProjectScalarFieldEnum = {
   updatedAt: 'updatedAt',
   galleryImages: 'galleryImages',
   clientId: 'clientId',
-  type: 'type',
-  accessToken: 'accessToken',
-  startDate: 'startDate',
-  dueDate: 'dueDate',
-  budget: 'budget',
-  invoiceStatus: 'invoiceStatus'
+  type: 'type'
 } as const
 
 export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
