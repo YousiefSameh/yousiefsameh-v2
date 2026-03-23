@@ -67,6 +67,15 @@ export const ProjectType = {
 export type ProjectType = (typeof ProjectType)[keyof typeof ProjectType]
 
 
+export const PreferredContact = {
+  WHATSAPP: 'WHATSAPP',
+  EMAIL: 'EMAIL',
+  PHONE: 'PHONE'
+} as const
+
+export type PreferredContact = (typeof PreferredContact)[keyof typeof PreferredContact]
+
+
 export const InvoiceStatus = {
   UNPAID: 'UNPAID',
   PAID: 'PAID',

@@ -167,9 +167,14 @@ export const ClientScalarFieldEnum = {
   email: 'email',
   company: 'company',
   avatarUrl: 'avatarUrl',
+  notes: 'notes',
+  tags: 'tags',
+  preferredContact: 'preferredContact',
+  accessToken: 'accessToken',
+  accessExpiresAt: 'accessExpiresAt',
+  lastActiveAt: 'lastActiveAt',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  accessToken: 'accessToken'
+  updatedAt: 'updatedAt'
 } as const
 
 export type ClientScalarFieldEnum = (typeof ClientScalarFieldEnum)[keyof typeof ClientScalarFieldEnum]
