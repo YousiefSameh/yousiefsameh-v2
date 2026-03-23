@@ -5,7 +5,8 @@ import { projectBaseSchema } from "@/validations/projects.validation";
 import { APIResult } from "@/lib/types";
 import { apiSuccess, apiError } from "@/lib/api";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
-import { parseQueryParams, projectQuerySchema } from "@/lib/parseQueryParams";
+import { parseQueryParams } from "@/lib/parseQueryParams";
+import { projectQuerySchema } from "@/validations/projects.validation";
 
 /**
  * @summary Get all projects (for admin)
