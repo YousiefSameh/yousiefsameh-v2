@@ -9,7 +9,6 @@ export const clientBaseSchema = z.object({
   notes:            z.string().optional(),
   tags:             z.array(z.string()),
   preferredContact: z.nativeEnum(PreferredContact).optional(),
-  timezone:         z.string().optional(),
 });
 
 export const clientQuerySchema = z.object({

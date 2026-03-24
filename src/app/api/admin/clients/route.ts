@@ -8,6 +8,7 @@ import {
 import { APIResult } from "@/lib/types";
 import { apiSuccess, apiError } from "@/lib/api";
 import { parseQueryParams } from "@/lib/parseQueryParams";
+import crypto from "crypto";
 
 /**
  * @summary Get all clients (for admin)
@@ -90,8 +91,16 @@ export async function POST(request: Request) {
       );
     }
 
+    const accessToken = crypto.randomBytes(32).toString("hex");
+    const accessExpiresAt = new Date();
+    accessExpiresAt.setDate(accessExpiresAt.getDate() + 30);
+
     const client = await prisma.client.create({
-      data: validation.data,
+      data: {
+        ...validation.data,
+        accessToken,
+        accessExpiresAt,
+      },
       include: { _count: { select: { projects: true } } },
     });
 
