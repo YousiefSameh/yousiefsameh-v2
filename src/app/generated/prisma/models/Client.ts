@@ -30,9 +30,13 @@ export type ClientMinAggregateOutputType = {
   email: string | null
   company: string | null
   avatarUrl: string | null
+  notes: string | null
+  preferredContact: $Enums.PreferredContact | null
+  accessToken: string | null
+  accessExpiresAt: Date | null
+  lastActiveAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
-  accessToken: string | null
 }
 
 export type ClientMaxAggregateOutputType = {
@@ -41,9 +45,13 @@ export type ClientMaxAggregateOutputType = {
   email: string | null
   company: string | null
   avatarUrl: string | null
+  notes: string | null
+  preferredContact: $Enums.PreferredContact | null
+  accessToken: string | null
+  accessExpiresAt: Date | null
+  lastActiveAt: Date | null
   createdAt: Date | null
   updatedAt: Date | null
-  accessToken: string | null
 }
 
 export type ClientCountAggregateOutputType = {
@@ -52,9 +60,14 @@ export type ClientCountAggregateOutputType = {
   email: number
   company: number
   avatarUrl: number
+  notes: number
+  tags: number
+  preferredContact: number
+  accessToken: number
+  accessExpiresAt: number
+  lastActiveAt: number
   createdAt: number
   updatedAt: number
-  accessToken: number
   _all: number
 }
 
@@ -65,9 +78,13 @@ export type ClientMinAggregateInputType = {
   email?: true
   company?: true
   avatarUrl?: true
+  notes?: true
+  preferredContact?: true
+  accessToken?: true
+  accessExpiresAt?: true
+  lastActiveAt?: true
   createdAt?: true
   updatedAt?: true
-  accessToken?: true
 }
 
 export type ClientMaxAggregateInputType = {
@@ -76,9 +93,13 @@ export type ClientMaxAggregateInputType = {
   email?: true
   company?: true
   avatarUrl?: true
+  notes?: true
+  preferredContact?: true
+  accessToken?: true
+  accessExpiresAt?: true
+  lastActiveAt?: true
   createdAt?: true
   updatedAt?: true
-  accessToken?: true
 }
 
 export type ClientCountAggregateInputType = {
@@ -87,9 +108,14 @@ export type ClientCountAggregateInputType = {
   email?: true
   company?: true
   avatarUrl?: true
+  notes?: true
+  tags?: true
+  preferredContact?: true
+  accessToken?: true
+  accessExpiresAt?: true
+  lastActiveAt?: true
   createdAt?: true
   updatedAt?: true
-  accessToken?: true
   _all?: true
 }
 
@@ -171,9 +197,14 @@ export type ClientGroupByOutputType = {
   email: string | null
   company: string | null
   avatarUrl: string | null
+  notes: string | null
+  tags: string[]
+  preferredContact: $Enums.PreferredContact | null
+  accessToken: string | null
+  accessExpiresAt: Date | null
+  lastActiveAt: Date | null
   createdAt: Date
   updatedAt: Date
-  accessToken: string | null
   _count: ClientCountAggregateOutputType | null
   _min: ClientMinAggregateOutputType | null
   _max: ClientMaxAggregateOutputType | null
@@ -203,9 +234,14 @@ export type ClientWhereInput = {
   email?: Prisma.StringNullableFilter<"Client"> | string | null
   company?: Prisma.StringNullableFilter<"Client"> | string | null
   avatarUrl?: Prisma.StringNullableFilter<"Client"> | string | null
+  notes?: Prisma.StringNullableFilter<"Client"> | string | null
+  tags?: Prisma.StringNullableListFilter<"Client">
+  preferredContact?: Prisma.EnumPreferredContactNullableFilter<"Client"> | $Enums.PreferredContact | null
+  accessToken?: Prisma.StringNullableFilter<"Client"> | string | null
+  accessExpiresAt?: Prisma.DateTimeNullableFilter<"Client"> | Date | string | null
+  lastActiveAt?: Prisma.DateTimeNullableFilter<"Client"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Client"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Client"> | Date | string
-  accessToken?: Prisma.StringNullableFilter<"Client"> | string | null
   projects?: Prisma.ProjectListRelationFilter
 }
 
@@ -215,9 +251,14 @@ export type ClientOrderByWithRelationInput = {
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   company?: Prisma.SortOrderInput | Prisma.SortOrder
   avatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  notes?: Prisma.SortOrderInput | Prisma.SortOrder
+  tags?: Prisma.SortOrder
+  preferredContact?: Prisma.SortOrderInput | Prisma.SortOrder
+  accessToken?: Prisma.SortOrderInput | Prisma.SortOrder
+  accessExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastActiveAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  accessToken?: Prisma.SortOrderInput | Prisma.SortOrder
   projects?: Prisma.ProjectOrderByRelationAggregateInput
 }
 
@@ -230,9 +271,14 @@ export type ClientWhereUniqueInput = Prisma.AtLeast<{
   email?: Prisma.StringNullableFilter<"Client"> | string | null
   company?: Prisma.StringNullableFilter<"Client"> | string | null
   avatarUrl?: Prisma.StringNullableFilter<"Client"> | string | null
+  notes?: Prisma.StringNullableFilter<"Client"> | string | null
+  tags?: Prisma.StringNullableListFilter<"Client">
+  preferredContact?: Prisma.EnumPreferredContactNullableFilter<"Client"> | $Enums.PreferredContact | null
+  accessToken?: Prisma.StringNullableFilter<"Client"> | string | null
+  accessExpiresAt?: Prisma.DateTimeNullableFilter<"Client"> | Date | string | null
+  lastActiveAt?: Prisma.DateTimeNullableFilter<"Client"> | Date | string | null
   createdAt?: Prisma.DateTimeFilter<"Client"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Client"> | Date | string
-  accessToken?: Prisma.StringNullableFilter<"Client"> | string | null
   projects?: Prisma.ProjectListRelationFilter
 }, "id">
 
@@ -242,9 +288,14 @@ export type ClientOrderByWithAggregationInput = {
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   company?: Prisma.SortOrderInput | Prisma.SortOrder
   avatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  notes?: Prisma.SortOrderInput | Prisma.SortOrder
+  tags?: Prisma.SortOrder
+  preferredContact?: Prisma.SortOrderInput | Prisma.SortOrder
+  accessToken?: Prisma.SortOrderInput | Prisma.SortOrder
+  accessExpiresAt?: Prisma.SortOrderInput | Prisma.SortOrder
+  lastActiveAt?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  accessToken?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ClientCountOrderByAggregateInput
   _max?: Prisma.ClientMaxOrderByAggregateInput
   _min?: Prisma.ClientMinOrderByAggregateInput
@@ -259,9 +310,14 @@ export type ClientScalarWhereWithAggregatesInput = {
   email?: Prisma.StringNullableWithAggregatesFilter<"Client"> | string | null
   company?: Prisma.StringNullableWithAggregatesFilter<"Client"> | string | null
   avatarUrl?: Prisma.StringNullableWithAggregatesFilter<"Client"> | string | null
+  notes?: Prisma.StringNullableWithAggregatesFilter<"Client"> | string | null
+  tags?: Prisma.StringNullableListFilter<"Client">
+  preferredContact?: Prisma.EnumPreferredContactNullableWithAggregatesFilter<"Client"> | $Enums.PreferredContact | null
+  accessToken?: Prisma.StringNullableWithAggregatesFilter<"Client"> | string | null
+  accessExpiresAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Client"> | Date | string | null
+  lastActiveAt?: Prisma.DateTimeNullableWithAggregatesFilter<"Client"> | Date | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Client"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Client"> | Date | string
-  accessToken?: Prisma.StringNullableWithAggregatesFilter<"Client"> | string | null
 }
 
 export type ClientCreateInput = {
@@ -270,9 +326,14 @@ export type ClientCreateInput = {
   email?: string | null
   company?: string | null
   avatarUrl?: string | null
+  notes?: string | null
+  tags?: Prisma.ClientCreatetagsInput | string[]
+  preferredContact?: $Enums.PreferredContact | null
+  accessToken?: string | null
+  accessExpiresAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  accessToken?: string | null
   projects?: Prisma.ProjectCreateNestedManyWithoutClientInput
 }
 
@@ -282,9 +343,14 @@ export type ClientUncheckedCreateInput = {
   email?: string | null
   company?: string | null
   avatarUrl?: string | null
+  notes?: string | null
+  tags?: Prisma.ClientCreatetagsInput | string[]
+  preferredContact?: $Enums.PreferredContact | null
+  accessToken?: string | null
+  accessExpiresAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  accessToken?: string | null
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutClientInput
 }
 
@@ -294,9 +360,14 @@ export type ClientUpdateInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   company?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.ClientUpdatetagsInput | string[]
+  preferredContact?: Prisma.NullableEnumPreferredContactFieldUpdateOperationsInput | $Enums.PreferredContact | null
+  accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accessExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   projects?: Prisma.ProjectUpdateManyWithoutClientNestedInput
 }
 
@@ -306,9 +377,14 @@ export type ClientUncheckedUpdateInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   company?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.ClientUpdatetagsInput | string[]
+  preferredContact?: Prisma.NullableEnumPreferredContactFieldUpdateOperationsInput | $Enums.PreferredContact | null
+  accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accessExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutClientNestedInput
 }
 
@@ -318,9 +394,14 @@ export type ClientCreateManyInput = {
   email?: string | null
   company?: string | null
   avatarUrl?: string | null
+  notes?: string | null
+  tags?: Prisma.ClientCreatetagsInput | string[]
+  preferredContact?: $Enums.PreferredContact | null
+  accessToken?: string | null
+  accessExpiresAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  accessToken?: string | null
 }
 
 export type ClientUpdateManyMutationInput = {
@@ -329,9 +410,14 @@ export type ClientUpdateManyMutationInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   company?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.ClientUpdatetagsInput | string[]
+  preferredContact?: Prisma.NullableEnumPreferredContactFieldUpdateOperationsInput | $Enums.PreferredContact | null
+  accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accessExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ClientUncheckedUpdateManyInput = {
@@ -340,9 +426,14 @@ export type ClientUncheckedUpdateManyInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   company?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.ClientUpdatetagsInput | string[]
+  preferredContact?: Prisma.NullableEnumPreferredContactFieldUpdateOperationsInput | $Enums.PreferredContact | null
+  accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accessExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ClientCountOrderByAggregateInput = {
@@ -351,9 +442,14 @@ export type ClientCountOrderByAggregateInput = {
   email?: Prisma.SortOrder
   company?: Prisma.SortOrder
   avatarUrl?: Prisma.SortOrder
+  notes?: Prisma.SortOrder
+  tags?: Prisma.SortOrder
+  preferredContact?: Prisma.SortOrder
+  accessToken?: Prisma.SortOrder
+  accessExpiresAt?: Prisma.SortOrder
+  lastActiveAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  accessToken?: Prisma.SortOrder
 }
 
 export type ClientMaxOrderByAggregateInput = {
@@ -362,9 +458,13 @@ export type ClientMaxOrderByAggregateInput = {
   email?: Prisma.SortOrder
   company?: Prisma.SortOrder
   avatarUrl?: Prisma.SortOrder
+  notes?: Prisma.SortOrder
+  preferredContact?: Prisma.SortOrder
+  accessToken?: Prisma.SortOrder
+  accessExpiresAt?: Prisma.SortOrder
+  lastActiveAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  accessToken?: Prisma.SortOrder
 }
 
 export type ClientMinOrderByAggregateInput = {
@@ -373,14 +473,31 @@ export type ClientMinOrderByAggregateInput = {
   email?: Prisma.SortOrder
   company?: Prisma.SortOrder
   avatarUrl?: Prisma.SortOrder
+  notes?: Prisma.SortOrder
+  preferredContact?: Prisma.SortOrder
+  accessToken?: Prisma.SortOrder
+  accessExpiresAt?: Prisma.SortOrder
+  lastActiveAt?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  accessToken?: Prisma.SortOrder
 }
 
 export type ClientNullableScalarRelationFilter = {
   is?: Prisma.ClientWhereInput | null
   isNot?: Prisma.ClientWhereInput | null
+}
+
+export type ClientCreatetagsInput = {
+  set: string[]
+}
+
+export type ClientUpdatetagsInput = {
+  set?: string[]
+  push?: string | string[]
+}
+
+export type NullableEnumPreferredContactFieldUpdateOperationsInput = {
+  set?: $Enums.PreferredContact | null
 }
 
 export type ClientCreateNestedOneWithoutProjectsInput = {
@@ -405,9 +522,14 @@ export type ClientCreateWithoutProjectsInput = {
   email?: string | null
   company?: string | null
   avatarUrl?: string | null
+  notes?: string | null
+  tags?: Prisma.ClientCreatetagsInput | string[]
+  preferredContact?: $Enums.PreferredContact | null
+  accessToken?: string | null
+  accessExpiresAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  accessToken?: string | null
 }
 
 export type ClientUncheckedCreateWithoutProjectsInput = {
@@ -416,9 +538,14 @@ export type ClientUncheckedCreateWithoutProjectsInput = {
   email?: string | null
   company?: string | null
   avatarUrl?: string | null
+  notes?: string | null
+  tags?: Prisma.ClientCreatetagsInput | string[]
+  preferredContact?: $Enums.PreferredContact | null
+  accessToken?: string | null
+  accessExpiresAt?: Date | string | null
+  lastActiveAt?: Date | string | null
   createdAt?: Date | string
   updatedAt?: Date | string
-  accessToken?: string | null
 }
 
 export type ClientCreateOrConnectWithoutProjectsInput = {
@@ -443,9 +570,14 @@ export type ClientUpdateWithoutProjectsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   company?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.ClientUpdatetagsInput | string[]
+  preferredContact?: Prisma.NullableEnumPreferredContactFieldUpdateOperationsInput | $Enums.PreferredContact | null
+  accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accessExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ClientUncheckedUpdateWithoutProjectsInput = {
@@ -454,9 +586,14 @@ export type ClientUncheckedUpdateWithoutProjectsInput = {
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   company?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.ClientUpdatetagsInput | string[]
+  preferredContact?: Prisma.NullableEnumPreferredContactFieldUpdateOperationsInput | $Enums.PreferredContact | null
+  accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accessExpiresAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  lastActiveAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -496,9 +633,14 @@ export type ClientSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   email?: boolean
   company?: boolean
   avatarUrl?: boolean
+  notes?: boolean
+  tags?: boolean
+  preferredContact?: boolean
+  accessToken?: boolean
+  accessExpiresAt?: boolean
+  lastActiveAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  accessToken?: boolean
   projects?: boolean | Prisma.Client$projectsArgs<ExtArgs>
   _count?: boolean | Prisma.ClientCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["client"]>
@@ -509,9 +651,14 @@ export type ClientSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   email?: boolean
   company?: boolean
   avatarUrl?: boolean
+  notes?: boolean
+  tags?: boolean
+  preferredContact?: boolean
+  accessToken?: boolean
+  accessExpiresAt?: boolean
+  lastActiveAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  accessToken?: boolean
 }, ExtArgs["result"]["client"]>
 
 export type ClientSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -520,9 +667,14 @@ export type ClientSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   email?: boolean
   company?: boolean
   avatarUrl?: boolean
+  notes?: boolean
+  tags?: boolean
+  preferredContact?: boolean
+  accessToken?: boolean
+  accessExpiresAt?: boolean
+  lastActiveAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  accessToken?: boolean
 }, ExtArgs["result"]["client"]>
 
 export type ClientSelectScalar = {
@@ -531,12 +683,17 @@ export type ClientSelectScalar = {
   email?: boolean
   company?: boolean
   avatarUrl?: boolean
+  notes?: boolean
+  tags?: boolean
+  preferredContact?: boolean
+  accessToken?: boolean
+  accessExpiresAt?: boolean
+  lastActiveAt?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  accessToken?: boolean
 }
 
-export type ClientOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "company" | "avatarUrl" | "createdAt" | "updatedAt" | "accessToken", ExtArgs["result"]["client"]>
+export type ClientOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "company" | "avatarUrl" | "notes" | "tags" | "preferredContact" | "accessToken" | "accessExpiresAt" | "lastActiveAt" | "createdAt" | "updatedAt", ExtArgs["result"]["client"]>
 export type ClientInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   projects?: boolean | Prisma.Client$projectsArgs<ExtArgs>
   _count?: boolean | Prisma.ClientCountOutputTypeDefaultArgs<ExtArgs>
@@ -555,9 +712,14 @@ export type $ClientPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     email: string | null
     company: string | null
     avatarUrl: string | null
+    notes: string | null
+    tags: string[]
+    preferredContact: $Enums.PreferredContact | null
+    accessToken: string | null
+    accessExpiresAt: Date | null
+    lastActiveAt: Date | null
     createdAt: Date
     updatedAt: Date
-    accessToken: string | null
   }, ExtArgs["result"]["client"]>
   composites: {}
 }
@@ -987,9 +1149,14 @@ export interface ClientFieldRefs {
   readonly email: Prisma.FieldRef<"Client", 'String'>
   readonly company: Prisma.FieldRef<"Client", 'String'>
   readonly avatarUrl: Prisma.FieldRef<"Client", 'String'>
+  readonly notes: Prisma.FieldRef<"Client", 'String'>
+  readonly tags: Prisma.FieldRef<"Client", 'String[]'>
+  readonly preferredContact: Prisma.FieldRef<"Client", 'PreferredContact'>
+  readonly accessToken: Prisma.FieldRef<"Client", 'String'>
+  readonly accessExpiresAt: Prisma.FieldRef<"Client", 'DateTime'>
+  readonly lastActiveAt: Prisma.FieldRef<"Client", 'DateTime'>
   readonly createdAt: Prisma.FieldRef<"Client", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Client", 'DateTime'>
-  readonly accessToken: Prisma.FieldRef<"Client", 'String'>
 }
     
 

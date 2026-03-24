@@ -1,4 +1,3 @@
-
 generator client {
   provider = "prisma-client"
   output   = "../src/app/generated/prisma"
@@ -13,17 +12,17 @@ datasource db {
 // -----------------------------------------------------------------------------
 
 enum BlogPostCategory {
-  TECH @map("tech")
-  PERSONAL_GROWTH @map("personal-growth")
+  TECH              @map("tech")
+  PERSONAL_GROWTH   @map("personal-growth")
   ENGINEERING_NOTES @map("engineering-notes")
-  TUTORIALS @map("tutorials")
-  DEV_JOURNEY @map("dev-journey")
+  TUTORIALS         @map("tutorials")
+  DEV_JOURNEY       @map("dev-journey")
 }
 
 enum ContactSubmissionStatus {
-  NEW @map("new")
-  READ @map("read")
-  REPLIED @map("replied")
+  NEW      @map("new")
+  READ     @map("read")
+  REPLIED  @map("replied")
   ARCHIVED @map("archived")
 }
 
@@ -33,67 +32,73 @@ enum ResourceType {
 }
 
 enum ProjectCategory {
-  WEB_APP @map("web-app")
-  SAAS @map("saas")
-  MOBILE @map("mobile")
+  WEB_APP      @map("web-app")
+  SAAS         @map("saas")
+  MOBILE       @map("mobile")
   LANDING_PAGE @map("landing-page")
-  E_COMMERCE @map("e-commerce")
-  OTHER @map("other")
+  E_COMMERCE   @map("e-commerce")
+  OTHER        @map("other")
 }
 
 enum ProjectStatus {
-  COMPLETED @map("completed")
-  IN_PROGRESS @map("in-progress")
+  COMPLETED         @map("completed")
+  IN_PROGRESS       @map("in-progress")
   UNDER_DEVELOPMENT @map("under-development")
 }
 
 enum ProjectType {
   PORTFOLIO @map("portfolio")
-  CLIENT @map("client")
+  CLIENT    @map("client")
+}
+
+enum PreferredContact {
+  WHATSAPP @map("whatsapp")
+  EMAIL    @map("email")
+  PHONE    @map("phone")
 }
 
 enum InvoiceStatus {
-  UNPAID @map("unpaid")
-  PAID @map("paid")
-  PENDING @map("pending")
+  UNPAID    @map("unpaid")
+  PAID      @map("paid")
+  PENDING   @map("pending")
   CANCELLED @map("cancelled")
 }
 
 enum SkillCategory {
-  FRONTEND @map("frontend")
-  BACKEND @map("backend")
-  DATABASE @map("database")
-  DEVOPS @map("devops")
-  TOOLS @map("tools")
+  FRONTEND           @map("frontend")
+  BACKEND            @map("backend")
+  DATABASE           @map("database")
+  DEVOPS             @map("devops")
+  TOOLS              @map("tools")
   CURRENTLY_LEARNING @map("currently-learning")
 }
 
 enum TaskStatus {
-  BACKLOG @map("backlog")
-  TODO @map("todo")
+  BACKLOG     @map("backlog")
+  TODO        @map("todo")
   IN_PROGRESS @map("in-progress")
-  REVIEW @map("review")
-  DONE @map("done")
+  REVIEW      @map("review")
+  DONE        @map("done")
 }
 
 enum TaskPriority {
-  LOW @map("low")
+  LOW    @map("low")
   MEDIUM @map("medium")
-  HIGH @map("high")
+  HIGH   @map("high")
   URGENT @map("urgent")
 }
 
 enum TaskType {
-  FEATURE @map("feature")
-  BUG @map("bug")
-  CHORE @map("chore")
+  FEATURE  @map("feature")
+  BUG      @map("bug")
+  CHORE    @map("chore")
   REFACTOR @map("refactor")
-  MEETING @map("meeting")
-  OTHER @map("other")
+  MEETING  @map("meeting")
+  OTHER    @map("other")
 }
 
 enum ReportStatus {
-  DRAFT @map("draft")
+  DRAFT     @map("draft")
   PUBLISHED @map("published")
 }
 
@@ -182,14 +187,22 @@ model BlogPost {
 }
 
 model Client {
-  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name        String
-  email       String?
-  company     String?
-  avatarUrl   String?  @map("avatar_url")
-  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz
-  updatedAt   DateTime @default(now()) @map("updated_at") @db.Timestamptz
-  accessToken String?  @map("access_token")
+  id        String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name      String
+  email     String?
+  company   String?
+  avatarUrl String? @map("avatar_url")
+
+  notes            String?
+  tags             String[]          @default([])
+  preferredContact PreferredContact? @map("preferred_contact")
+
+  accessToken     String?   @map("access_token")
+  accessExpiresAt DateTime? @map("access_expires_at") @db.Timestamptz
+
+  lastActiveAt DateTime? @map("last_active_at") @db.Timestamptz
+  createdAt    DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt    DateTime  @default(now()) @map("updated_at") @db.Timestamptz
 
   projects Project[]
 
@@ -224,26 +237,26 @@ model ProjectFile {
 }
 
 model Project {
-  id                String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  title             String
-  slug              String          @unique
-  shortDescription  String          @map("short_description")
-  fullDescription   Json?           @map("full_description")
-  thumbnailUrl      String?         @map("thumbnail_url")
-  featuredImageUrl  String?         @map("featured_image_url")
-  category          ProjectCategory
-  techStack         String[]        @default([]) @map("tech_stack")
-  status            ProjectStatus   @default(COMPLETED)
-  liveUrl           String?         @map("live_url")
-  repoUrl           String?         @map("repo_url")
-  isFeatured        Boolean?        @default(false) @map("is_featured")
-  displayOrder      Int?            @default(0) @map("display_order")
-  year              Int?
-  createdAt         DateTime?       @default(now()) @map("created_at") @db.Timestamptz
-  updatedAt         DateTime?       @default(now()) @map("updated_at") @db.Timestamptz
-  galleryImages     String[]        @default([]) @map("gallery_images")
-  clientId          String?         @map("client_id") @db.Uuid
-  type              ProjectType?    @default(PORTFOLIO) 
+  id               String          @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title            String
+  slug             String          @unique
+  shortDescription String          @map("short_description")
+  fullDescription  Json?           @map("full_description")
+  thumbnailUrl     String?         @map("thumbnail_url")
+  featuredImageUrl String?         @map("featured_image_url")
+  category         ProjectCategory
+  techStack        String[]        @default([]) @map("tech_stack")
+  status           ProjectStatus   @default(COMPLETED)
+  liveUrl          String?         @map("live_url")
+  repoUrl          String?         @map("repo_url")
+  isFeatured       Boolean?        @default(false) @map("is_featured")
+  displayOrder     Int?            @default(0) @map("display_order")
+  year             Int?
+  createdAt        DateTime?       @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt        DateTime?       @default(now()) @map("updated_at") @db.Timestamptz
+  galleryImages    String[]        @default([]) @map("gallery_images")
+  clientId         String?         @map("client_id") @db.Uuid
+  type             ProjectType?    @default(PORTFOLIO)
 
   client        Client?        @relation(fields: [clientId], references: [id])
   files         ProjectFile[]

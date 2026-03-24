@@ -283,6 +283,23 @@ export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedBoolNullableFilter<$PrismaModel>
 }
 
+export type EnumPreferredContactNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.PreferredContact | Prisma.EnumPreferredContactFieldRefInput<$PrismaModel> | null
+  in?: $Enums.PreferredContact[] | Prisma.ListEnumPreferredContactFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.PreferredContact[] | Prisma.ListEnumPreferredContactFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumPreferredContactNullableFilter<$PrismaModel> | $Enums.PreferredContact | null
+}
+
+export type EnumPreferredContactNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PreferredContact | Prisma.EnumPreferredContactFieldRefInput<$PrismaModel> | null
+  in?: $Enums.PreferredContact[] | Prisma.ListEnumPreferredContactFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.PreferredContact[] | Prisma.ListEnumPreferredContactFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumPreferredContactNullableWithAggregatesFilter<$PrismaModel> | $Enums.PreferredContact | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPreferredContactNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPreferredContactNullableFilter<$PrismaModel>
+}
+
 export type EnumContactSubmissionStatusNullableFilter<$PrismaModel = never> = {
   equals?: $Enums.ContactSubmissionStatus | Prisma.EnumContactSubmissionStatusFieldRefInput<$PrismaModel> | null
   in?: $Enums.ContactSubmissionStatus[] | Prisma.ListEnumContactSubmissionStatusFieldRefInput<$PrismaModel> | null
@@ -782,6 +799,23 @@ export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _min?: Prisma.NestedBoolNullableFilter<$PrismaModel>
   _max?: Prisma.NestedBoolNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumPreferredContactNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.PreferredContact | Prisma.EnumPreferredContactFieldRefInput<$PrismaModel> | null
+  in?: $Enums.PreferredContact[] | Prisma.ListEnumPreferredContactFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.PreferredContact[] | Prisma.ListEnumPreferredContactFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumPreferredContactNullableFilter<$PrismaModel> | $Enums.PreferredContact | null
+}
+
+export type NestedEnumPreferredContactNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.PreferredContact | Prisma.EnumPreferredContactFieldRefInput<$PrismaModel> | null
+  in?: $Enums.PreferredContact[] | Prisma.ListEnumPreferredContactFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.PreferredContact[] | Prisma.ListEnumPreferredContactFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumPreferredContactNullableWithAggregatesFilter<$PrismaModel> | $Enums.PreferredContact | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumPreferredContactNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumPreferredContactNullableFilter<$PrismaModel>
 }
 
 export type NestedEnumContactSubmissionStatusNullableFilter<$PrismaModel = never> = {

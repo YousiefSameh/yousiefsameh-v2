@@ -1650,9 +1650,14 @@ export const ClientScalarFieldEnum = {
   email: 'email',
   company: 'company',
   avatarUrl: 'avatarUrl',
+  notes: 'notes',
+  tags: 'tags',
+  preferredContact: 'preferredContact',
+  accessToken: 'accessToken',
+  accessExpiresAt: 'accessExpiresAt',
+  lastActiveAt: 'lastActiveAt',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  accessToken: 'accessToken'
+  updatedAt: 'updatedAt'
 } as const
 
 export type ClientScalarFieldEnum = (typeof ClientScalarFieldEnum)[keyof typeof ClientScalarFieldEnum]
@@ -1929,6 +1934,20 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Int[]'
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'PreferredContact'
+ */
+export type EnumPreferredContactFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PreferredContact'>
+    
+
+
+/**
+ * Reference to a field of type 'PreferredContact[]'
+ */
+export type ListEnumPreferredContactFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PreferredContact[]'>
     
 
 
