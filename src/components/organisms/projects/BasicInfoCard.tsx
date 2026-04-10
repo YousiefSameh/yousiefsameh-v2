@@ -21,9 +21,10 @@ import {
 } from "@/components/atoms/form";
 import { Input } from "@/components/atoms/input";
 import { ProjectFormValues } from "@/validations/projects.validation";
-import { UseFormReturn } from "react-hook-form";
+import { UseFormReturn, useWatch } from "react-hook-form";
 import { Button } from "@/components/atoms/button";
 import { Wand2 } from "lucide-react";
+import { useEffect } from "react";
 
 interface BasicInfoCardProps {
   form: UseFormReturn<ProjectFormValues>;
@@ -34,20 +35,27 @@ function generateSlug(title: string): string {
   return title
     .toLowerCase()
     .trim()
-    .replace(/[^\w\s-]/g, "")   // شيل special characters
-    .replace(/\s+/g, "-")        // spaces → hyphens
-    .replace(/-+/g, "-")         // multiple hyphens → single
-    .replace(/^-|-$/g, "");      // شيل hyphens من الأول والآخر
+    .replace(/[^\w\s-]/g, "")
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "");
 }
 
 export function BasicInfoCard({ form, clients }: BasicInfoCardProps) {
-  const projectType = form.watch("type");
+  const projectType = useWatch({
+    control: form.control,
+    name: "type",
+  });
 
   function handleGenerateSlug() {
     const title = form.getValues("title");
     if (!title) return;
     form.setValue("slug", generateSlug(title), { shouldValidate: true });
   }
+
+  useEffect(() => {
+    console.log("BasicInfoCard perceived type:", projectType);
+  }, [projectType]);
 
   return (
     <Card>
