@@ -333,6 +333,8 @@ export type ProjectWhereInput = {
   tasks?: Prisma.TaskListRelationFilter
   testimonials?: Prisma.TestimonialListRelationFilter
   weeklyReports?: Prisma.WeeklyReportListRelationFilter
+  activityLogs?: Prisma.ActivityLogListRelationFilter
+  taskLabels?: Prisma.TaskLabelListRelationFilter
 }
 
 export type ProjectOrderByWithRelationInput = {
@@ -361,6 +363,8 @@ export type ProjectOrderByWithRelationInput = {
   tasks?: Prisma.TaskOrderByRelationAggregateInput
   testimonials?: Prisma.TestimonialOrderByRelationAggregateInput
   weeklyReports?: Prisma.WeeklyReportOrderByRelationAggregateInput
+  activityLogs?: Prisma.ActivityLogOrderByRelationAggregateInput
+  taskLabels?: Prisma.TaskLabelOrderByRelationAggregateInput
 }
 
 export type ProjectWhereUniqueInput = Prisma.AtLeast<{
@@ -392,6 +396,8 @@ export type ProjectWhereUniqueInput = Prisma.AtLeast<{
   tasks?: Prisma.TaskListRelationFilter
   testimonials?: Prisma.TestimonialListRelationFilter
   weeklyReports?: Prisma.WeeklyReportListRelationFilter
+  activityLogs?: Prisma.ActivityLogListRelationFilter
+  taskLabels?: Prisma.TaskLabelListRelationFilter
 }, "id" | "slug">
 
 export type ProjectOrderByWithAggregationInput = {
@@ -473,6 +479,8 @@ export type ProjectCreateInput = {
   tasks?: Prisma.TaskCreateNestedManyWithoutProjectInput
   testimonials?: Prisma.TestimonialCreateNestedManyWithoutProjectInput
   weeklyReports?: Prisma.WeeklyReportCreateNestedManyWithoutProjectInput
+  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutProjectInput
+  taskLabels?: Prisma.TaskLabelCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateInput = {
@@ -500,6 +508,8 @@ export type ProjectUncheckedCreateInput = {
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutProjectInput
   testimonials?: Prisma.TestimonialUncheckedCreateNestedManyWithoutProjectInput
   weeklyReports?: Prisma.WeeklyReportUncheckedCreateNestedManyWithoutProjectInput
+  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutProjectInput
+  taskLabels?: Prisma.TaskLabelUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUpdateInput = {
@@ -527,6 +537,8 @@ export type ProjectUpdateInput = {
   tasks?: Prisma.TaskUpdateManyWithoutProjectNestedInput
   testimonials?: Prisma.TestimonialUpdateManyWithoutProjectNestedInput
   weeklyReports?: Prisma.WeeklyReportUpdateManyWithoutProjectNestedInput
+  activityLogs?: Prisma.ActivityLogUpdateManyWithoutProjectNestedInput
+  taskLabels?: Prisma.TaskLabelUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateInput = {
@@ -554,6 +566,8 @@ export type ProjectUncheckedUpdateInput = {
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutProjectNestedInput
   testimonials?: Prisma.TestimonialUncheckedUpdateManyWithoutProjectNestedInput
   weeklyReports?: Prisma.WeeklyReportUncheckedUpdateManyWithoutProjectNestedInput
+  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutProjectNestedInput
+  taskLabels?: Prisma.TaskLabelUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateManyInput = {
@@ -817,6 +831,20 @@ export type ProjectUpdateOneRequiredWithoutTasksNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutTasksInput, Prisma.ProjectUpdateWithoutTasksInput>, Prisma.ProjectUncheckedUpdateWithoutTasksInput>
 }
 
+export type ProjectCreateNestedOneWithoutTaskLabelsInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutTaskLabelsInput, Prisma.ProjectUncheckedCreateWithoutTaskLabelsInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutTaskLabelsInput
+  connect?: Prisma.ProjectWhereUniqueInput
+}
+
+export type ProjectUpdateOneRequiredWithoutTaskLabelsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutTaskLabelsInput, Prisma.ProjectUncheckedCreateWithoutTaskLabelsInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutTaskLabelsInput
+  upsert?: Prisma.ProjectUpsertWithoutTaskLabelsInput
+  connect?: Prisma.ProjectWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutTaskLabelsInput, Prisma.ProjectUpdateWithoutTaskLabelsInput>, Prisma.ProjectUncheckedUpdateWithoutTaskLabelsInput>
+}
+
 export type ProjectCreateNestedOneWithoutTestimonialsInput = {
   create?: Prisma.XOR<Prisma.ProjectCreateWithoutTestimonialsInput, Prisma.ProjectUncheckedCreateWithoutTestimonialsInput>
   connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutTestimonialsInput
@@ -847,6 +875,20 @@ export type ProjectUpdateOneRequiredWithoutWeeklyReportsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutWeeklyReportsInput, Prisma.ProjectUpdateWithoutWeeklyReportsInput>, Prisma.ProjectUncheckedUpdateWithoutWeeklyReportsInput>
 }
 
+export type ProjectCreateNestedOneWithoutActivityLogsInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutActivityLogsInput, Prisma.ProjectUncheckedCreateWithoutActivityLogsInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutActivityLogsInput
+  connect?: Prisma.ProjectWhereUniqueInput
+}
+
+export type ProjectUpdateOneRequiredWithoutActivityLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProjectCreateWithoutActivityLogsInput, Prisma.ProjectUncheckedCreateWithoutActivityLogsInput>
+  connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutActivityLogsInput
+  upsert?: Prisma.ProjectUpsertWithoutActivityLogsInput
+  connect?: Prisma.ProjectWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProjectUpdateToOneWithWhereWithoutActivityLogsInput, Prisma.ProjectUpdateWithoutActivityLogsInput>, Prisma.ProjectUncheckedUpdateWithoutActivityLogsInput>
+}
+
 export type ProjectCreateWithoutClientInput = {
   id?: string
   title: string
@@ -871,6 +913,8 @@ export type ProjectCreateWithoutClientInput = {
   tasks?: Prisma.TaskCreateNestedManyWithoutProjectInput
   testimonials?: Prisma.TestimonialCreateNestedManyWithoutProjectInput
   weeklyReports?: Prisma.WeeklyReportCreateNestedManyWithoutProjectInput
+  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutProjectInput
+  taskLabels?: Prisma.TaskLabelCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutClientInput = {
@@ -897,6 +941,8 @@ export type ProjectUncheckedCreateWithoutClientInput = {
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutProjectInput
   testimonials?: Prisma.TestimonialUncheckedCreateNestedManyWithoutProjectInput
   weeklyReports?: Prisma.WeeklyReportUncheckedCreateNestedManyWithoutProjectInput
+  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutProjectInput
+  taskLabels?: Prisma.TaskLabelUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutClientInput = {
@@ -975,6 +1021,8 @@ export type ProjectCreateWithoutFilesInput = {
   tasks?: Prisma.TaskCreateNestedManyWithoutProjectInput
   testimonials?: Prisma.TestimonialCreateNestedManyWithoutProjectInput
   weeklyReports?: Prisma.WeeklyReportCreateNestedManyWithoutProjectInput
+  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutProjectInput
+  taskLabels?: Prisma.TaskLabelCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutFilesInput = {
@@ -1001,6 +1049,8 @@ export type ProjectUncheckedCreateWithoutFilesInput = {
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutProjectInput
   testimonials?: Prisma.TestimonialUncheckedCreateNestedManyWithoutProjectInput
   weeklyReports?: Prisma.WeeklyReportUncheckedCreateNestedManyWithoutProjectInput
+  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutProjectInput
+  taskLabels?: Prisma.TaskLabelUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutFilesInput = {
@@ -1043,6 +1093,8 @@ export type ProjectUpdateWithoutFilesInput = {
   tasks?: Prisma.TaskUpdateManyWithoutProjectNestedInput
   testimonials?: Prisma.TestimonialUpdateManyWithoutProjectNestedInput
   weeklyReports?: Prisma.WeeklyReportUpdateManyWithoutProjectNestedInput
+  activityLogs?: Prisma.ActivityLogUpdateManyWithoutProjectNestedInput
+  taskLabels?: Prisma.TaskLabelUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutFilesInput = {
@@ -1069,6 +1121,8 @@ export type ProjectUncheckedUpdateWithoutFilesInput = {
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutProjectNestedInput
   testimonials?: Prisma.TestimonialUncheckedUpdateManyWithoutProjectNestedInput
   weeklyReports?: Prisma.WeeklyReportUncheckedUpdateManyWithoutProjectNestedInput
+  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutProjectNestedInput
+  taskLabels?: Prisma.TaskLabelUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutTasksInput = {
@@ -1095,6 +1149,8 @@ export type ProjectCreateWithoutTasksInput = {
   files?: Prisma.ProjectFileCreateNestedManyWithoutProjectInput
   testimonials?: Prisma.TestimonialCreateNestedManyWithoutProjectInput
   weeklyReports?: Prisma.WeeklyReportCreateNestedManyWithoutProjectInput
+  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutProjectInput
+  taskLabels?: Prisma.TaskLabelCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutTasksInput = {
@@ -1121,6 +1177,8 @@ export type ProjectUncheckedCreateWithoutTasksInput = {
   files?: Prisma.ProjectFileUncheckedCreateNestedManyWithoutProjectInput
   testimonials?: Prisma.TestimonialUncheckedCreateNestedManyWithoutProjectInput
   weeklyReports?: Prisma.WeeklyReportUncheckedCreateNestedManyWithoutProjectInput
+  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutProjectInput
+  taskLabels?: Prisma.TaskLabelUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutTasksInput = {
@@ -1163,6 +1221,8 @@ export type ProjectUpdateWithoutTasksInput = {
   files?: Prisma.ProjectFileUpdateManyWithoutProjectNestedInput
   testimonials?: Prisma.TestimonialUpdateManyWithoutProjectNestedInput
   weeklyReports?: Prisma.WeeklyReportUpdateManyWithoutProjectNestedInput
+  activityLogs?: Prisma.ActivityLogUpdateManyWithoutProjectNestedInput
+  taskLabels?: Prisma.TaskLabelUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutTasksInput = {
@@ -1189,6 +1249,136 @@ export type ProjectUncheckedUpdateWithoutTasksInput = {
   files?: Prisma.ProjectFileUncheckedUpdateManyWithoutProjectNestedInput
   testimonials?: Prisma.TestimonialUncheckedUpdateManyWithoutProjectNestedInput
   weeklyReports?: Prisma.WeeklyReportUncheckedUpdateManyWithoutProjectNestedInput
+  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutProjectNestedInput
+  taskLabels?: Prisma.TaskLabelUncheckedUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectCreateWithoutTaskLabelsInput = {
+  id?: string
+  title: string
+  slug: string
+  shortDescription: string
+  fullDescription?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  thumbnailUrl?: string | null
+  featuredImageUrl?: string | null
+  category: $Enums.ProjectCategory
+  techStack?: Prisma.ProjectCreatetechStackInput | string[]
+  status?: $Enums.ProjectStatus
+  liveUrl?: string | null
+  repoUrl?: string | null
+  isFeatured?: boolean | null
+  displayOrder?: number | null
+  year?: number | null
+  createdAt?: Date | string | null
+  updatedAt?: Date | string | null
+  galleryImages?: Prisma.ProjectCreategalleryImagesInput | string[]
+  type?: $Enums.ProjectType | null
+  client?: Prisma.ClientCreateNestedOneWithoutProjectsInput
+  files?: Prisma.ProjectFileCreateNestedManyWithoutProjectInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutProjectInput
+  testimonials?: Prisma.TestimonialCreateNestedManyWithoutProjectInput
+  weeklyReports?: Prisma.WeeklyReportCreateNestedManyWithoutProjectInput
+  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectUncheckedCreateWithoutTaskLabelsInput = {
+  id?: string
+  title: string
+  slug: string
+  shortDescription: string
+  fullDescription?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  thumbnailUrl?: string | null
+  featuredImageUrl?: string | null
+  category: $Enums.ProjectCategory
+  techStack?: Prisma.ProjectCreatetechStackInput | string[]
+  status?: $Enums.ProjectStatus
+  liveUrl?: string | null
+  repoUrl?: string | null
+  isFeatured?: boolean | null
+  displayOrder?: number | null
+  year?: number | null
+  createdAt?: Date | string | null
+  updatedAt?: Date | string | null
+  galleryImages?: Prisma.ProjectCreategalleryImagesInput | string[]
+  clientId?: string | null
+  type?: $Enums.ProjectType | null
+  files?: Prisma.ProjectFileUncheckedCreateNestedManyWithoutProjectInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutProjectInput
+  testimonials?: Prisma.TestimonialUncheckedCreateNestedManyWithoutProjectInput
+  weeklyReports?: Prisma.WeeklyReportUncheckedCreateNestedManyWithoutProjectInput
+  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectCreateOrConnectWithoutTaskLabelsInput = {
+  where: Prisma.ProjectWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutTaskLabelsInput, Prisma.ProjectUncheckedCreateWithoutTaskLabelsInput>
+}
+
+export type ProjectUpsertWithoutTaskLabelsInput = {
+  update: Prisma.XOR<Prisma.ProjectUpdateWithoutTaskLabelsInput, Prisma.ProjectUncheckedUpdateWithoutTaskLabelsInput>
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutTaskLabelsInput, Prisma.ProjectUncheckedCreateWithoutTaskLabelsInput>
+  where?: Prisma.ProjectWhereInput
+}
+
+export type ProjectUpdateToOneWithWhereWithoutTaskLabelsInput = {
+  where?: Prisma.ProjectWhereInput
+  data: Prisma.XOR<Prisma.ProjectUpdateWithoutTaskLabelsInput, Prisma.ProjectUncheckedUpdateWithoutTaskLabelsInput>
+}
+
+export type ProjectUpdateWithoutTaskLabelsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  shortDescription?: Prisma.StringFieldUpdateOperationsInput | string
+  fullDescription?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  featuredImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.EnumProjectCategoryFieldUpdateOperationsInput | $Enums.ProjectCategory
+  techStack?: Prisma.ProjectUpdatetechStackInput | string[]
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  liveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  repoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  displayOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  galleryImages?: Prisma.ProjectUpdategalleryImagesInput | string[]
+  type?: Prisma.NullableEnumProjectTypeFieldUpdateOperationsInput | $Enums.ProjectType | null
+  client?: Prisma.ClientUpdateOneWithoutProjectsNestedInput
+  files?: Prisma.ProjectFileUpdateManyWithoutProjectNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutProjectNestedInput
+  testimonials?: Prisma.TestimonialUpdateManyWithoutProjectNestedInput
+  weeklyReports?: Prisma.WeeklyReportUpdateManyWithoutProjectNestedInput
+  activityLogs?: Prisma.ActivityLogUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectUncheckedUpdateWithoutTaskLabelsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  shortDescription?: Prisma.StringFieldUpdateOperationsInput | string
+  fullDescription?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  featuredImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.EnumProjectCategoryFieldUpdateOperationsInput | $Enums.ProjectCategory
+  techStack?: Prisma.ProjectUpdatetechStackInput | string[]
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  liveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  repoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  displayOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  galleryImages?: Prisma.ProjectUpdategalleryImagesInput | string[]
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.NullableEnumProjectTypeFieldUpdateOperationsInput | $Enums.ProjectType | null
+  files?: Prisma.ProjectFileUncheckedUpdateManyWithoutProjectNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutProjectNestedInput
+  testimonials?: Prisma.TestimonialUncheckedUpdateManyWithoutProjectNestedInput
+  weeklyReports?: Prisma.WeeklyReportUncheckedUpdateManyWithoutProjectNestedInput
+  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutTestimonialsInput = {
@@ -1215,6 +1405,8 @@ export type ProjectCreateWithoutTestimonialsInput = {
   files?: Prisma.ProjectFileCreateNestedManyWithoutProjectInput
   tasks?: Prisma.TaskCreateNestedManyWithoutProjectInput
   weeklyReports?: Prisma.WeeklyReportCreateNestedManyWithoutProjectInput
+  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutProjectInput
+  taskLabels?: Prisma.TaskLabelCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutTestimonialsInput = {
@@ -1241,6 +1433,8 @@ export type ProjectUncheckedCreateWithoutTestimonialsInput = {
   files?: Prisma.ProjectFileUncheckedCreateNestedManyWithoutProjectInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutProjectInput
   weeklyReports?: Prisma.WeeklyReportUncheckedCreateNestedManyWithoutProjectInput
+  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutProjectInput
+  taskLabels?: Prisma.TaskLabelUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutTestimonialsInput = {
@@ -1283,6 +1477,8 @@ export type ProjectUpdateWithoutTestimonialsInput = {
   files?: Prisma.ProjectFileUpdateManyWithoutProjectNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutProjectNestedInput
   weeklyReports?: Prisma.WeeklyReportUpdateManyWithoutProjectNestedInput
+  activityLogs?: Prisma.ActivityLogUpdateManyWithoutProjectNestedInput
+  taskLabels?: Prisma.TaskLabelUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutTestimonialsInput = {
@@ -1309,6 +1505,8 @@ export type ProjectUncheckedUpdateWithoutTestimonialsInput = {
   files?: Prisma.ProjectFileUncheckedUpdateManyWithoutProjectNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutProjectNestedInput
   weeklyReports?: Prisma.WeeklyReportUncheckedUpdateManyWithoutProjectNestedInput
+  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutProjectNestedInput
+  taskLabels?: Prisma.TaskLabelUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateWithoutWeeklyReportsInput = {
@@ -1335,6 +1533,8 @@ export type ProjectCreateWithoutWeeklyReportsInput = {
   files?: Prisma.ProjectFileCreateNestedManyWithoutProjectInput
   tasks?: Prisma.TaskCreateNestedManyWithoutProjectInput
   testimonials?: Prisma.TestimonialCreateNestedManyWithoutProjectInput
+  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutProjectInput
+  taskLabels?: Prisma.TaskLabelCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectUncheckedCreateWithoutWeeklyReportsInput = {
@@ -1361,6 +1561,8 @@ export type ProjectUncheckedCreateWithoutWeeklyReportsInput = {
   files?: Prisma.ProjectFileUncheckedCreateNestedManyWithoutProjectInput
   tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutProjectInput
   testimonials?: Prisma.TestimonialUncheckedCreateNestedManyWithoutProjectInput
+  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutProjectInput
+  taskLabels?: Prisma.TaskLabelUncheckedCreateNestedManyWithoutProjectInput
 }
 
 export type ProjectCreateOrConnectWithoutWeeklyReportsInput = {
@@ -1403,6 +1605,8 @@ export type ProjectUpdateWithoutWeeklyReportsInput = {
   files?: Prisma.ProjectFileUpdateManyWithoutProjectNestedInput
   tasks?: Prisma.TaskUpdateManyWithoutProjectNestedInput
   testimonials?: Prisma.TestimonialUpdateManyWithoutProjectNestedInput
+  activityLogs?: Prisma.ActivityLogUpdateManyWithoutProjectNestedInput
+  taskLabels?: Prisma.TaskLabelUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutWeeklyReportsInput = {
@@ -1429,6 +1633,136 @@ export type ProjectUncheckedUpdateWithoutWeeklyReportsInput = {
   files?: Prisma.ProjectFileUncheckedUpdateManyWithoutProjectNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutProjectNestedInput
   testimonials?: Prisma.TestimonialUncheckedUpdateManyWithoutProjectNestedInput
+  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutProjectNestedInput
+  taskLabels?: Prisma.TaskLabelUncheckedUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectCreateWithoutActivityLogsInput = {
+  id?: string
+  title: string
+  slug: string
+  shortDescription: string
+  fullDescription?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  thumbnailUrl?: string | null
+  featuredImageUrl?: string | null
+  category: $Enums.ProjectCategory
+  techStack?: Prisma.ProjectCreatetechStackInput | string[]
+  status?: $Enums.ProjectStatus
+  liveUrl?: string | null
+  repoUrl?: string | null
+  isFeatured?: boolean | null
+  displayOrder?: number | null
+  year?: number | null
+  createdAt?: Date | string | null
+  updatedAt?: Date | string | null
+  galleryImages?: Prisma.ProjectCreategalleryImagesInput | string[]
+  type?: $Enums.ProjectType | null
+  client?: Prisma.ClientCreateNestedOneWithoutProjectsInput
+  files?: Prisma.ProjectFileCreateNestedManyWithoutProjectInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutProjectInput
+  testimonials?: Prisma.TestimonialCreateNestedManyWithoutProjectInput
+  weeklyReports?: Prisma.WeeklyReportCreateNestedManyWithoutProjectInput
+  taskLabels?: Prisma.TaskLabelCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectUncheckedCreateWithoutActivityLogsInput = {
+  id?: string
+  title: string
+  slug: string
+  shortDescription: string
+  fullDescription?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  thumbnailUrl?: string | null
+  featuredImageUrl?: string | null
+  category: $Enums.ProjectCategory
+  techStack?: Prisma.ProjectCreatetechStackInput | string[]
+  status?: $Enums.ProjectStatus
+  liveUrl?: string | null
+  repoUrl?: string | null
+  isFeatured?: boolean | null
+  displayOrder?: number | null
+  year?: number | null
+  createdAt?: Date | string | null
+  updatedAt?: Date | string | null
+  galleryImages?: Prisma.ProjectCreategalleryImagesInput | string[]
+  clientId?: string | null
+  type?: $Enums.ProjectType | null
+  files?: Prisma.ProjectFileUncheckedCreateNestedManyWithoutProjectInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutProjectInput
+  testimonials?: Prisma.TestimonialUncheckedCreateNestedManyWithoutProjectInput
+  weeklyReports?: Prisma.WeeklyReportUncheckedCreateNestedManyWithoutProjectInput
+  taskLabels?: Prisma.TaskLabelUncheckedCreateNestedManyWithoutProjectInput
+}
+
+export type ProjectCreateOrConnectWithoutActivityLogsInput = {
+  where: Prisma.ProjectWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutActivityLogsInput, Prisma.ProjectUncheckedCreateWithoutActivityLogsInput>
+}
+
+export type ProjectUpsertWithoutActivityLogsInput = {
+  update: Prisma.XOR<Prisma.ProjectUpdateWithoutActivityLogsInput, Prisma.ProjectUncheckedUpdateWithoutActivityLogsInput>
+  create: Prisma.XOR<Prisma.ProjectCreateWithoutActivityLogsInput, Prisma.ProjectUncheckedCreateWithoutActivityLogsInput>
+  where?: Prisma.ProjectWhereInput
+}
+
+export type ProjectUpdateToOneWithWhereWithoutActivityLogsInput = {
+  where?: Prisma.ProjectWhereInput
+  data: Prisma.XOR<Prisma.ProjectUpdateWithoutActivityLogsInput, Prisma.ProjectUncheckedUpdateWithoutActivityLogsInput>
+}
+
+export type ProjectUpdateWithoutActivityLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  shortDescription?: Prisma.StringFieldUpdateOperationsInput | string
+  fullDescription?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  featuredImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.EnumProjectCategoryFieldUpdateOperationsInput | $Enums.ProjectCategory
+  techStack?: Prisma.ProjectUpdatetechStackInput | string[]
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  liveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  repoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  displayOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  galleryImages?: Prisma.ProjectUpdategalleryImagesInput | string[]
+  type?: Prisma.NullableEnumProjectTypeFieldUpdateOperationsInput | $Enums.ProjectType | null
+  client?: Prisma.ClientUpdateOneWithoutProjectsNestedInput
+  files?: Prisma.ProjectFileUpdateManyWithoutProjectNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutProjectNestedInput
+  testimonials?: Prisma.TestimonialUpdateManyWithoutProjectNestedInput
+  weeklyReports?: Prisma.WeeklyReportUpdateManyWithoutProjectNestedInput
+  taskLabels?: Prisma.TaskLabelUpdateManyWithoutProjectNestedInput
+}
+
+export type ProjectUncheckedUpdateWithoutActivityLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  shortDescription?: Prisma.StringFieldUpdateOperationsInput | string
+  fullDescription?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  thumbnailUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  featuredImageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.EnumProjectCategoryFieldUpdateOperationsInput | $Enums.ProjectCategory
+  techStack?: Prisma.ProjectUpdatetechStackInput | string[]
+  status?: Prisma.EnumProjectStatusFieldUpdateOperationsInput | $Enums.ProjectStatus
+  liveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  repoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isFeatured?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  displayOrder?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  year?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  updatedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  galleryImages?: Prisma.ProjectUpdategalleryImagesInput | string[]
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  type?: Prisma.NullableEnumProjectTypeFieldUpdateOperationsInput | $Enums.ProjectType | null
+  files?: Prisma.ProjectFileUncheckedUpdateManyWithoutProjectNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutProjectNestedInput
+  testimonials?: Prisma.TestimonialUncheckedUpdateManyWithoutProjectNestedInput
+  weeklyReports?: Prisma.WeeklyReportUncheckedUpdateManyWithoutProjectNestedInput
+  taskLabels?: Prisma.TaskLabelUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectCreateManyClientInput = {
@@ -1477,6 +1811,8 @@ export type ProjectUpdateWithoutClientInput = {
   tasks?: Prisma.TaskUpdateManyWithoutProjectNestedInput
   testimonials?: Prisma.TestimonialUpdateManyWithoutProjectNestedInput
   weeklyReports?: Prisma.WeeklyReportUpdateManyWithoutProjectNestedInput
+  activityLogs?: Prisma.ActivityLogUpdateManyWithoutProjectNestedInput
+  taskLabels?: Prisma.TaskLabelUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateWithoutClientInput = {
@@ -1503,6 +1839,8 @@ export type ProjectUncheckedUpdateWithoutClientInput = {
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutProjectNestedInput
   testimonials?: Prisma.TestimonialUncheckedUpdateManyWithoutProjectNestedInput
   weeklyReports?: Prisma.WeeklyReportUncheckedUpdateManyWithoutProjectNestedInput
+  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutProjectNestedInput
+  taskLabels?: Prisma.TaskLabelUncheckedUpdateManyWithoutProjectNestedInput
 }
 
 export type ProjectUncheckedUpdateManyWithoutClientInput = {
@@ -1537,6 +1875,8 @@ export type ProjectCountOutputType = {
   tasks: number
   testimonials: number
   weeklyReports: number
+  activityLogs: number
+  taskLabels: number
 }
 
 export type ProjectCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1544,6 +1884,8 @@ export type ProjectCountOutputTypeSelect<ExtArgs extends runtime.Types.Extension
   tasks?: boolean | ProjectCountOutputTypeCountTasksArgs
   testimonials?: boolean | ProjectCountOutputTypeCountTestimonialsArgs
   weeklyReports?: boolean | ProjectCountOutputTypeCountWeeklyReportsArgs
+  activityLogs?: boolean | ProjectCountOutputTypeCountActivityLogsArgs
+  taskLabels?: boolean | ProjectCountOutputTypeCountTaskLabelsArgs
 }
 
 /**
@@ -1584,6 +1926,20 @@ export type ProjectCountOutputTypeCountWeeklyReportsArgs<ExtArgs extends runtime
   where?: Prisma.WeeklyReportWhereInput
 }
 
+/**
+ * ProjectCountOutputType without action
+ */
+export type ProjectCountOutputTypeCountActivityLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ActivityLogWhereInput
+}
+
+/**
+ * ProjectCountOutputType without action
+ */
+export type ProjectCountOutputTypeCountTaskLabelsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.TaskLabelWhereInput
+}
+
 
 export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1611,6 +1967,8 @@ export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   tasks?: boolean | Prisma.Project$tasksArgs<ExtArgs>
   testimonials?: boolean | Prisma.Project$testimonialsArgs<ExtArgs>
   weeklyReports?: boolean | Prisma.Project$weeklyReportsArgs<ExtArgs>
+  activityLogs?: boolean | Prisma.Project$activityLogsArgs<ExtArgs>
+  taskLabels?: boolean | Prisma.Project$taskLabelsArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["project"]>
 
@@ -1692,6 +2050,8 @@ export type ProjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   tasks?: boolean | Prisma.Project$tasksArgs<ExtArgs>
   testimonials?: boolean | Prisma.Project$testimonialsArgs<ExtArgs>
   weeklyReports?: boolean | Prisma.Project$weeklyReportsArgs<ExtArgs>
+  activityLogs?: boolean | Prisma.Project$activityLogsArgs<ExtArgs>
+  taskLabels?: boolean | Prisma.Project$taskLabelsArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProjectIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1709,6 +2069,8 @@ export type $ProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     tasks: Prisma.$TaskPayload<ExtArgs>[]
     testimonials: Prisma.$TestimonialPayload<ExtArgs>[]
     weeklyReports: Prisma.$WeeklyReportPayload<ExtArgs>[]
+    activityLogs: Prisma.$ActivityLogPayload<ExtArgs>[]
+    taskLabels: Prisma.$TaskLabelPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2130,6 +2492,8 @@ export interface Prisma__ProjectClient<T, Null = never, ExtArgs extends runtime.
   tasks<T extends Prisma.Project$tasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   testimonials<T extends Prisma.Project$testimonialsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$testimonialsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TestimonialPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   weeklyReports<T extends Prisma.Project$weeklyReportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$weeklyReportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WeeklyReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  activityLogs<T extends Prisma.Project$activityLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$activityLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActivityLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  taskLabels<T extends Prisma.Project$taskLabelsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Project$taskLabelsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskLabelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2692,6 +3056,54 @@ export type Project$weeklyReportsArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.WeeklyReportScalarFieldEnum | Prisma.WeeklyReportScalarFieldEnum[]
+}
+
+/**
+ * Project.activityLogs
+ */
+export type Project$activityLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ActivityLog
+   */
+  select?: Prisma.ActivityLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ActivityLog
+   */
+  omit?: Prisma.ActivityLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ActivityLogInclude<ExtArgs> | null
+  where?: Prisma.ActivityLogWhereInput
+  orderBy?: Prisma.ActivityLogOrderByWithRelationInput | Prisma.ActivityLogOrderByWithRelationInput[]
+  cursor?: Prisma.ActivityLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ActivityLogScalarFieldEnum | Prisma.ActivityLogScalarFieldEnum[]
+}
+
+/**
+ * Project.taskLabels
+ */
+export type Project$taskLabelsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the TaskLabel
+   */
+  select?: Prisma.TaskLabelSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the TaskLabel
+   */
+  omit?: Prisma.TaskLabelOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.TaskLabelInclude<ExtArgs> | null
+  where?: Prisma.TaskLabelWhereInput
+  orderBy?: Prisma.TaskLabelOrderByWithRelationInput | Prisma.TaskLabelOrderByWithRelationInput[]
+  cursor?: Prisma.TaskLabelWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.TaskLabelScalarFieldEnum | Prisma.TaskLabelScalarFieldEnum[]
 }
 
 /**

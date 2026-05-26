@@ -195,6 +195,9 @@ export type WeeklyReportWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"WeeklyReport"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"WeeklyReport"> | Date | string
   project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.ProjectWhereInput>
+  attachments?: Prisma.WeeklyReportAttachmentListRelationFilter
+  comments?: Prisma.WeeklyReportCommentListRelationFilter
+  activityLogs?: Prisma.ActivityLogListRelationFilter
 }
 
 export type WeeklyReportOrderByWithRelationInput = {
@@ -206,6 +209,9 @@ export type WeeklyReportOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   project?: Prisma.ProjectOrderByWithRelationInput
+  attachments?: Prisma.WeeklyReportAttachmentOrderByRelationAggregateInput
+  comments?: Prisma.WeeklyReportCommentOrderByRelationAggregateInput
+  activityLogs?: Prisma.ActivityLogOrderByRelationAggregateInput
 }
 
 export type WeeklyReportWhereUniqueInput = Prisma.AtLeast<{
@@ -220,6 +226,9 @@ export type WeeklyReportWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"WeeklyReport"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"WeeklyReport"> | Date | string
   project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.ProjectWhereInput>
+  attachments?: Prisma.WeeklyReportAttachmentListRelationFilter
+  comments?: Prisma.WeeklyReportCommentListRelationFilter
+  activityLogs?: Prisma.ActivityLogListRelationFilter
 }, "id">
 
 export type WeeklyReportOrderByWithAggregationInput = {
@@ -256,6 +265,9 @@ export type WeeklyReportCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   project: Prisma.ProjectCreateNestedOneWithoutWeeklyReportsInput
+  attachments?: Prisma.WeeklyReportAttachmentCreateNestedManyWithoutReportInput
+  comments?: Prisma.WeeklyReportCommentCreateNestedManyWithoutReportInput
+  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutWeeklyReportInput
 }
 
 export type WeeklyReportUncheckedCreateInput = {
@@ -266,6 +278,9 @@ export type WeeklyReportUncheckedCreateInput = {
   status?: $Enums.ReportStatus | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  attachments?: Prisma.WeeklyReportAttachmentUncheckedCreateNestedManyWithoutReportInput
+  comments?: Prisma.WeeklyReportCommentUncheckedCreateNestedManyWithoutReportInput
+  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutWeeklyReportInput
 }
 
 export type WeeklyReportUpdateInput = {
@@ -276,6 +291,9 @@ export type WeeklyReportUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   project?: Prisma.ProjectUpdateOneRequiredWithoutWeeklyReportsNestedInput
+  attachments?: Prisma.WeeklyReportAttachmentUpdateManyWithoutReportNestedInput
+  comments?: Prisma.WeeklyReportCommentUpdateManyWithoutReportNestedInput
+  activityLogs?: Prisma.ActivityLogUpdateManyWithoutWeeklyReportNestedInput
 }
 
 export type WeeklyReportUncheckedUpdateInput = {
@@ -286,6 +304,9 @@ export type WeeklyReportUncheckedUpdateInput = {
   status?: Prisma.NullableEnumReportStatusFieldUpdateOperationsInput | $Enums.ReportStatus | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  attachments?: Prisma.WeeklyReportAttachmentUncheckedUpdateManyWithoutReportNestedInput
+  comments?: Prisma.WeeklyReportCommentUncheckedUpdateManyWithoutReportNestedInput
+  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutWeeklyReportNestedInput
 }
 
 export type WeeklyReportCreateManyInput = {
@@ -355,6 +376,16 @@ export type WeeklyReportMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
+export type WeeklyReportScalarRelationFilter = {
+  is?: Prisma.WeeklyReportWhereInput
+  isNot?: Prisma.WeeklyReportWhereInput
+}
+
+export type WeeklyReportNullableScalarRelationFilter = {
+  is?: Prisma.WeeklyReportWhereInput | null
+  isNot?: Prisma.WeeklyReportWhereInput | null
+}
+
 export type WeeklyReportCreateNestedManyWithoutProjectInput = {
   create?: Prisma.XOR<Prisma.WeeklyReportCreateWithoutProjectInput, Prisma.WeeklyReportUncheckedCreateWithoutProjectInput> | Prisma.WeeklyReportCreateWithoutProjectInput[] | Prisma.WeeklyReportUncheckedCreateWithoutProjectInput[]
   connectOrCreate?: Prisma.WeeklyReportCreateOrConnectWithoutProjectInput | Prisma.WeeklyReportCreateOrConnectWithoutProjectInput[]
@@ -401,6 +432,50 @@ export type NullableEnumReportStatusFieldUpdateOperationsInput = {
   set?: $Enums.ReportStatus | null
 }
 
+export type WeeklyReportCreateNestedOneWithoutAttachmentsInput = {
+  create?: Prisma.XOR<Prisma.WeeklyReportCreateWithoutAttachmentsInput, Prisma.WeeklyReportUncheckedCreateWithoutAttachmentsInput>
+  connectOrCreate?: Prisma.WeeklyReportCreateOrConnectWithoutAttachmentsInput
+  connect?: Prisma.WeeklyReportWhereUniqueInput
+}
+
+export type WeeklyReportUpdateOneRequiredWithoutAttachmentsNestedInput = {
+  create?: Prisma.XOR<Prisma.WeeklyReportCreateWithoutAttachmentsInput, Prisma.WeeklyReportUncheckedCreateWithoutAttachmentsInput>
+  connectOrCreate?: Prisma.WeeklyReportCreateOrConnectWithoutAttachmentsInput
+  upsert?: Prisma.WeeklyReportUpsertWithoutAttachmentsInput
+  connect?: Prisma.WeeklyReportWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.WeeklyReportUpdateToOneWithWhereWithoutAttachmentsInput, Prisma.WeeklyReportUpdateWithoutAttachmentsInput>, Prisma.WeeklyReportUncheckedUpdateWithoutAttachmentsInput>
+}
+
+export type WeeklyReportCreateNestedOneWithoutCommentsInput = {
+  create?: Prisma.XOR<Prisma.WeeklyReportCreateWithoutCommentsInput, Prisma.WeeklyReportUncheckedCreateWithoutCommentsInput>
+  connectOrCreate?: Prisma.WeeklyReportCreateOrConnectWithoutCommentsInput
+  connect?: Prisma.WeeklyReportWhereUniqueInput
+}
+
+export type WeeklyReportUpdateOneRequiredWithoutCommentsNestedInput = {
+  create?: Prisma.XOR<Prisma.WeeklyReportCreateWithoutCommentsInput, Prisma.WeeklyReportUncheckedCreateWithoutCommentsInput>
+  connectOrCreate?: Prisma.WeeklyReportCreateOrConnectWithoutCommentsInput
+  upsert?: Prisma.WeeklyReportUpsertWithoutCommentsInput
+  connect?: Prisma.WeeklyReportWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.WeeklyReportUpdateToOneWithWhereWithoutCommentsInput, Prisma.WeeklyReportUpdateWithoutCommentsInput>, Prisma.WeeklyReportUncheckedUpdateWithoutCommentsInput>
+}
+
+export type WeeklyReportCreateNestedOneWithoutActivityLogsInput = {
+  create?: Prisma.XOR<Prisma.WeeklyReportCreateWithoutActivityLogsInput, Prisma.WeeklyReportUncheckedCreateWithoutActivityLogsInput>
+  connectOrCreate?: Prisma.WeeklyReportCreateOrConnectWithoutActivityLogsInput
+  connect?: Prisma.WeeklyReportWhereUniqueInput
+}
+
+export type WeeklyReportUpdateOneWithoutActivityLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.WeeklyReportCreateWithoutActivityLogsInput, Prisma.WeeklyReportUncheckedCreateWithoutActivityLogsInput>
+  connectOrCreate?: Prisma.WeeklyReportCreateOrConnectWithoutActivityLogsInput
+  upsert?: Prisma.WeeklyReportUpsertWithoutActivityLogsInput
+  disconnect?: Prisma.WeeklyReportWhereInput | boolean
+  delete?: Prisma.WeeklyReportWhereInput | boolean
+  connect?: Prisma.WeeklyReportWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.WeeklyReportUpdateToOneWithWhereWithoutActivityLogsInput, Prisma.WeeklyReportUpdateWithoutActivityLogsInput>, Prisma.WeeklyReportUncheckedUpdateWithoutActivityLogsInput>
+}
+
 export type WeeklyReportCreateWithoutProjectInput = {
   id?: string
   title: string
@@ -408,6 +483,9 @@ export type WeeklyReportCreateWithoutProjectInput = {
   status?: $Enums.ReportStatus | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  attachments?: Prisma.WeeklyReportAttachmentCreateNestedManyWithoutReportInput
+  comments?: Prisma.WeeklyReportCommentCreateNestedManyWithoutReportInput
+  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutWeeklyReportInput
 }
 
 export type WeeklyReportUncheckedCreateWithoutProjectInput = {
@@ -417,6 +495,9 @@ export type WeeklyReportUncheckedCreateWithoutProjectInput = {
   status?: $Enums.ReportStatus | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  attachments?: Prisma.WeeklyReportAttachmentUncheckedCreateNestedManyWithoutReportInput
+  comments?: Prisma.WeeklyReportCommentUncheckedCreateNestedManyWithoutReportInput
+  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutWeeklyReportInput
 }
 
 export type WeeklyReportCreateOrConnectWithoutProjectInput = {
@@ -458,6 +539,198 @@ export type WeeklyReportScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"WeeklyReport"> | Date | string
 }
 
+export type WeeklyReportCreateWithoutAttachmentsInput = {
+  id?: string
+  title: string
+  content?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ReportStatus | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  project: Prisma.ProjectCreateNestedOneWithoutWeeklyReportsInput
+  comments?: Prisma.WeeklyReportCommentCreateNestedManyWithoutReportInput
+  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutWeeklyReportInput
+}
+
+export type WeeklyReportUncheckedCreateWithoutAttachmentsInput = {
+  id?: string
+  projectId: string
+  title: string
+  content?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ReportStatus | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  comments?: Prisma.WeeklyReportCommentUncheckedCreateNestedManyWithoutReportInput
+  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutWeeklyReportInput
+}
+
+export type WeeklyReportCreateOrConnectWithoutAttachmentsInput = {
+  where: Prisma.WeeklyReportWhereUniqueInput
+  create: Prisma.XOR<Prisma.WeeklyReportCreateWithoutAttachmentsInput, Prisma.WeeklyReportUncheckedCreateWithoutAttachmentsInput>
+}
+
+export type WeeklyReportUpsertWithoutAttachmentsInput = {
+  update: Prisma.XOR<Prisma.WeeklyReportUpdateWithoutAttachmentsInput, Prisma.WeeklyReportUncheckedUpdateWithoutAttachmentsInput>
+  create: Prisma.XOR<Prisma.WeeklyReportCreateWithoutAttachmentsInput, Prisma.WeeklyReportUncheckedCreateWithoutAttachmentsInput>
+  where?: Prisma.WeeklyReportWhereInput
+}
+
+export type WeeklyReportUpdateToOneWithWhereWithoutAttachmentsInput = {
+  where?: Prisma.WeeklyReportWhereInput
+  data: Prisma.XOR<Prisma.WeeklyReportUpdateWithoutAttachmentsInput, Prisma.WeeklyReportUncheckedUpdateWithoutAttachmentsInput>
+}
+
+export type WeeklyReportUpdateWithoutAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.NullableEnumReportStatusFieldUpdateOperationsInput | $Enums.ReportStatus | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  project?: Prisma.ProjectUpdateOneRequiredWithoutWeeklyReportsNestedInput
+  comments?: Prisma.WeeklyReportCommentUpdateManyWithoutReportNestedInput
+  activityLogs?: Prisma.ActivityLogUpdateManyWithoutWeeklyReportNestedInput
+}
+
+export type WeeklyReportUncheckedUpdateWithoutAttachmentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  projectId?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.NullableEnumReportStatusFieldUpdateOperationsInput | $Enums.ReportStatus | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  comments?: Prisma.WeeklyReportCommentUncheckedUpdateManyWithoutReportNestedInput
+  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutWeeklyReportNestedInput
+}
+
+export type WeeklyReportCreateWithoutCommentsInput = {
+  id?: string
+  title: string
+  content?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ReportStatus | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  project: Prisma.ProjectCreateNestedOneWithoutWeeklyReportsInput
+  attachments?: Prisma.WeeklyReportAttachmentCreateNestedManyWithoutReportInput
+  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutWeeklyReportInput
+}
+
+export type WeeklyReportUncheckedCreateWithoutCommentsInput = {
+  id?: string
+  projectId: string
+  title: string
+  content?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ReportStatus | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  attachments?: Prisma.WeeklyReportAttachmentUncheckedCreateNestedManyWithoutReportInput
+  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutWeeklyReportInput
+}
+
+export type WeeklyReportCreateOrConnectWithoutCommentsInput = {
+  where: Prisma.WeeklyReportWhereUniqueInput
+  create: Prisma.XOR<Prisma.WeeklyReportCreateWithoutCommentsInput, Prisma.WeeklyReportUncheckedCreateWithoutCommentsInput>
+}
+
+export type WeeklyReportUpsertWithoutCommentsInput = {
+  update: Prisma.XOR<Prisma.WeeklyReportUpdateWithoutCommentsInput, Prisma.WeeklyReportUncheckedUpdateWithoutCommentsInput>
+  create: Prisma.XOR<Prisma.WeeklyReportCreateWithoutCommentsInput, Prisma.WeeklyReportUncheckedCreateWithoutCommentsInput>
+  where?: Prisma.WeeklyReportWhereInput
+}
+
+export type WeeklyReportUpdateToOneWithWhereWithoutCommentsInput = {
+  where?: Prisma.WeeklyReportWhereInput
+  data: Prisma.XOR<Prisma.WeeklyReportUpdateWithoutCommentsInput, Prisma.WeeklyReportUncheckedUpdateWithoutCommentsInput>
+}
+
+export type WeeklyReportUpdateWithoutCommentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.NullableEnumReportStatusFieldUpdateOperationsInput | $Enums.ReportStatus | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  project?: Prisma.ProjectUpdateOneRequiredWithoutWeeklyReportsNestedInput
+  attachments?: Prisma.WeeklyReportAttachmentUpdateManyWithoutReportNestedInput
+  activityLogs?: Prisma.ActivityLogUpdateManyWithoutWeeklyReportNestedInput
+}
+
+export type WeeklyReportUncheckedUpdateWithoutCommentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  projectId?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.NullableEnumReportStatusFieldUpdateOperationsInput | $Enums.ReportStatus | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  attachments?: Prisma.WeeklyReportAttachmentUncheckedUpdateManyWithoutReportNestedInput
+  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutWeeklyReportNestedInput
+}
+
+export type WeeklyReportCreateWithoutActivityLogsInput = {
+  id?: string
+  title: string
+  content?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ReportStatus | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  project: Prisma.ProjectCreateNestedOneWithoutWeeklyReportsInput
+  attachments?: Prisma.WeeklyReportAttachmentCreateNestedManyWithoutReportInput
+  comments?: Prisma.WeeklyReportCommentCreateNestedManyWithoutReportInput
+}
+
+export type WeeklyReportUncheckedCreateWithoutActivityLogsInput = {
+  id?: string
+  projectId: string
+  title: string
+  content?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: $Enums.ReportStatus | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  attachments?: Prisma.WeeklyReportAttachmentUncheckedCreateNestedManyWithoutReportInput
+  comments?: Prisma.WeeklyReportCommentUncheckedCreateNestedManyWithoutReportInput
+}
+
+export type WeeklyReportCreateOrConnectWithoutActivityLogsInput = {
+  where: Prisma.WeeklyReportWhereUniqueInput
+  create: Prisma.XOR<Prisma.WeeklyReportCreateWithoutActivityLogsInput, Prisma.WeeklyReportUncheckedCreateWithoutActivityLogsInput>
+}
+
+export type WeeklyReportUpsertWithoutActivityLogsInput = {
+  update: Prisma.XOR<Prisma.WeeklyReportUpdateWithoutActivityLogsInput, Prisma.WeeklyReportUncheckedUpdateWithoutActivityLogsInput>
+  create: Prisma.XOR<Prisma.WeeklyReportCreateWithoutActivityLogsInput, Prisma.WeeklyReportUncheckedCreateWithoutActivityLogsInput>
+  where?: Prisma.WeeklyReportWhereInput
+}
+
+export type WeeklyReportUpdateToOneWithWhereWithoutActivityLogsInput = {
+  where?: Prisma.WeeklyReportWhereInput
+  data: Prisma.XOR<Prisma.WeeklyReportUpdateWithoutActivityLogsInput, Prisma.WeeklyReportUncheckedUpdateWithoutActivityLogsInput>
+}
+
+export type WeeklyReportUpdateWithoutActivityLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.NullableEnumReportStatusFieldUpdateOperationsInput | $Enums.ReportStatus | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  project?: Prisma.ProjectUpdateOneRequiredWithoutWeeklyReportsNestedInput
+  attachments?: Prisma.WeeklyReportAttachmentUpdateManyWithoutReportNestedInput
+  comments?: Prisma.WeeklyReportCommentUpdateManyWithoutReportNestedInput
+}
+
+export type WeeklyReportUncheckedUpdateWithoutActivityLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  projectId?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  status?: Prisma.NullableEnumReportStatusFieldUpdateOperationsInput | $Enums.ReportStatus | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  attachments?: Prisma.WeeklyReportAttachmentUncheckedUpdateManyWithoutReportNestedInput
+  comments?: Prisma.WeeklyReportCommentUncheckedUpdateManyWithoutReportNestedInput
+}
+
 export type WeeklyReportCreateManyProjectInput = {
   id?: string
   title: string
@@ -474,6 +747,9 @@ export type WeeklyReportUpdateWithoutProjectInput = {
   status?: Prisma.NullableEnumReportStatusFieldUpdateOperationsInput | $Enums.ReportStatus | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  attachments?: Prisma.WeeklyReportAttachmentUpdateManyWithoutReportNestedInput
+  comments?: Prisma.WeeklyReportCommentUpdateManyWithoutReportNestedInput
+  activityLogs?: Prisma.ActivityLogUpdateManyWithoutWeeklyReportNestedInput
 }
 
 export type WeeklyReportUncheckedUpdateWithoutProjectInput = {
@@ -483,6 +759,9 @@ export type WeeklyReportUncheckedUpdateWithoutProjectInput = {
   status?: Prisma.NullableEnumReportStatusFieldUpdateOperationsInput | $Enums.ReportStatus | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  attachments?: Prisma.WeeklyReportAttachmentUncheckedUpdateManyWithoutReportNestedInput
+  comments?: Prisma.WeeklyReportCommentUncheckedUpdateManyWithoutReportNestedInput
+  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutWeeklyReportNestedInput
 }
 
 export type WeeklyReportUncheckedUpdateManyWithoutProjectInput = {
@@ -495,6 +774,53 @@ export type WeeklyReportUncheckedUpdateManyWithoutProjectInput = {
 }
 
 
+/**
+ * Count Type WeeklyReportCountOutputType
+ */
+
+export type WeeklyReportCountOutputType = {
+  attachments: number
+  comments: number
+  activityLogs: number
+}
+
+export type WeeklyReportCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  attachments?: boolean | WeeklyReportCountOutputTypeCountAttachmentsArgs
+  comments?: boolean | WeeklyReportCountOutputTypeCountCommentsArgs
+  activityLogs?: boolean | WeeklyReportCountOutputTypeCountActivityLogsArgs
+}
+
+/**
+ * WeeklyReportCountOutputType without action
+ */
+export type WeeklyReportCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the WeeklyReportCountOutputType
+   */
+  select?: Prisma.WeeklyReportCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * WeeklyReportCountOutputType without action
+ */
+export type WeeklyReportCountOutputTypeCountAttachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.WeeklyReportAttachmentWhereInput
+}
+
+/**
+ * WeeklyReportCountOutputType without action
+ */
+export type WeeklyReportCountOutputTypeCountCommentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.WeeklyReportCommentWhereInput
+}
+
+/**
+ * WeeklyReportCountOutputType without action
+ */
+export type WeeklyReportCountOutputTypeCountActivityLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ActivityLogWhereInput
+}
+
 
 export type WeeklyReportSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -505,6 +831,10 @@ export type WeeklyReportSelect<ExtArgs extends runtime.Types.Extensions.Internal
   createdAt?: boolean
   updatedAt?: boolean
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
+  attachments?: boolean | Prisma.WeeklyReport$attachmentsArgs<ExtArgs>
+  comments?: boolean | Prisma.WeeklyReport$commentsArgs<ExtArgs>
+  activityLogs?: boolean | Prisma.WeeklyReport$activityLogsArgs<ExtArgs>
+  _count?: boolean | Prisma.WeeklyReportCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["weeklyReport"]>
 
 export type WeeklyReportSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -542,6 +872,10 @@ export type WeeklyReportSelectScalar = {
 export type WeeklyReportOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "projectId" | "title" | "content" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["weeklyReport"]>
 export type WeeklyReportInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
+  attachments?: boolean | Prisma.WeeklyReport$attachmentsArgs<ExtArgs>
+  comments?: boolean | Prisma.WeeklyReport$commentsArgs<ExtArgs>
+  activityLogs?: boolean | Prisma.WeeklyReport$activityLogsArgs<ExtArgs>
+  _count?: boolean | Prisma.WeeklyReportCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type WeeklyReportIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   project?: boolean | Prisma.ProjectDefaultArgs<ExtArgs>
@@ -554,6 +888,9 @@ export type $WeeklyReportPayload<ExtArgs extends runtime.Types.Extensions.Intern
   name: "WeeklyReport"
   objects: {
     project: Prisma.$ProjectPayload<ExtArgs>
+    attachments: Prisma.$WeeklyReportAttachmentPayload<ExtArgs>[]
+    comments: Prisma.$WeeklyReportCommentPayload<ExtArgs>[]
+    activityLogs: Prisma.$ActivityLogPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -958,6 +1295,9 @@ readonly fields: WeeklyReportFieldRefs;
 export interface Prisma__WeeklyReportClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   project<T extends Prisma.ProjectDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ProjectDefaultArgs<ExtArgs>>): Prisma.Prisma__ProjectClient<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  attachments<T extends Prisma.WeeklyReport$attachmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.WeeklyReport$attachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WeeklyReportAttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  comments<T extends Prisma.WeeklyReport$commentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.WeeklyReport$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$WeeklyReportCommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  activityLogs<T extends Prisma.WeeklyReport$activityLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.WeeklyReport$activityLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActivityLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1392,6 +1732,78 @@ export type WeeklyReportDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.
    * Limit how many WeeklyReports to delete.
    */
   limit?: number
+}
+
+/**
+ * WeeklyReport.attachments
+ */
+export type WeeklyReport$attachmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the WeeklyReportAttachment
+   */
+  select?: Prisma.WeeklyReportAttachmentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the WeeklyReportAttachment
+   */
+  omit?: Prisma.WeeklyReportAttachmentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WeeklyReportAttachmentInclude<ExtArgs> | null
+  where?: Prisma.WeeklyReportAttachmentWhereInput
+  orderBy?: Prisma.WeeklyReportAttachmentOrderByWithRelationInput | Prisma.WeeklyReportAttachmentOrderByWithRelationInput[]
+  cursor?: Prisma.WeeklyReportAttachmentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.WeeklyReportAttachmentScalarFieldEnum | Prisma.WeeklyReportAttachmentScalarFieldEnum[]
+}
+
+/**
+ * WeeklyReport.comments
+ */
+export type WeeklyReport$commentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the WeeklyReportComment
+   */
+  select?: Prisma.WeeklyReportCommentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the WeeklyReportComment
+   */
+  omit?: Prisma.WeeklyReportCommentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.WeeklyReportCommentInclude<ExtArgs> | null
+  where?: Prisma.WeeklyReportCommentWhereInput
+  orderBy?: Prisma.WeeklyReportCommentOrderByWithRelationInput | Prisma.WeeklyReportCommentOrderByWithRelationInput[]
+  cursor?: Prisma.WeeklyReportCommentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.WeeklyReportCommentScalarFieldEnum | Prisma.WeeklyReportCommentScalarFieldEnum[]
+}
+
+/**
+ * WeeklyReport.activityLogs
+ */
+export type WeeklyReport$activityLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ActivityLog
+   */
+  select?: Prisma.ActivityLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ActivityLog
+   */
+  omit?: Prisma.ActivityLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ActivityLogInclude<ExtArgs> | null
+  where?: Prisma.ActivityLogWhereInput
+  orderBy?: Prisma.ActivityLogOrderByWithRelationInput | Prisma.ActivityLogOrderByWithRelationInput[]
+  cursor?: Prisma.ActivityLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ActivityLogScalarFieldEnum | Prisma.ActivityLogScalarFieldEnum[]
 }
 
 /**

@@ -137,3 +137,45 @@ export const ReportStatus = {
 } as const
 
 export type ReportStatus = (typeof ReportStatus)[keyof typeof ReportStatus]
+
+
+export const ActivityActorType = {
+  ADMIN: 'ADMIN',
+  CLIENT: 'CLIENT'
+} as const
+
+export type ActivityActorType = (typeof ActivityActorType)[keyof typeof ActivityActorType]
+
+
+export const ActivityEntityType = {
+  TASK: 'TASK',
+  COMMENT: 'COMMENT',
+  ATTACHMENT: 'ATTACHMENT',
+  REPORT: 'REPORT'
+} as const
+
+export type ActivityEntityType = (typeof ActivityEntityType)[keyof typeof ActivityEntityType]
+
+
+export const ActivityAction = {
+  TASK_CREATED: 'TASK_CREATED',
+  TASK_UPDATED: 'TASK_UPDATED',
+  TASK_STATUS_CHANGED: 'TASK_STATUS_CHANGED',
+  TASK_PRIORITY_CHANGED: 'TASK_PRIORITY_CHANGED',
+  TASK_TYPE_CHANGED: 'TASK_TYPE_CHANGED',
+  TASK_ASSIGNEE_CHANGED: 'TASK_ASSIGNEE_CHANGED',
+  TASK_DUE_DATE_CHANGED: 'TASK_DUE_DATE_CHANGED',
+  TASK_LABELS_CHANGED: 'TASK_LABELS_CHANGED',
+  TASK_VISIBILITY_CHANGED: 'TASK_VISIBILITY_CHANGED',
+  TASK_MOVED: 'TASK_MOVED',
+  COMMENT_ADDED: 'COMMENT_ADDED',
+  COMMENT_UPDATED: 'COMMENT_UPDATED',
+  COMMENT_DELETED: 'COMMENT_DELETED',
+  FILE_UPLOADED: 'FILE_UPLOADED',
+  FILE_DELETED: 'FILE_DELETED',
+  REPORT_CREATED: 'REPORT_CREATED',
+  REPORT_UPDATED: 'REPORT_UPDATED',
+  REPORT_PUBLISHED: 'REPORT_PUBLISHED'
+} as const
+
+export type ActivityAction = (typeof ActivityAction)[keyof typeof ActivityAction]

@@ -64,8 +64,16 @@ export const ModelName = {
   SiteSetting: 'SiteSetting',
   Skill: 'Skill',
   Task: 'Task',
+  TaskLabel: 'TaskLabel',
+  TaskLabelAssignment: 'TaskLabelAssignment',
+  TaskComment: 'TaskComment',
+  TaskAttachment: 'TaskAttachment',
+  TaskSubtask: 'TaskSubtask',
   Testimonial: 'Testimonial',
-  WeeklyReport: 'WeeklyReport'
+  WeeklyReport: 'WeeklyReport',
+  WeeklyReportAttachment: 'WeeklyReportAttachment',
+  WeeklyReportComment: 'WeeklyReportComment',
+  ActivityLog: 'ActivityLog'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -278,6 +286,7 @@ export const TaskScalarFieldEnum = {
   projectId: 'projectId',
   title: 'title',
   description: 'description',
+  descriptionRich: 'descriptionRich',
   status: 'status',
   priority: 'priority',
   dueDate: 'dueDate',
@@ -290,6 +299,68 @@ export const TaskScalarFieldEnum = {
 } as const
 
 export type TaskScalarFieldEnum = (typeof TaskScalarFieldEnum)[keyof typeof TaskScalarFieldEnum]
+
+
+export const TaskLabelScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  name: 'name',
+  color: 'color',
+  createdAt: 'createdAt'
+} as const
+
+export type TaskLabelScalarFieldEnum = (typeof TaskLabelScalarFieldEnum)[keyof typeof TaskLabelScalarFieldEnum]
+
+
+export const TaskLabelAssignmentScalarFieldEnum = {
+  taskId: 'taskId',
+  labelId: 'labelId'
+} as const
+
+export type TaskLabelAssignmentScalarFieldEnum = (typeof TaskLabelAssignmentScalarFieldEnum)[keyof typeof TaskLabelAssignmentScalarFieldEnum]
+
+
+export const TaskCommentScalarFieldEnum = {
+  id: 'id',
+  taskId: 'taskId',
+  parentId: 'parentId',
+  authorType: 'authorType',
+  authorUserId: 'authorUserId',
+  authorClientId: 'authorClientId',
+  body: 'body',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type TaskCommentScalarFieldEnum = (typeof TaskCommentScalarFieldEnum)[keyof typeof TaskCommentScalarFieldEnum]
+
+
+export const TaskAttachmentScalarFieldEnum = {
+  id: 'id',
+  taskId: 'taskId',
+  uploadedByType: 'uploadedByType',
+  uploadedByUserId: 'uploadedByUserId',
+  uploadedByClientId: 'uploadedByClientId',
+  filePath: 'filePath',
+  url: 'url',
+  fileName: 'fileName',
+  mimeType: 'mimeType',
+  sizeBytes: 'sizeBytes',
+  createdAt: 'createdAt'
+} as const
+
+export type TaskAttachmentScalarFieldEnum = (typeof TaskAttachmentScalarFieldEnum)[keyof typeof TaskAttachmentScalarFieldEnum]
+
+
+export const TaskSubtaskScalarFieldEnum = {
+  parentTaskId: 'parentTaskId',
+  childTaskId: 'childTaskId',
+  displayOrder: 'displayOrder',
+  createdAt: 'createdAt'
+} as const
+
+export type TaskSubtaskScalarFieldEnum = (typeof TaskSubtaskScalarFieldEnum)[keyof typeof TaskSubtaskScalarFieldEnum]
 
 
 export const TestimonialScalarFieldEnum = {
@@ -321,6 +392,52 @@ export const WeeklyReportScalarFieldEnum = {
 } as const
 
 export type WeeklyReportScalarFieldEnum = (typeof WeeklyReportScalarFieldEnum)[keyof typeof WeeklyReportScalarFieldEnum]
+
+
+export const WeeklyReportAttachmentScalarFieldEnum = {
+  id: 'id',
+  reportId: 'reportId',
+  filePath: 'filePath',
+  url: 'url',
+  fileName: 'fileName',
+  mimeType: 'mimeType',
+  sizeBytes: 'sizeBytes',
+  createdAt: 'createdAt'
+} as const
+
+export type WeeklyReportAttachmentScalarFieldEnum = (typeof WeeklyReportAttachmentScalarFieldEnum)[keyof typeof WeeklyReportAttachmentScalarFieldEnum]
+
+
+export const WeeklyReportCommentScalarFieldEnum = {
+  id: 'id',
+  reportId: 'reportId',
+  parentId: 'parentId',
+  authorType: 'authorType',
+  authorUserId: 'authorUserId',
+  authorClientId: 'authorClientId',
+  body: 'body',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt'
+} as const
+
+export type WeeklyReportCommentScalarFieldEnum = (typeof WeeklyReportCommentScalarFieldEnum)[keyof typeof WeeklyReportCommentScalarFieldEnum]
+
+
+export const ActivityLogScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  entityType: 'entityType',
+  entityId: 'entityId',
+  action: 'action',
+  actorType: 'actorType',
+  actorUserId: 'actorUserId',
+  actorClientId: 'actorClientId',
+  diff: 'diff',
+  createdAt: 'createdAt'
+} as const
+
+export type ActivityLogScalarFieldEnum = (typeof ActivityLogScalarFieldEnum)[keyof typeof ActivityLogScalarFieldEnum]
 
 
 export const SortOrder = {

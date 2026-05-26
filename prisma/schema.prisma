@@ -115,27 +115,27 @@ enum ActivityEntityType {
 }
 
 enum ActivityAction {
-  TASK_CREATED         @map("task_created")
-  TASK_UPDATED         @map("task_updated")
-  TASK_STATUS_CHANGED  @map("task_status_changed")
-  TASK_PRIORITY_CHANGED @map("task_priority_changed")
-  TASK_TYPE_CHANGED    @map("task_type_changed")
-  TASK_ASSIGNEE_CHANGED @map("task_assignee_changed")
-  TASK_DUE_DATE_CHANGED @map("task_due_date_changed")
-  TASK_LABELS_CHANGED  @map("task_labels_changed")
+  TASK_CREATED            @map("task_created")
+  TASK_UPDATED            @map("task_updated")
+  TASK_STATUS_CHANGED     @map("task_status_changed")
+  TASK_PRIORITY_CHANGED   @map("task_priority_changed")
+  TASK_TYPE_CHANGED       @map("task_type_changed")
+  TASK_ASSIGNEE_CHANGED   @map("task_assignee_changed")
+  TASK_DUE_DATE_CHANGED   @map("task_due_date_changed")
+  TASK_LABELS_CHANGED     @map("task_labels_changed")
   TASK_VISIBILITY_CHANGED @map("task_visibility_changed")
-  TASK_MOVED           @map("task_moved")
+  TASK_MOVED              @map("task_moved")
 
-  COMMENT_ADDED        @map("comment_added")
-  COMMENT_UPDATED      @map("comment_updated")
-  COMMENT_DELETED      @map("comment_deleted")
+  COMMENT_ADDED   @map("comment_added")
+  COMMENT_UPDATED @map("comment_updated")
+  COMMENT_DELETED @map("comment_deleted")
 
-  FILE_UPLOADED        @map("file_uploaded")
-  FILE_DELETED         @map("file_deleted")
+  FILE_UPLOADED @map("file_uploaded")
+  FILE_DELETED  @map("file_deleted")
 
-  REPORT_CREATED       @map("report_created")
-  REPORT_UPDATED       @map("report_updated")
-  REPORT_PUBLISHED     @map("report_published")
+  REPORT_CREATED   @map("report_created")
+  REPORT_UPDATED   @map("report_updated")
+  REPORT_PUBLISHED @map("report_published")
 }
 
 // -----------------------------------------------------------------------------
@@ -358,12 +358,12 @@ model Task {
   type            TaskType?     @default(FEATURE)
   isClientVisible Boolean?      @default(false) @map("is_client_visible")
 
-  project      Project              @relation(fields: [projectId], references: [id])
+  project      Project               @relation(fields: [projectId], references: [id])
   labels       TaskLabelAssignment[]
   comments     TaskComment[]
   attachments  TaskAttachment[]
-  subtasks     TaskSubtask[]        @relation("TaskParentToSubtask")
-  parentLinks  TaskSubtask[]        @relation("TaskChildToSubtask")
+  subtasks     TaskSubtask[]         @relation("TaskParentToSubtask")
+  parentLinks  TaskSubtask[]         @relation("TaskChildToSubtask")
   activityLogs ActivityLog[]
 
   @@index([projectId, status, displayOrder])
@@ -375,7 +375,7 @@ model TaskLabel {
   id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   projectId String   @map("project_id") @db.Uuid
   name      String
-  color     String?  // e.g. hex or token
+  color     String? // e.g. hex or token
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
 
   project Project               @relation(fields: [projectId], references: [id], onDelete: Cascade)
@@ -410,9 +410,9 @@ model TaskComment {
   updatedAt      DateTime          @default(now()) @map("updated_at") @db.Timestamptz
   deletedAt      DateTime?         @map("deleted_at") @db.Timestamptz
 
-  task     Task         @relation(fields: [taskId], references: [id], onDelete: Cascade)
-  parent   TaskComment? @relation("TaskCommentToReplies", fields: [parentId], references: [id], onDelete: Cascade)
-  replies  TaskComment[] @relation("TaskCommentToReplies")
+  task         Task          @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  parent       TaskComment?  @relation("TaskCommentToReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies      TaskComment[] @relation("TaskCommentToReplies")
   activityLogs ActivityLog[]
 
   @@index([taskId, createdAt])
@@ -421,19 +421,19 @@ model TaskComment {
 }
 
 model TaskAttachment {
-  id             String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  taskId         String            @map("task_id") @db.Uuid
-  uploadedByType ActivityActorType @map("uploaded_by_type")
-  uploadedByUserId String?         @map("uploaded_by_user_id")
-  uploadedByClientId String?       @map("uploaded_by_client_id") @db.Uuid
-  filePath       String            @map("file_path")
-  url            String
-  fileName       String            @map("file_name")
-  mimeType       String?           @map("mime_type")
-  sizeBytes      Int?              @map("size_bytes")
-  createdAt      DateTime          @default(now()) @map("created_at") @db.Timestamptz
+  id                 String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  taskId             String            @map("task_id") @db.Uuid
+  uploadedByType     ActivityActorType @map("uploaded_by_type")
+  uploadedByUserId   String?           @map("uploaded_by_user_id")
+  uploadedByClientId String?           @map("uploaded_by_client_id") @db.Uuid
+  filePath           String            @map("file_path")
+  url                String
+  fileName           String            @map("file_name")
+  mimeType           String?           @map("mime_type")
+  sizeBytes          Int?              @map("size_bytes")
+  createdAt          DateTime          @default(now()) @map("created_at") @db.Timestamptz
 
-  task Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  task         Task          @relation(fields: [taskId], references: [id], onDelete: Cascade)
   activityLogs ActivityLog[]
 
   @@index([taskId, createdAt])
@@ -441,9 +441,9 @@ model TaskAttachment {
 }
 
 model TaskSubtask {
-  parentTaskId String @map("parent_task_id") @db.Uuid
-  childTaskId  String @map("child_task_id") @db.Uuid
-  displayOrder Int?   @default(0) @map("display_order")
+  parentTaskId String   @map("parent_task_id") @db.Uuid
+  childTaskId  String   @map("child_task_id") @db.Uuid
+  displayOrder Int?     @default(0) @map("display_order")
   createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz
 
   parentTask Task @relation("TaskParentToSubtask", fields: [parentTaskId], references: [id], onDelete: Cascade)
@@ -482,13 +482,12 @@ model WeeklyReport {
   createdAt DateTime      @default(now()) @map("created_at") @db.Timestamptz
   updatedAt DateTime      @default(now()) @map("updated_at") @db.Timestamptz
 
-  project Project @relation(fields: [projectId], references: [id])
-  attachments WeeklyReportAttachment[]
-  comments    WeeklyReportComment[]
+  project      Project                  @relation(fields: [projectId], references: [id])
+  attachments  WeeklyReportAttachment[]
+  comments     WeeklyReportComment[]
   activityLogs ActivityLog[]
 
   @@index([projectId, createdAt])
-
   @@map("weekly_reports")
 }
 
@@ -502,7 +501,7 @@ model WeeklyReportAttachment {
   sizeBytes Int?     @map("size_bytes")
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
 
-  report WeeklyReport @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  report       WeeklyReport  @relation(fields: [reportId], references: [id], onDelete: Cascade)
   activityLogs ActivityLog[]
 
   @@index([reportId, createdAt])
@@ -521,9 +520,9 @@ model WeeklyReportComment {
   updatedAt      DateTime          @default(now()) @map("updated_at") @db.Timestamptz
   deletedAt      DateTime?         @map("deleted_at") @db.Timestamptz
 
-  report   WeeklyReport         @relation(fields: [reportId], references: [id], onDelete: Cascade)
-  parent   WeeklyReportComment? @relation("WeeklyReportCommentToReplies", fields: [parentId], references: [id], onDelete: Cascade)
-  replies  WeeklyReportComment[] @relation("WeeklyReportCommentToReplies")
+  report       WeeklyReport          @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  parent       WeeklyReportComment?  @relation("WeeklyReportCommentToReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies      WeeklyReportComment[] @relation("WeeklyReportCommentToReplies")
   activityLogs ActivityLog[]
 
   @@index([reportId, createdAt])
@@ -532,24 +531,24 @@ model WeeklyReportComment {
 }
 
 model ActivityLog {
-  id         String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  projectId  String            @map("project_id") @db.Uuid
-  entityType ActivityEntityType @map("entity_type")
-  entityId   String            @map("entity_id") @db.Uuid
-  action     ActivityAction
-  actorType  ActivityActorType @map("actor_type")
-  actorUserId   String?        @map("actor_user_id")
-  actorClientId String?        @map("actor_client_id") @db.Uuid
-  diff       Json?             @map("diff")
-  createdAt  DateTime          @default(now()) @map("created_at") @db.Timestamptz
+  id            String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  projectId     String             @map("project_id") @db.Uuid
+  entityType    ActivityEntityType @map("entity_type")
+  entityId      String             @map("entity_id") @db.Uuid
+  action        ActivityAction
+  actorType     ActivityActorType  @map("actor_type")
+  actorUserId   String?            @map("actor_user_id")
+  actorClientId String?            @map("actor_client_id") @db.Uuid
+  diff          Json?              @map("diff")
+  createdAt     DateTime           @default(now()) @map("created_at") @db.Timestamptz
 
   project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
 
-  task       Task?        @relation(fields: [entityId], references: [id], onDelete: Cascade, map: "activity_log_task_fk")
-  taskComment TaskComment? @relation(fields: [entityId], references: [id], onDelete: Cascade, map: "activity_log_task_comment_fk")
-  taskAttachment TaskAttachment? @relation(fields: [entityId], references: [id], onDelete: Cascade, map: "activity_log_task_attachment_fk")
-  weeklyReport WeeklyReport? @relation(fields: [entityId], references: [id], onDelete: Cascade, map: "activity_log_weekly_report_fk")
-  weeklyReportComment WeeklyReportComment? @relation(fields: [entityId], references: [id], onDelete: Cascade, map: "activity_log_weekly_report_comment_fk")
+  task                   Task?                   @relation(fields: [entityId], references: [id], onDelete: Cascade, map: "activity_log_task_fk")
+  taskComment            TaskComment?            @relation(fields: [entityId], references: [id], onDelete: Cascade, map: "activity_log_task_comment_fk")
+  taskAttachment         TaskAttachment?         @relation(fields: [entityId], references: [id], onDelete: Cascade, map: "activity_log_task_attachment_fk")
+  weeklyReport           WeeklyReport?           @relation(fields: [entityId], references: [id], onDelete: Cascade, map: "activity_log_weekly_report_fk")
+  weeklyReportComment    WeeklyReportComment?    @relation(fields: [entityId], references: [id], onDelete: Cascade, map: "activity_log_weekly_report_comment_fk")
   weeklyReportAttachment WeeklyReportAttachment? @relation(fields: [entityId], references: [id], onDelete: Cascade, map: "activity_log_weekly_report_attachment_fk")
 
   @@index([projectId, createdAt])
