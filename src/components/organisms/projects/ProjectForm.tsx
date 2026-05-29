@@ -74,7 +74,7 @@ export function ProjectForm({ project, clients = [] }: ProjectFormProps) {
       updateProject(data, {
         onSuccess: () => {
           toast.success("Project updated successfully");
-          router.push("/admin/projects");
+          router.push(`/admin/projects/${project.id}/settings`);
         },
         onError: (err) => toast.error(err.message),
       });

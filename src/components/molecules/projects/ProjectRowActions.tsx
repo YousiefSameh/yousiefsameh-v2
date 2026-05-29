@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/atoms/button";
-import { Eye, Edit } from "lucide-react";
+import { Eye, LayoutGrid, Settings } from "lucide-react";
 import { DeleteProjectButton } from "@/components/molecules/projects/DeleteProjectButton";
 
 interface ProjectRowActionsProps {
@@ -20,8 +20,13 @@ export function ProjectRowActions({
         </Link>
       </Button>
       <Button asChild variant="ghost" size="icon">
-        <Link href={`/admin/projects/${projectId}/edit`}>
-          <Edit className="h-4 w-4" />
+        <Link href={`/admin/projects/${projectId}/board`}>
+          <LayoutGrid className="h-4 w-4" />
+        </Link>
+      </Button>
+      <Button asChild variant="ghost" size="icon">
+        <Link href={`/admin/projects/${projectId}/settings`}>
+          <Settings className="h-4 w-4" />
         </Link>
       </Button>
       <DeleteProjectButton projectId={projectId} />
