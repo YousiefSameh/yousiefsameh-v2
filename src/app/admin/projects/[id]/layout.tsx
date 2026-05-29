@@ -5,7 +5,7 @@ import { ProjectWorkspaceNav } from "@/components/molecules/projects/ProjectWork
 import { Button } from "@/components/atoms/button";
 import { ChevronLeft } from "lucide-react";
 
-type Params = { params: Promise<{ projectId: string }> };
+type Params = { params: Promise<{ id: string }> };
 
 export default async function ProjectWorkspaceLayout({
   children,
@@ -14,10 +14,10 @@ export default async function ProjectWorkspaceLayout({
   children: React.ReactNode;
   params: Params["params"];
 }) {
-  const { projectId } = await params;
+  const { id } = await params;
 
   const project = await prisma.project.findUnique({
-    where: { id: projectId },
+    where: { id },
     select: { id: true, title: true, status: true },
   });
 
@@ -42,7 +42,7 @@ export default async function ProjectWorkspaceLayout({
         </div>
       </div>
 
-      <ProjectWorkspaceNav projectId={projectId} />
+      <ProjectWorkspaceNav projectId={id} />
 
       <div>{children}</div>
     </div>

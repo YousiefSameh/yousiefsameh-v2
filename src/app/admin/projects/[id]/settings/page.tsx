@@ -2,13 +2,13 @@ import { ProjectForm } from "@/components/organisms/projects/ProjectForm";
 import prisma from "@/lib/prisma";
 import { notFound } from "next/navigation";
 
-type Params = { params: Promise<{ projectId: string }> };
+type Params = { params: Promise<{ id: string }> };
 
 export default async function ProjectSettingsPage({ params }: Params) {
-  const { projectId } = await params;
+  const { id } = await params;
 
   const [project, clients] = await Promise.all([
-    prisma.project.findUnique({ where: { id: projectId } }),
+    prisma.project.findUnique({ where: { id } }),
     prisma.client.findMany({ orderBy: { name: "asc" } }),
   ]);
 
