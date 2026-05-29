@@ -3,20 +3,21 @@ import { requireAdmin } from "@/lib/requireAdmin";
 import { apiError, apiSuccess } from "@/lib/api";
 import { taskMoveSchema } from "@/validations/tasks.validation";
 
-type Params = { params: Promise<{ projectId: string; taskId: string }> };
+type Params = { params: Promise<{ id: string; taskId: string }> };
 
 /**
- * Reorders tasks within a status column and optionally moves a task into it.
- *
- * Payload is the full ordered list of task IDs for the destination status.
- * This keeps the API simple and makes optimistic UI straightforward.
+ * @summary: Move a task
+ * @param: id - The ID of the project
+ * @param: taskId - The ID of the task
+ * @param: request - the payload for the move
+ * @returns: A success status or error message
  */
 export async function POST(request: Request, { params }: Params) {
   try {
     const user = await requireAdmin();
     if (!user) return apiError("Unauthorized", 401);
 
-    const { projectId, taskId } = await params;
+    const { id: projectId, taskId } = await params;
     const body = await request.json();
 
     const validation = taskMoveSchema.safeParse(body);
@@ -33,14 +34,12 @@ export async function POST(request: Request, { params }: Params) {
     }
 
     await prisma.$transaction(async (tx) => {
-      // Ensure the task belongs to the project.
       const existing = await tx.task.findFirst({
         where: { id: taskId, projectId },
         select: { id: true },
       });
       if (!existing) throw new Error("TASK_NOT_FOUND");
 
-      // Move + renumber the entire destination column in one go.
       await Promise.all(
         orderedTaskIds.map((id, idx) =>
           tx.task.update({
@@ -63,4 +62,3 @@ export async function POST(request: Request, { params }: Params) {
     return apiError("Failed to move task", 500);
   }
 }
-

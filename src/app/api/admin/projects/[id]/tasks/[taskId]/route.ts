@@ -4,7 +4,7 @@ import { apiError, apiSuccess } from "@/lib/api";
 import { taskBaseSchema } from "@/validations/tasks.validation";
 import { Prisma } from "@/app/generated/prisma/client";
 
-type Params = { params: Promise<{ projectId: string; taskId: string }> };
+type Params = { params: Promise<{ id: string; taskId: string }> };
 
 const taskInclude = {
   labels: {
@@ -20,12 +20,18 @@ const taskInclude = {
   },
 } satisfies Prisma.TaskInclude;
 
+/**
+ * @summary: Get a task by ID
+ * @param: id - The ID of the project
+ * @param: taskId - The ID of the task
+ * @returns: The task data or an error message
+ */
 export async function GET(_request: Request, { params }: Params) {
   try {
     const user = await requireAdmin();
     if (!user) return apiError("Unauthorized", 401);
 
-    const { projectId, taskId } = await params;
+    const { id: projectId, taskId } = await params;
 
     const task = await prisma.task.findFirst({
       where: { id: taskId, projectId },
@@ -41,12 +47,19 @@ export async function GET(_request: Request, { params }: Params) {
   }
 }
 
+/**
+ * @summary: Update a task by ID
+ * @param: id - The ID of the project
+ * @param: taskId - The ID of the task
+ * @param: request - the updated task data
+ * @returns: The updated task data or an error message
+ */
 export async function PATCH(request: Request, { params }: Params) {
   try {
     const user = await requireAdmin();
     if (!user) return apiError("Unauthorized", 401);
 
-    const { projectId, taskId } = await params;
+    const { id: projectId, taskId } = await params;
     const body = await request.json();
 
     const validation = taskBaseSchema
@@ -65,9 +78,7 @@ export async function PATCH(request: Request, { params }: Params) {
 
     const updated = await prisma.$transaction(async (tx) => {
       if (labelIds) {
-        await tx.taskLabelAssignment.deleteMany({
-          where: { taskId },
-        });
+        await tx.taskLabelAssignment.deleteMany({ where: { taskId } });
         if (labelIds.length) {
           await tx.taskLabelAssignment.createMany({
             data: labelIds.map((labelId) => ({ taskId, labelId })),
@@ -92,12 +103,18 @@ export async function PATCH(request: Request, { params }: Params) {
   }
 }
 
+/**
+ * @summary: Delete a task by ID
+ * @param: id - The ID of the project
+ * @param: taskId - The ID of the task
+ * @returns: A success status or error message
+ */
 export async function DELETE(_request: Request, { params }: Params) {
   try {
     const user = await requireAdmin();
     if (!user) return apiError("Unauthorized", 401);
 
-    const { projectId, taskId } = await params;
+    const { id: projectId, taskId } = await params;
 
     const existing = await prisma.task.findFirst({
       where: { id: taskId, projectId },
@@ -112,4 +129,3 @@ export async function DELETE(_request: Request, { params }: Params) {
     return apiError("Failed to delete task", 500);
   }
 }
-

@@ -8,7 +8,7 @@ import {
 } from "@/validations/tasks.validation";
 import { Prisma } from "@/app/generated/prisma/client";
 
-type Params = { params: Promise<{ projectId: string }> };
+type Params = { params: Promise<{ id: string }> };
 
 const taskInclude = {
   labels: {
@@ -24,12 +24,18 @@ const taskInclude = {
   },
 } satisfies Prisma.TaskInclude;
 
+/**
+ * @summary: Get all tasks for a project by ID
+ * @param: id - The ID of the project
+ * @param: request - the search query params
+ * @returns: The tasks data or an error message
+ */
 export async function GET(request: Request, { params }: Params) {
   try {
     const user = await requireAdmin();
     if (!user) return apiError("Unauthorized", 401);
 
-    const { projectId } = await params;
+    const { id: projectId } = await params;
     if (!projectId) return apiError("Project ID is required", 400);
 
     const { searchParams } = new URL(request.url);
@@ -66,12 +72,18 @@ export async function GET(request: Request, { params }: Params) {
   }
 }
 
+/**
+ * @summary: Create a task for a project by ID
+ * @param: id - The ID of the project
+ * @param: request - the task data
+ * @returns: The created task data or an error message
+ */
 export async function POST(request: Request, { params }: Params) {
   try {
     const user = await requireAdmin();
     if (!user) return apiError("Unauthorized", 401);
 
-    const { projectId } = await params;
+    const { id: projectId } = await params;
     const body = await request.json();
 
     const validation = taskBaseSchema.safeParse({ ...body, projectId });
@@ -105,4 +117,3 @@ export async function POST(request: Request, { params }: Params) {
     return apiError("Failed to create task", 500);
   }
 }
-
