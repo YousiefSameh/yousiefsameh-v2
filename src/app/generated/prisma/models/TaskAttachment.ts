@@ -265,7 +265,6 @@ export type TaskAttachmentWhereInput = {
   sizeBytes?: Prisma.IntNullableFilter<"TaskAttachment"> | number | null
   createdAt?: Prisma.DateTimeFilter<"TaskAttachment"> | Date | string
   task?: Prisma.XOR<Prisma.TaskScalarRelationFilter, Prisma.TaskWhereInput>
-  activityLogs?: Prisma.ActivityLogListRelationFilter
 }
 
 export type TaskAttachmentOrderByWithRelationInput = {
@@ -281,7 +280,6 @@ export type TaskAttachmentOrderByWithRelationInput = {
   sizeBytes?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   task?: Prisma.TaskOrderByWithRelationInput
-  activityLogs?: Prisma.ActivityLogOrderByRelationAggregateInput
 }
 
 export type TaskAttachmentWhereUniqueInput = Prisma.AtLeast<{
@@ -300,7 +298,6 @@ export type TaskAttachmentWhereUniqueInput = Prisma.AtLeast<{
   sizeBytes?: Prisma.IntNullableFilter<"TaskAttachment"> | number | null
   createdAt?: Prisma.DateTimeFilter<"TaskAttachment"> | Date | string
   task?: Prisma.XOR<Prisma.TaskScalarRelationFilter, Prisma.TaskWhereInput>
-  activityLogs?: Prisma.ActivityLogListRelationFilter
 }, "id">
 
 export type TaskAttachmentOrderByWithAggregationInput = {
@@ -351,7 +348,6 @@ export type TaskAttachmentCreateInput = {
   sizeBytes?: number | null
   createdAt?: Date | string
   task: Prisma.TaskCreateNestedOneWithoutAttachmentsInput
-  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutTaskAttachmentInput
 }
 
 export type TaskAttachmentUncheckedCreateInput = {
@@ -366,7 +362,6 @@ export type TaskAttachmentUncheckedCreateInput = {
   mimeType?: string | null
   sizeBytes?: number | null
   createdAt?: Date | string
-  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutTaskAttachmentInput
 }
 
 export type TaskAttachmentUpdateInput = {
@@ -381,7 +376,6 @@ export type TaskAttachmentUpdateInput = {
   sizeBytes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   task?: Prisma.TaskUpdateOneRequiredWithoutAttachmentsNestedInput
-  activityLogs?: Prisma.ActivityLogUpdateManyWithoutTaskAttachmentNestedInput
 }
 
 export type TaskAttachmentUncheckedUpdateInput = {
@@ -396,7 +390,6 @@ export type TaskAttachmentUncheckedUpdateInput = {
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sizeBytes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutTaskAttachmentNestedInput
 }
 
 export type TaskAttachmentCreateManyInput = {
@@ -500,11 +493,6 @@ export type TaskAttachmentSumOrderByAggregateInput = {
   sizeBytes?: Prisma.SortOrder
 }
 
-export type TaskAttachmentNullableScalarRelationFilter = {
-  is?: Prisma.TaskAttachmentWhereInput | null
-  isNot?: Prisma.TaskAttachmentWhereInput | null
-}
-
 export type TaskAttachmentCreateNestedManyWithoutTaskInput = {
   create?: Prisma.XOR<Prisma.TaskAttachmentCreateWithoutTaskInput, Prisma.TaskAttachmentUncheckedCreateWithoutTaskInput> | Prisma.TaskAttachmentCreateWithoutTaskInput[] | Prisma.TaskAttachmentUncheckedCreateWithoutTaskInput[]
   connectOrCreate?: Prisma.TaskAttachmentCreateOrConnectWithoutTaskInput | Prisma.TaskAttachmentCreateOrConnectWithoutTaskInput[]
@@ -547,22 +535,6 @@ export type TaskAttachmentUncheckedUpdateManyWithoutTaskNestedInput = {
   deleteMany?: Prisma.TaskAttachmentScalarWhereInput | Prisma.TaskAttachmentScalarWhereInput[]
 }
 
-export type TaskAttachmentCreateNestedOneWithoutActivityLogsInput = {
-  create?: Prisma.XOR<Prisma.TaskAttachmentCreateWithoutActivityLogsInput, Prisma.TaskAttachmentUncheckedCreateWithoutActivityLogsInput>
-  connectOrCreate?: Prisma.TaskAttachmentCreateOrConnectWithoutActivityLogsInput
-  connect?: Prisma.TaskAttachmentWhereUniqueInput
-}
-
-export type TaskAttachmentUpdateOneWithoutActivityLogsNestedInput = {
-  create?: Prisma.XOR<Prisma.TaskAttachmentCreateWithoutActivityLogsInput, Prisma.TaskAttachmentUncheckedCreateWithoutActivityLogsInput>
-  connectOrCreate?: Prisma.TaskAttachmentCreateOrConnectWithoutActivityLogsInput
-  upsert?: Prisma.TaskAttachmentUpsertWithoutActivityLogsInput
-  disconnect?: Prisma.TaskAttachmentWhereInput | boolean
-  delete?: Prisma.TaskAttachmentWhereInput | boolean
-  connect?: Prisma.TaskAttachmentWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.TaskAttachmentUpdateToOneWithWhereWithoutActivityLogsInput, Prisma.TaskAttachmentUpdateWithoutActivityLogsInput>, Prisma.TaskAttachmentUncheckedUpdateWithoutActivityLogsInput>
-}
-
 export type TaskAttachmentCreateWithoutTaskInput = {
   id?: string
   uploadedByType: $Enums.ActivityActorType
@@ -574,7 +546,6 @@ export type TaskAttachmentCreateWithoutTaskInput = {
   mimeType?: string | null
   sizeBytes?: number | null
   createdAt?: Date | string
-  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutTaskAttachmentInput
 }
 
 export type TaskAttachmentUncheckedCreateWithoutTaskInput = {
@@ -588,7 +559,6 @@ export type TaskAttachmentUncheckedCreateWithoutTaskInput = {
   mimeType?: string | null
   sizeBytes?: number | null
   createdAt?: Date | string
-  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutTaskAttachmentInput
 }
 
 export type TaskAttachmentCreateOrConnectWithoutTaskInput = {
@@ -634,78 +604,6 @@ export type TaskAttachmentScalarWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"TaskAttachment"> | Date | string
 }
 
-export type TaskAttachmentCreateWithoutActivityLogsInput = {
-  id?: string
-  uploadedByType: $Enums.ActivityActorType
-  uploadedByUserId?: string | null
-  uploadedByClientId?: string | null
-  filePath: string
-  url: string
-  fileName: string
-  mimeType?: string | null
-  sizeBytes?: number | null
-  createdAt?: Date | string
-  task: Prisma.TaskCreateNestedOneWithoutAttachmentsInput
-}
-
-export type TaskAttachmentUncheckedCreateWithoutActivityLogsInput = {
-  id?: string
-  taskId: string
-  uploadedByType: $Enums.ActivityActorType
-  uploadedByUserId?: string | null
-  uploadedByClientId?: string | null
-  filePath: string
-  url: string
-  fileName: string
-  mimeType?: string | null
-  sizeBytes?: number | null
-  createdAt?: Date | string
-}
-
-export type TaskAttachmentCreateOrConnectWithoutActivityLogsInput = {
-  where: Prisma.TaskAttachmentWhereUniqueInput
-  create: Prisma.XOR<Prisma.TaskAttachmentCreateWithoutActivityLogsInput, Prisma.TaskAttachmentUncheckedCreateWithoutActivityLogsInput>
-}
-
-export type TaskAttachmentUpsertWithoutActivityLogsInput = {
-  update: Prisma.XOR<Prisma.TaskAttachmentUpdateWithoutActivityLogsInput, Prisma.TaskAttachmentUncheckedUpdateWithoutActivityLogsInput>
-  create: Prisma.XOR<Prisma.TaskAttachmentCreateWithoutActivityLogsInput, Prisma.TaskAttachmentUncheckedCreateWithoutActivityLogsInput>
-  where?: Prisma.TaskAttachmentWhereInput
-}
-
-export type TaskAttachmentUpdateToOneWithWhereWithoutActivityLogsInput = {
-  where?: Prisma.TaskAttachmentWhereInput
-  data: Prisma.XOR<Prisma.TaskAttachmentUpdateWithoutActivityLogsInput, Prisma.TaskAttachmentUncheckedUpdateWithoutActivityLogsInput>
-}
-
-export type TaskAttachmentUpdateWithoutActivityLogsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  uploadedByType?: Prisma.EnumActivityActorTypeFieldUpdateOperationsInput | $Enums.ActivityActorType
-  uploadedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  uploadedByClientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  filePath?: Prisma.StringFieldUpdateOperationsInput | string
-  url?: Prisma.StringFieldUpdateOperationsInput | string
-  fileName?: Prisma.StringFieldUpdateOperationsInput | string
-  mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sizeBytes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  task?: Prisma.TaskUpdateOneRequiredWithoutAttachmentsNestedInput
-}
-
-export type TaskAttachmentUncheckedUpdateWithoutActivityLogsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  taskId?: Prisma.StringFieldUpdateOperationsInput | string
-  uploadedByType?: Prisma.EnumActivityActorTypeFieldUpdateOperationsInput | $Enums.ActivityActorType
-  uploadedByUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  uploadedByClientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  filePath?: Prisma.StringFieldUpdateOperationsInput | string
-  url?: Prisma.StringFieldUpdateOperationsInput | string
-  fileName?: Prisma.StringFieldUpdateOperationsInput | string
-  mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sizeBytes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
 export type TaskAttachmentCreateManyTaskInput = {
   id?: string
   uploadedByType: $Enums.ActivityActorType
@@ -730,7 +628,6 @@ export type TaskAttachmentUpdateWithoutTaskInput = {
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sizeBytes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  activityLogs?: Prisma.ActivityLogUpdateManyWithoutTaskAttachmentNestedInput
 }
 
 export type TaskAttachmentUncheckedUpdateWithoutTaskInput = {
@@ -744,7 +641,6 @@ export type TaskAttachmentUncheckedUpdateWithoutTaskInput = {
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sizeBytes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutTaskAttachmentNestedInput
 }
 
 export type TaskAttachmentUncheckedUpdateManyWithoutTaskInput = {
@@ -761,35 +657,6 @@ export type TaskAttachmentUncheckedUpdateManyWithoutTaskInput = {
 }
 
 
-/**
- * Count Type TaskAttachmentCountOutputType
- */
-
-export type TaskAttachmentCountOutputType = {
-  activityLogs: number
-}
-
-export type TaskAttachmentCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  activityLogs?: boolean | TaskAttachmentCountOutputTypeCountActivityLogsArgs
-}
-
-/**
- * TaskAttachmentCountOutputType without action
- */
-export type TaskAttachmentCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the TaskAttachmentCountOutputType
-   */
-  select?: Prisma.TaskAttachmentCountOutputTypeSelect<ExtArgs> | null
-}
-
-/**
- * TaskAttachmentCountOutputType without action
- */
-export type TaskAttachmentCountOutputTypeCountActivityLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ActivityLogWhereInput
-}
-
 
 export type TaskAttachmentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -804,8 +671,6 @@ export type TaskAttachmentSelect<ExtArgs extends runtime.Types.Extensions.Intern
   sizeBytes?: boolean
   createdAt?: boolean
   task?: boolean | Prisma.TaskDefaultArgs<ExtArgs>
-  activityLogs?: boolean | Prisma.TaskAttachment$activityLogsArgs<ExtArgs>
-  _count?: boolean | Prisma.TaskAttachmentCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["taskAttachment"]>
 
 export type TaskAttachmentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -855,8 +720,6 @@ export type TaskAttachmentSelectScalar = {
 export type TaskAttachmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "taskId" | "uploadedByType" | "uploadedByUserId" | "uploadedByClientId" | "filePath" | "url" | "fileName" | "mimeType" | "sizeBytes" | "createdAt", ExtArgs["result"]["taskAttachment"]>
 export type TaskAttachmentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   task?: boolean | Prisma.TaskDefaultArgs<ExtArgs>
-  activityLogs?: boolean | Prisma.TaskAttachment$activityLogsArgs<ExtArgs>
-  _count?: boolean | Prisma.TaskAttachmentCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type TaskAttachmentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   task?: boolean | Prisma.TaskDefaultArgs<ExtArgs>
@@ -869,7 +732,6 @@ export type $TaskAttachmentPayload<ExtArgs extends runtime.Types.Extensions.Inte
   name: "TaskAttachment"
   objects: {
     task: Prisma.$TaskPayload<ExtArgs>
-    activityLogs: Prisma.$ActivityLogPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1278,7 +1140,6 @@ readonly fields: TaskAttachmentFieldRefs;
 export interface Prisma__TaskAttachmentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   task<T extends Prisma.TaskDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TaskDefaultArgs<ExtArgs>>): Prisma.Prisma__TaskClient<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  activityLogs<T extends Prisma.TaskAttachment$activityLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TaskAttachment$activityLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActivityLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1717,30 +1578,6 @@ export type TaskAttachmentDeleteManyArgs<ExtArgs extends runtime.Types.Extension
    * Limit how many TaskAttachments to delete.
    */
   limit?: number
-}
-
-/**
- * TaskAttachment.activityLogs
- */
-export type TaskAttachment$activityLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ActivityLog
-   */
-  select?: Prisma.ActivityLogSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ActivityLog
-   */
-  omit?: Prisma.ActivityLogOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ActivityLogInclude<ExtArgs> | null
-  where?: Prisma.ActivityLogWhereInput
-  orderBy?: Prisma.ActivityLogOrderByWithRelationInput | Prisma.ActivityLogOrderByWithRelationInput[]
-  cursor?: Prisma.ActivityLogWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ActivityLogScalarFieldEnum | Prisma.ActivityLogScalarFieldEnum[]
 }
 
 /**

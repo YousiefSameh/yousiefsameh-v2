@@ -221,7 +221,6 @@ export type TaskCommentWhereInput = {
   task?: Prisma.XOR<Prisma.TaskScalarRelationFilter, Prisma.TaskWhereInput>
   parent?: Prisma.XOR<Prisma.TaskCommentNullableScalarRelationFilter, Prisma.TaskCommentWhereInput> | null
   replies?: Prisma.TaskCommentListRelationFilter
-  activityLogs?: Prisma.ActivityLogListRelationFilter
 }
 
 export type TaskCommentOrderByWithRelationInput = {
@@ -238,7 +237,6 @@ export type TaskCommentOrderByWithRelationInput = {
   task?: Prisma.TaskOrderByWithRelationInput
   parent?: Prisma.TaskCommentOrderByWithRelationInput
   replies?: Prisma.TaskCommentOrderByRelationAggregateInput
-  activityLogs?: Prisma.ActivityLogOrderByRelationAggregateInput
 }
 
 export type TaskCommentWhereUniqueInput = Prisma.AtLeast<{
@@ -258,7 +256,6 @@ export type TaskCommentWhereUniqueInput = Prisma.AtLeast<{
   task?: Prisma.XOR<Prisma.TaskScalarRelationFilter, Prisma.TaskWhereInput>
   parent?: Prisma.XOR<Prisma.TaskCommentNullableScalarRelationFilter, Prisma.TaskCommentWhereInput> | null
   replies?: Prisma.TaskCommentListRelationFilter
-  activityLogs?: Prisma.ActivityLogListRelationFilter
 }, "id">
 
 export type TaskCommentOrderByWithAggregationInput = {
@@ -305,7 +302,6 @@ export type TaskCommentCreateInput = {
   task: Prisma.TaskCreateNestedOneWithoutCommentsInput
   parent?: Prisma.TaskCommentCreateNestedOneWithoutRepliesInput
   replies?: Prisma.TaskCommentCreateNestedManyWithoutParentInput
-  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutTaskCommentInput
 }
 
 export type TaskCommentUncheckedCreateInput = {
@@ -320,7 +316,6 @@ export type TaskCommentUncheckedCreateInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   replies?: Prisma.TaskCommentUncheckedCreateNestedManyWithoutParentInput
-  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutTaskCommentInput
 }
 
 export type TaskCommentUpdateInput = {
@@ -335,7 +330,6 @@ export type TaskCommentUpdateInput = {
   task?: Prisma.TaskUpdateOneRequiredWithoutCommentsNestedInput
   parent?: Prisma.TaskCommentUpdateOneWithoutRepliesNestedInput
   replies?: Prisma.TaskCommentUpdateManyWithoutParentNestedInput
-  activityLogs?: Prisma.ActivityLogUpdateManyWithoutTaskCommentNestedInput
 }
 
 export type TaskCommentUncheckedUpdateInput = {
@@ -350,7 +344,6 @@ export type TaskCommentUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   replies?: Prisma.TaskCommentUncheckedUpdateManyWithoutParentNestedInput
-  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutTaskCommentNestedInput
 }
 
 export type TaskCommentCreateManyInput = {
@@ -546,22 +539,6 @@ export type TaskCommentUncheckedUpdateManyWithoutParentNestedInput = {
   deleteMany?: Prisma.TaskCommentScalarWhereInput | Prisma.TaskCommentScalarWhereInput[]
 }
 
-export type TaskCommentCreateNestedOneWithoutActivityLogsInput = {
-  create?: Prisma.XOR<Prisma.TaskCommentCreateWithoutActivityLogsInput, Prisma.TaskCommentUncheckedCreateWithoutActivityLogsInput>
-  connectOrCreate?: Prisma.TaskCommentCreateOrConnectWithoutActivityLogsInput
-  connect?: Prisma.TaskCommentWhereUniqueInput
-}
-
-export type TaskCommentUpdateOneWithoutActivityLogsNestedInput = {
-  create?: Prisma.XOR<Prisma.TaskCommentCreateWithoutActivityLogsInput, Prisma.TaskCommentUncheckedCreateWithoutActivityLogsInput>
-  connectOrCreate?: Prisma.TaskCommentCreateOrConnectWithoutActivityLogsInput
-  upsert?: Prisma.TaskCommentUpsertWithoutActivityLogsInput
-  disconnect?: Prisma.TaskCommentWhereInput | boolean
-  delete?: Prisma.TaskCommentWhereInput | boolean
-  connect?: Prisma.TaskCommentWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.TaskCommentUpdateToOneWithWhereWithoutActivityLogsInput, Prisma.TaskCommentUpdateWithoutActivityLogsInput>, Prisma.TaskCommentUncheckedUpdateWithoutActivityLogsInput>
-}
-
 export type TaskCommentCreateWithoutTaskInput = {
   id?: string
   authorType: $Enums.ActivityActorType
@@ -573,7 +550,6 @@ export type TaskCommentCreateWithoutTaskInput = {
   deletedAt?: Date | string | null
   parent?: Prisma.TaskCommentCreateNestedOneWithoutRepliesInput
   replies?: Prisma.TaskCommentCreateNestedManyWithoutParentInput
-  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutTaskCommentInput
 }
 
 export type TaskCommentUncheckedCreateWithoutTaskInput = {
@@ -587,7 +563,6 @@ export type TaskCommentUncheckedCreateWithoutTaskInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   replies?: Prisma.TaskCommentUncheckedCreateNestedManyWithoutParentInput
-  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutTaskCommentInput
 }
 
 export type TaskCommentCreateOrConnectWithoutTaskInput = {
@@ -643,7 +618,6 @@ export type TaskCommentCreateWithoutRepliesInput = {
   deletedAt?: Date | string | null
   task: Prisma.TaskCreateNestedOneWithoutCommentsInput
   parent?: Prisma.TaskCommentCreateNestedOneWithoutRepliesInput
-  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutTaskCommentInput
 }
 
 export type TaskCommentUncheckedCreateWithoutRepliesInput = {
@@ -657,7 +631,6 @@ export type TaskCommentUncheckedCreateWithoutRepliesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   deletedAt?: Date | string | null
-  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutTaskCommentInput
 }
 
 export type TaskCommentCreateOrConnectWithoutRepliesInput = {
@@ -676,7 +649,6 @@ export type TaskCommentCreateWithoutParentInput = {
   deletedAt?: Date | string | null
   task: Prisma.TaskCreateNestedOneWithoutCommentsInput
   replies?: Prisma.TaskCommentCreateNestedManyWithoutParentInput
-  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutTaskCommentInput
 }
 
 export type TaskCommentUncheckedCreateWithoutParentInput = {
@@ -690,7 +662,6 @@ export type TaskCommentUncheckedCreateWithoutParentInput = {
   updatedAt?: Date | string
   deletedAt?: Date | string | null
   replies?: Prisma.TaskCommentUncheckedCreateNestedManyWithoutParentInput
-  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutTaskCommentInput
 }
 
 export type TaskCommentCreateOrConnectWithoutParentInput = {
@@ -725,7 +696,6 @@ export type TaskCommentUpdateWithoutRepliesInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   task?: Prisma.TaskUpdateOneRequiredWithoutCommentsNestedInput
   parent?: Prisma.TaskCommentUpdateOneWithoutRepliesNestedInput
-  activityLogs?: Prisma.ActivityLogUpdateManyWithoutTaskCommentNestedInput
 }
 
 export type TaskCommentUncheckedUpdateWithoutRepliesInput = {
@@ -739,7 +709,6 @@ export type TaskCommentUncheckedUpdateWithoutRepliesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutTaskCommentNestedInput
 }
 
 export type TaskCommentUpsertWithWhereUniqueWithoutParentInput = {
@@ -756,78 +725,6 @@ export type TaskCommentUpdateWithWhereUniqueWithoutParentInput = {
 export type TaskCommentUpdateManyWithWhereWithoutParentInput = {
   where: Prisma.TaskCommentScalarWhereInput
   data: Prisma.XOR<Prisma.TaskCommentUpdateManyMutationInput, Prisma.TaskCommentUncheckedUpdateManyWithoutParentInput>
-}
-
-export type TaskCommentCreateWithoutActivityLogsInput = {
-  id?: string
-  authorType: $Enums.ActivityActorType
-  authorUserId?: string | null
-  authorClientId?: string | null
-  body: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  task: Prisma.TaskCreateNestedOneWithoutCommentsInput
-  parent?: Prisma.TaskCommentCreateNestedOneWithoutRepliesInput
-  replies?: Prisma.TaskCommentCreateNestedManyWithoutParentInput
-}
-
-export type TaskCommentUncheckedCreateWithoutActivityLogsInput = {
-  id?: string
-  taskId: string
-  parentId?: string | null
-  authorType: $Enums.ActivityActorType
-  authorUserId?: string | null
-  authorClientId?: string | null
-  body: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  deletedAt?: Date | string | null
-  replies?: Prisma.TaskCommentUncheckedCreateNestedManyWithoutParentInput
-}
-
-export type TaskCommentCreateOrConnectWithoutActivityLogsInput = {
-  where: Prisma.TaskCommentWhereUniqueInput
-  create: Prisma.XOR<Prisma.TaskCommentCreateWithoutActivityLogsInput, Prisma.TaskCommentUncheckedCreateWithoutActivityLogsInput>
-}
-
-export type TaskCommentUpsertWithoutActivityLogsInput = {
-  update: Prisma.XOR<Prisma.TaskCommentUpdateWithoutActivityLogsInput, Prisma.TaskCommentUncheckedUpdateWithoutActivityLogsInput>
-  create: Prisma.XOR<Prisma.TaskCommentCreateWithoutActivityLogsInput, Prisma.TaskCommentUncheckedCreateWithoutActivityLogsInput>
-  where?: Prisma.TaskCommentWhereInput
-}
-
-export type TaskCommentUpdateToOneWithWhereWithoutActivityLogsInput = {
-  where?: Prisma.TaskCommentWhereInput
-  data: Prisma.XOR<Prisma.TaskCommentUpdateWithoutActivityLogsInput, Prisma.TaskCommentUncheckedUpdateWithoutActivityLogsInput>
-}
-
-export type TaskCommentUpdateWithoutActivityLogsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  authorType?: Prisma.EnumActivityActorTypeFieldUpdateOperationsInput | $Enums.ActivityActorType
-  authorUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  authorClientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  task?: Prisma.TaskUpdateOneRequiredWithoutCommentsNestedInput
-  parent?: Prisma.TaskCommentUpdateOneWithoutRepliesNestedInput
-  replies?: Prisma.TaskCommentUpdateManyWithoutParentNestedInput
-}
-
-export type TaskCommentUncheckedUpdateWithoutActivityLogsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  taskId?: Prisma.StringFieldUpdateOperationsInput | string
-  parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  authorType?: Prisma.EnumActivityActorTypeFieldUpdateOperationsInput | $Enums.ActivityActorType
-  authorUserId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  authorClientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  body?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  replies?: Prisma.TaskCommentUncheckedUpdateManyWithoutParentNestedInput
 }
 
 export type TaskCommentCreateManyTaskInput = {
@@ -853,7 +750,6 @@ export type TaskCommentUpdateWithoutTaskInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   parent?: Prisma.TaskCommentUpdateOneWithoutRepliesNestedInput
   replies?: Prisma.TaskCommentUpdateManyWithoutParentNestedInput
-  activityLogs?: Prisma.ActivityLogUpdateManyWithoutTaskCommentNestedInput
 }
 
 export type TaskCommentUncheckedUpdateWithoutTaskInput = {
@@ -867,7 +763,6 @@ export type TaskCommentUncheckedUpdateWithoutTaskInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   replies?: Prisma.TaskCommentUncheckedUpdateManyWithoutParentNestedInput
-  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutTaskCommentNestedInput
 }
 
 export type TaskCommentUncheckedUpdateManyWithoutTaskInput = {
@@ -905,7 +800,6 @@ export type TaskCommentUpdateWithoutParentInput = {
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   task?: Prisma.TaskUpdateOneRequiredWithoutCommentsNestedInput
   replies?: Prisma.TaskCommentUpdateManyWithoutParentNestedInput
-  activityLogs?: Prisma.ActivityLogUpdateManyWithoutTaskCommentNestedInput
 }
 
 export type TaskCommentUncheckedUpdateWithoutParentInput = {
@@ -919,7 +813,6 @@ export type TaskCommentUncheckedUpdateWithoutParentInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   replies?: Prisma.TaskCommentUncheckedUpdateManyWithoutParentNestedInput
-  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutTaskCommentNestedInput
 }
 
 export type TaskCommentUncheckedUpdateManyWithoutParentInput = {
@@ -941,12 +834,10 @@ export type TaskCommentUncheckedUpdateManyWithoutParentInput = {
 
 export type TaskCommentCountOutputType = {
   replies: number
-  activityLogs: number
 }
 
 export type TaskCommentCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   replies?: boolean | TaskCommentCountOutputTypeCountRepliesArgs
-  activityLogs?: boolean | TaskCommentCountOutputTypeCountActivityLogsArgs
 }
 
 /**
@@ -966,13 +857,6 @@ export type TaskCommentCountOutputTypeCountRepliesArgs<ExtArgs extends runtime.T
   where?: Prisma.TaskCommentWhereInput
 }
 
-/**
- * TaskCommentCountOutputType without action
- */
-export type TaskCommentCountOutputTypeCountActivityLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ActivityLogWhereInput
-}
-
 
 export type TaskCommentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -988,7 +872,6 @@ export type TaskCommentSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   task?: boolean | Prisma.TaskDefaultArgs<ExtArgs>
   parent?: boolean | Prisma.TaskComment$parentArgs<ExtArgs>
   replies?: boolean | Prisma.TaskComment$repliesArgs<ExtArgs>
-  activityLogs?: boolean | Prisma.TaskComment$activityLogsArgs<ExtArgs>
   _count?: boolean | Prisma.TaskCommentCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["taskComment"]>
 
@@ -1040,7 +923,6 @@ export type TaskCommentInclude<ExtArgs extends runtime.Types.Extensions.Internal
   task?: boolean | Prisma.TaskDefaultArgs<ExtArgs>
   parent?: boolean | Prisma.TaskComment$parentArgs<ExtArgs>
   replies?: boolean | Prisma.TaskComment$repliesArgs<ExtArgs>
-  activityLogs?: boolean | Prisma.TaskComment$activityLogsArgs<ExtArgs>
   _count?: boolean | Prisma.TaskCommentCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type TaskCommentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1058,7 +940,6 @@ export type $TaskCommentPayload<ExtArgs extends runtime.Types.Extensions.Interna
     task: Prisma.$TaskPayload<ExtArgs>
     parent: Prisma.$TaskCommentPayload<ExtArgs> | null
     replies: Prisma.$TaskCommentPayload<ExtArgs>[]
-    activityLogs: Prisma.$ActivityLogPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1468,7 +1349,6 @@ export interface Prisma__TaskCommentClient<T, Null = never, ExtArgs extends runt
   task<T extends Prisma.TaskDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TaskDefaultArgs<ExtArgs>>): Prisma.Prisma__TaskClient<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   parent<T extends Prisma.TaskComment$parentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TaskComment$parentArgs<ExtArgs>>): Prisma.Prisma__TaskCommentClient<runtime.Types.Result.GetResult<Prisma.$TaskCommentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   replies<T extends Prisma.TaskComment$repliesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TaskComment$repliesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskCommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  activityLogs<T extends Prisma.TaskComment$activityLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.TaskComment$activityLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActivityLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1949,30 +1829,6 @@ export type TaskComment$repliesArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.TaskCommentScalarFieldEnum | Prisma.TaskCommentScalarFieldEnum[]
-}
-
-/**
- * TaskComment.activityLogs
- */
-export type TaskComment$activityLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ActivityLog
-   */
-  select?: Prisma.ActivityLogSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ActivityLog
-   */
-  omit?: Prisma.ActivityLogOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ActivityLogInclude<ExtArgs> | null
-  where?: Prisma.ActivityLogWhereInput
-  orderBy?: Prisma.ActivityLogOrderByWithRelationInput | Prisma.ActivityLogOrderByWithRelationInput[]
-  cursor?: Prisma.ActivityLogWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ActivityLogScalarFieldEnum | Prisma.ActivityLogScalarFieldEnum[]
 }
 
 /**

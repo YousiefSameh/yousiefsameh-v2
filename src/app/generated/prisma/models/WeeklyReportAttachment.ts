@@ -241,7 +241,6 @@ export type WeeklyReportAttachmentWhereInput = {
   sizeBytes?: Prisma.IntNullableFilter<"WeeklyReportAttachment"> | number | null
   createdAt?: Prisma.DateTimeFilter<"WeeklyReportAttachment"> | Date | string
   report?: Prisma.XOR<Prisma.WeeklyReportScalarRelationFilter, Prisma.WeeklyReportWhereInput>
-  activityLogs?: Prisma.ActivityLogListRelationFilter
 }
 
 export type WeeklyReportAttachmentOrderByWithRelationInput = {
@@ -254,7 +253,6 @@ export type WeeklyReportAttachmentOrderByWithRelationInput = {
   sizeBytes?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   report?: Prisma.WeeklyReportOrderByWithRelationInput
-  activityLogs?: Prisma.ActivityLogOrderByRelationAggregateInput
 }
 
 export type WeeklyReportAttachmentWhereUniqueInput = Prisma.AtLeast<{
@@ -270,7 +268,6 @@ export type WeeklyReportAttachmentWhereUniqueInput = Prisma.AtLeast<{
   sizeBytes?: Prisma.IntNullableFilter<"WeeklyReportAttachment"> | number | null
   createdAt?: Prisma.DateTimeFilter<"WeeklyReportAttachment"> | Date | string
   report?: Prisma.XOR<Prisma.WeeklyReportScalarRelationFilter, Prisma.WeeklyReportWhereInput>
-  activityLogs?: Prisma.ActivityLogListRelationFilter
 }, "id">
 
 export type WeeklyReportAttachmentOrderByWithAggregationInput = {
@@ -312,7 +309,6 @@ export type WeeklyReportAttachmentCreateInput = {
   sizeBytes?: number | null
   createdAt?: Date | string
   report: Prisma.WeeklyReportCreateNestedOneWithoutAttachmentsInput
-  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutWeeklyReportAttachmentInput
 }
 
 export type WeeklyReportAttachmentUncheckedCreateInput = {
@@ -324,7 +320,6 @@ export type WeeklyReportAttachmentUncheckedCreateInput = {
   mimeType?: string | null
   sizeBytes?: number | null
   createdAt?: Date | string
-  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutWeeklyReportAttachmentInput
 }
 
 export type WeeklyReportAttachmentUpdateInput = {
@@ -336,7 +331,6 @@ export type WeeklyReportAttachmentUpdateInput = {
   sizeBytes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   report?: Prisma.WeeklyReportUpdateOneRequiredWithoutAttachmentsNestedInput
-  activityLogs?: Prisma.ActivityLogUpdateManyWithoutWeeklyReportAttachmentNestedInput
 }
 
 export type WeeklyReportAttachmentUncheckedUpdateInput = {
@@ -348,7 +342,6 @@ export type WeeklyReportAttachmentUncheckedUpdateInput = {
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sizeBytes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutWeeklyReportAttachmentNestedInput
 }
 
 export type WeeklyReportAttachmentCreateManyInput = {
@@ -434,11 +427,6 @@ export type WeeklyReportAttachmentSumOrderByAggregateInput = {
   sizeBytes?: Prisma.SortOrder
 }
 
-export type WeeklyReportAttachmentNullableScalarRelationFilter = {
-  is?: Prisma.WeeklyReportAttachmentWhereInput | null
-  isNot?: Prisma.WeeklyReportAttachmentWhereInput | null
-}
-
 export type WeeklyReportAttachmentCreateNestedManyWithoutReportInput = {
   create?: Prisma.XOR<Prisma.WeeklyReportAttachmentCreateWithoutReportInput, Prisma.WeeklyReportAttachmentUncheckedCreateWithoutReportInput> | Prisma.WeeklyReportAttachmentCreateWithoutReportInput[] | Prisma.WeeklyReportAttachmentUncheckedCreateWithoutReportInput[]
   connectOrCreate?: Prisma.WeeklyReportAttachmentCreateOrConnectWithoutReportInput | Prisma.WeeklyReportAttachmentCreateOrConnectWithoutReportInput[]
@@ -481,22 +469,6 @@ export type WeeklyReportAttachmentUncheckedUpdateManyWithoutReportNestedInput = 
   deleteMany?: Prisma.WeeklyReportAttachmentScalarWhereInput | Prisma.WeeklyReportAttachmentScalarWhereInput[]
 }
 
-export type WeeklyReportAttachmentCreateNestedOneWithoutActivityLogsInput = {
-  create?: Prisma.XOR<Prisma.WeeklyReportAttachmentCreateWithoutActivityLogsInput, Prisma.WeeklyReportAttachmentUncheckedCreateWithoutActivityLogsInput>
-  connectOrCreate?: Prisma.WeeklyReportAttachmentCreateOrConnectWithoutActivityLogsInput
-  connect?: Prisma.WeeklyReportAttachmentWhereUniqueInput
-}
-
-export type WeeklyReportAttachmentUpdateOneWithoutActivityLogsNestedInput = {
-  create?: Prisma.XOR<Prisma.WeeklyReportAttachmentCreateWithoutActivityLogsInput, Prisma.WeeklyReportAttachmentUncheckedCreateWithoutActivityLogsInput>
-  connectOrCreate?: Prisma.WeeklyReportAttachmentCreateOrConnectWithoutActivityLogsInput
-  upsert?: Prisma.WeeklyReportAttachmentUpsertWithoutActivityLogsInput
-  disconnect?: Prisma.WeeklyReportAttachmentWhereInput | boolean
-  delete?: Prisma.WeeklyReportAttachmentWhereInput | boolean
-  connect?: Prisma.WeeklyReportAttachmentWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.WeeklyReportAttachmentUpdateToOneWithWhereWithoutActivityLogsInput, Prisma.WeeklyReportAttachmentUpdateWithoutActivityLogsInput>, Prisma.WeeklyReportAttachmentUncheckedUpdateWithoutActivityLogsInput>
-}
-
 export type WeeklyReportAttachmentCreateWithoutReportInput = {
   id?: string
   filePath: string
@@ -505,7 +477,6 @@ export type WeeklyReportAttachmentCreateWithoutReportInput = {
   mimeType?: string | null
   sizeBytes?: number | null
   createdAt?: Date | string
-  activityLogs?: Prisma.ActivityLogCreateNestedManyWithoutWeeklyReportAttachmentInput
 }
 
 export type WeeklyReportAttachmentUncheckedCreateWithoutReportInput = {
@@ -516,7 +487,6 @@ export type WeeklyReportAttachmentUncheckedCreateWithoutReportInput = {
   mimeType?: string | null
   sizeBytes?: number | null
   createdAt?: Date | string
-  activityLogs?: Prisma.ActivityLogUncheckedCreateNestedManyWithoutWeeklyReportAttachmentInput
 }
 
 export type WeeklyReportAttachmentCreateOrConnectWithoutReportInput = {
@@ -559,66 +529,6 @@ export type WeeklyReportAttachmentScalarWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"WeeklyReportAttachment"> | Date | string
 }
 
-export type WeeklyReportAttachmentCreateWithoutActivityLogsInput = {
-  id?: string
-  filePath: string
-  url: string
-  fileName: string
-  mimeType?: string | null
-  sizeBytes?: number | null
-  createdAt?: Date | string
-  report: Prisma.WeeklyReportCreateNestedOneWithoutAttachmentsInput
-}
-
-export type WeeklyReportAttachmentUncheckedCreateWithoutActivityLogsInput = {
-  id?: string
-  reportId: string
-  filePath: string
-  url: string
-  fileName: string
-  mimeType?: string | null
-  sizeBytes?: number | null
-  createdAt?: Date | string
-}
-
-export type WeeklyReportAttachmentCreateOrConnectWithoutActivityLogsInput = {
-  where: Prisma.WeeklyReportAttachmentWhereUniqueInput
-  create: Prisma.XOR<Prisma.WeeklyReportAttachmentCreateWithoutActivityLogsInput, Prisma.WeeklyReportAttachmentUncheckedCreateWithoutActivityLogsInput>
-}
-
-export type WeeklyReportAttachmentUpsertWithoutActivityLogsInput = {
-  update: Prisma.XOR<Prisma.WeeklyReportAttachmentUpdateWithoutActivityLogsInput, Prisma.WeeklyReportAttachmentUncheckedUpdateWithoutActivityLogsInput>
-  create: Prisma.XOR<Prisma.WeeklyReportAttachmentCreateWithoutActivityLogsInput, Prisma.WeeklyReportAttachmentUncheckedCreateWithoutActivityLogsInput>
-  where?: Prisma.WeeklyReportAttachmentWhereInput
-}
-
-export type WeeklyReportAttachmentUpdateToOneWithWhereWithoutActivityLogsInput = {
-  where?: Prisma.WeeklyReportAttachmentWhereInput
-  data: Prisma.XOR<Prisma.WeeklyReportAttachmentUpdateWithoutActivityLogsInput, Prisma.WeeklyReportAttachmentUncheckedUpdateWithoutActivityLogsInput>
-}
-
-export type WeeklyReportAttachmentUpdateWithoutActivityLogsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  filePath?: Prisma.StringFieldUpdateOperationsInput | string
-  url?: Prisma.StringFieldUpdateOperationsInput | string
-  fileName?: Prisma.StringFieldUpdateOperationsInput | string
-  mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sizeBytes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  report?: Prisma.WeeklyReportUpdateOneRequiredWithoutAttachmentsNestedInput
-}
-
-export type WeeklyReportAttachmentUncheckedUpdateWithoutActivityLogsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  reportId?: Prisma.StringFieldUpdateOperationsInput | string
-  filePath?: Prisma.StringFieldUpdateOperationsInput | string
-  url?: Prisma.StringFieldUpdateOperationsInput | string
-  fileName?: Prisma.StringFieldUpdateOperationsInput | string
-  mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  sizeBytes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
 export type WeeklyReportAttachmentCreateManyReportInput = {
   id?: string
   filePath: string
@@ -637,7 +547,6 @@ export type WeeklyReportAttachmentUpdateWithoutReportInput = {
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sizeBytes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  activityLogs?: Prisma.ActivityLogUpdateManyWithoutWeeklyReportAttachmentNestedInput
 }
 
 export type WeeklyReportAttachmentUncheckedUpdateWithoutReportInput = {
@@ -648,7 +557,6 @@ export type WeeklyReportAttachmentUncheckedUpdateWithoutReportInput = {
   mimeType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   sizeBytes?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  activityLogs?: Prisma.ActivityLogUncheckedUpdateManyWithoutWeeklyReportAttachmentNestedInput
 }
 
 export type WeeklyReportAttachmentUncheckedUpdateManyWithoutReportInput = {
@@ -662,35 +570,6 @@ export type WeeklyReportAttachmentUncheckedUpdateManyWithoutReportInput = {
 }
 
 
-/**
- * Count Type WeeklyReportAttachmentCountOutputType
- */
-
-export type WeeklyReportAttachmentCountOutputType = {
-  activityLogs: number
-}
-
-export type WeeklyReportAttachmentCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  activityLogs?: boolean | WeeklyReportAttachmentCountOutputTypeCountActivityLogsArgs
-}
-
-/**
- * WeeklyReportAttachmentCountOutputType without action
- */
-export type WeeklyReportAttachmentCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the WeeklyReportAttachmentCountOutputType
-   */
-  select?: Prisma.WeeklyReportAttachmentCountOutputTypeSelect<ExtArgs> | null
-}
-
-/**
- * WeeklyReportAttachmentCountOutputType without action
- */
-export type WeeklyReportAttachmentCountOutputTypeCountActivityLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ActivityLogWhereInput
-}
-
 
 export type WeeklyReportAttachmentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -702,8 +581,6 @@ export type WeeklyReportAttachmentSelect<ExtArgs extends runtime.Types.Extension
   sizeBytes?: boolean
   createdAt?: boolean
   report?: boolean | Prisma.WeeklyReportDefaultArgs<ExtArgs>
-  activityLogs?: boolean | Prisma.WeeklyReportAttachment$activityLogsArgs<ExtArgs>
-  _count?: boolean | Prisma.WeeklyReportAttachmentCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["weeklyReportAttachment"]>
 
 export type WeeklyReportAttachmentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -744,8 +621,6 @@ export type WeeklyReportAttachmentSelectScalar = {
 export type WeeklyReportAttachmentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "reportId" | "filePath" | "url" | "fileName" | "mimeType" | "sizeBytes" | "createdAt", ExtArgs["result"]["weeklyReportAttachment"]>
 export type WeeklyReportAttachmentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   report?: boolean | Prisma.WeeklyReportDefaultArgs<ExtArgs>
-  activityLogs?: boolean | Prisma.WeeklyReportAttachment$activityLogsArgs<ExtArgs>
-  _count?: boolean | Prisma.WeeklyReportAttachmentCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type WeeklyReportAttachmentIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   report?: boolean | Prisma.WeeklyReportDefaultArgs<ExtArgs>
@@ -758,7 +633,6 @@ export type $WeeklyReportAttachmentPayload<ExtArgs extends runtime.Types.Extensi
   name: "WeeklyReportAttachment"
   objects: {
     report: Prisma.$WeeklyReportPayload<ExtArgs>
-    activityLogs: Prisma.$ActivityLogPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1164,7 +1038,6 @@ readonly fields: WeeklyReportAttachmentFieldRefs;
 export interface Prisma__WeeklyReportAttachmentClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   report<T extends Prisma.WeeklyReportDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.WeeklyReportDefaultArgs<ExtArgs>>): Prisma.Prisma__WeeklyReportClient<runtime.Types.Result.GetResult<Prisma.$WeeklyReportPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  activityLogs<T extends Prisma.WeeklyReportAttachment$activityLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.WeeklyReportAttachment$activityLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ActivityLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1600,30 +1473,6 @@ export type WeeklyReportAttachmentDeleteManyArgs<ExtArgs extends runtime.Types.E
    * Limit how many WeeklyReportAttachments to delete.
    */
   limit?: number
-}
-
-/**
- * WeeklyReportAttachment.activityLogs
- */
-export type WeeklyReportAttachment$activityLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the ActivityLog
-   */
-  select?: Prisma.ActivityLogSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the ActivityLog
-   */
-  omit?: Prisma.ActivityLogOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.ActivityLogInclude<ExtArgs> | null
-  where?: Prisma.ActivityLogWhereInput
-  orderBy?: Prisma.ActivityLogOrderByWithRelationInput | Prisma.ActivityLogOrderByWithRelationInput[]
-  cursor?: Prisma.ActivityLogWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.ActivityLogScalarFieldEnum | Prisma.ActivityLogScalarFieldEnum[]
 }
 
 /**

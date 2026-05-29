@@ -358,13 +358,12 @@ model Task {
   type            TaskType?     @default(FEATURE)
   isClientVisible Boolean?      @default(false) @map("is_client_visible")
 
-  project      Project               @relation(fields: [projectId], references: [id])
-  labels       TaskLabelAssignment[]
-  comments     TaskComment[]
-  attachments  TaskAttachment[]
-  subtasks     TaskSubtask[]         @relation("TaskParentToSubtask")
-  parentLinks  TaskSubtask[]         @relation("TaskChildToSubtask")
-  activityLogs ActivityLog[]
+  project     Project               @relation(fields: [projectId], references: [id])
+  labels      TaskLabelAssignment[]
+  comments    TaskComment[]
+  attachments TaskAttachment[]
+  subtasks    TaskSubtask[]         @relation("TaskParentToSubtask")
+  parentLinks TaskSubtask[]         @relation("TaskChildToSubtask")
 
   @@index([projectId, status, displayOrder])
   @@index([projectId, createdAt])
@@ -410,10 +409,9 @@ model TaskComment {
   updatedAt      DateTime          @default(now()) @map("updated_at") @db.Timestamptz
   deletedAt      DateTime?         @map("deleted_at") @db.Timestamptz
 
-  task         Task          @relation(fields: [taskId], references: [id], onDelete: Cascade)
-  parent       TaskComment?  @relation("TaskCommentToReplies", fields: [parentId], references: [id], onDelete: Cascade)
-  replies      TaskComment[] @relation("TaskCommentToReplies")
-  activityLogs ActivityLog[]
+  task    Task          @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  parent  TaskComment?  @relation("TaskCommentToReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies TaskComment[] @relation("TaskCommentToReplies")
 
   @@index([taskId, createdAt])
   @@index([parentId])
@@ -433,8 +431,7 @@ model TaskAttachment {
   sizeBytes          Int?              @map("size_bytes")
   createdAt          DateTime          @default(now()) @map("created_at") @db.Timestamptz
 
-  task         Task          @relation(fields: [taskId], references: [id], onDelete: Cascade)
-  activityLogs ActivityLog[]
+  task Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
 
   @@index([taskId, createdAt])
   @@map("task_attachments")
@@ -482,10 +479,9 @@ model WeeklyReport {
   createdAt DateTime      @default(now()) @map("created_at") @db.Timestamptz
   updatedAt DateTime      @default(now()) @map("updated_at") @db.Timestamptz
 
-  project      Project                  @relation(fields: [projectId], references: [id])
-  attachments  WeeklyReportAttachment[]
-  comments     WeeklyReportComment[]
-  activityLogs ActivityLog[]
+  project     Project                  @relation(fields: [projectId], references: [id])
+  attachments WeeklyReportAttachment[]
+  comments    WeeklyReportComment[]
 
   @@index([projectId, createdAt])
   @@map("weekly_reports")
@@ -501,8 +497,7 @@ model WeeklyReportAttachment {
   sizeBytes Int?     @map("size_bytes")
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
 
-  report       WeeklyReport  @relation(fields: [reportId], references: [id], onDelete: Cascade)
-  activityLogs ActivityLog[]
+  report WeeklyReport @relation(fields: [reportId], references: [id], onDelete: Cascade)
 
   @@index([reportId, createdAt])
   @@map("weekly_report_attachments")
@@ -520,10 +515,9 @@ model WeeklyReportComment {
   updatedAt      DateTime          @default(now()) @map("updated_at") @db.Timestamptz
   deletedAt      DateTime?         @map("deleted_at") @db.Timestamptz
 
-  report       WeeklyReport          @relation(fields: [reportId], references: [id], onDelete: Cascade)
-  parent       WeeklyReportComment?  @relation("WeeklyReportCommentToReplies", fields: [parentId], references: [id], onDelete: Cascade)
-  replies      WeeklyReportComment[] @relation("WeeklyReportCommentToReplies")
-  activityLogs ActivityLog[]
+  report  WeeklyReport          @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  parent  WeeklyReportComment?  @relation("WeeklyReportCommentToReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies WeeklyReportComment[] @relation("WeeklyReportCommentToReplies")
 
   @@index([reportId, createdAt])
   @@index([parentId])
@@ -543,13 +537,6 @@ model ActivityLog {
   createdAt     DateTime           @default(now()) @map("created_at") @db.Timestamptz
 
   project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
-
-  task                   Task?                   @relation(fields: [entityId], references: [id], onDelete: Cascade, map: "activity_log_task_fk")
-  taskComment            TaskComment?            @relation(fields: [entityId], references: [id], onDelete: Cascade, map: "activity_log_task_comment_fk")
-  taskAttachment         TaskAttachment?         @relation(fields: [entityId], references: [id], onDelete: Cascade, map: "activity_log_task_attachment_fk")
-  weeklyReport           WeeklyReport?           @relation(fields: [entityId], references: [id], onDelete: Cascade, map: "activity_log_weekly_report_fk")
-  weeklyReportComment    WeeklyReportComment?    @relation(fields: [entityId], references: [id], onDelete: Cascade, map: "activity_log_weekly_report_comment_fk")
-  weeklyReportAttachment WeeklyReportAttachment? @relation(fields: [entityId], references: [id], onDelete: Cascade, map: "activity_log_weekly_report_attachment_fk")
 
   @@index([projectId, createdAt])
   @@index([entityType, entityId])
