@@ -5,6 +5,7 @@ import {
   ArrowDown,
   ArrowRight,
   ArrowUp,
+  Minus,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -25,16 +26,21 @@ interface PriorityConfig {
  * Each icon is visually distinct — no two priorities share the same icon — so
  * the component conveys meaning even when rendered without the text label.
  */
-const PRIORITY_CONFIG: Record<TaskPriority, PriorityConfig> = {
+
+const PRIORITY_CONFIG = {
   URGENT: { icon: AlertCircle, colorClass: "text-red-500", label: "Urgent" },
   HIGH: { icon: ArrowUp, colorClass: "text-orange-500", label: "High" },
   MEDIUM: { icon: ArrowRight, colorClass: "text-yellow-500", label: "Medium" },
   LOW: { icon: ArrowDown, colorClass: "text-blue-400", label: "Low" },
-};
+  NO_PRIORITY: {
+    icon: Minus,
+    colorClass: "text-muted-foreground",
+    label: "No priority",
+  },
+} satisfies Record<TaskPriority | "NO_PRIORITY", PriorityConfig>;
 
 interface TaskPriorityIconProps {
-  priority: TaskPriority;
-  /** When true, renders the priority label as text next to the icon. */
+  priority: TaskPriority | null;
   showLabel?: boolean;
   className?: string;
 }
@@ -54,8 +60,9 @@ export function TaskPriorityIcon({
   showLabel = false,
   className,
 }: TaskPriorityIconProps) {
-  const { icon: Icon, colorClass, label } = PRIORITY_CONFIG[priority];
+  const configKey = priority ?? "NO_PRIORITY";
 
+  const { icon: Icon, colorClass, label } = PRIORITY_CONFIG[configKey];
   return (
     <span
       className={cn("inline-flex items-center gap-1", className)}
