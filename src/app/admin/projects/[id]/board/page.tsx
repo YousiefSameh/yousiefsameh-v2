@@ -14,7 +14,7 @@ export default async function ProjectBoardPage({ params }: Props) {
   const { id } = await params;
 
   return (
-    <div className="flex h-[calc(100vh-var(--header-height))] flex-col gap-4 p-6">
+    <div className="flex h-[calc(100vh-var(--header-height))] flex-col gap-4">
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-xl font-semibold tracking-tight">Board</h2>

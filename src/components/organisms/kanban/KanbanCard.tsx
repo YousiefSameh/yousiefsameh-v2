@@ -79,7 +79,7 @@ export const KanbanCard = forwardRef<HTMLDivElement, KanbanCardProps>(
       >
         {/* Row 1: Priority + Task type */}
         <div className="flex items-center justify-between gap-2">
-          <TaskPriorityIcon priority={task.priority} />
+          <TaskPriorityIcon priority={task.priority} showLabel />
           {task.type && (
             <span className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
               {task.type.replaceAll("_", " ")}

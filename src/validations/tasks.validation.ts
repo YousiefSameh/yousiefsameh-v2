@@ -54,3 +54,11 @@ export const taskLabelSchema = z.object({
 
 export type TaskLabelValues = z.infer<typeof taskLabelSchema>;
 
+export const createTaskFormSchema = z.object({
+  title: z.string().min(1, "Title is required").max(255),
+  status: z.nativeEnum(TaskStatus),
+  priority: z.nativeEnum(TaskPriority),
+  labelIds: z.array(z.string()),
+});
+
+export type CreateTaskFormValues = z.infer<typeof createTaskFormSchema>;
