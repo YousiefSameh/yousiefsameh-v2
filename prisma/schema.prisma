@@ -102,6 +102,42 @@ enum ReportStatus {
   PUBLISHED @map("published")
 }
 
+enum ActivityActorType {
+  ADMIN  @map("admin")
+  CLIENT @map("client")
+}
+
+enum ActivityEntityType {
+  TASK       @map("task")
+  COMMENT    @map("comment")
+  ATTACHMENT @map("attachment")
+  REPORT     @map("report")
+}
+
+enum ActivityAction {
+  TASK_CREATED            @map("task_created")
+  TASK_UPDATED            @map("task_updated")
+  TASK_STATUS_CHANGED     @map("task_status_changed")
+  TASK_PRIORITY_CHANGED   @map("task_priority_changed")
+  TASK_TYPE_CHANGED       @map("task_type_changed")
+  TASK_ASSIGNEE_CHANGED   @map("task_assignee_changed")
+  TASK_DUE_DATE_CHANGED   @map("task_due_date_changed")
+  TASK_LABELS_CHANGED     @map("task_labels_changed")
+  TASK_VISIBILITY_CHANGED @map("task_visibility_changed")
+  TASK_MOVED              @map("task_moved")
+
+  COMMENT_ADDED   @map("comment_added")
+  COMMENT_UPDATED @map("comment_updated")
+  COMMENT_DELETED @map("comment_deleted")
+
+  FILE_UPLOADED @map("file_uploaded")
+  FILE_DELETED  @map("file_deleted")
+
+  REPORT_CREATED   @map("report_created")
+  REPORT_UPDATED   @map("report_updated")
+  REPORT_PUBLISHED @map("report_published")
+}
+
 // -----------------------------------------------------------------------------
 // Models
 // -----------------------------------------------------------------------------
@@ -263,6 +299,8 @@ model Project {
   tasks         Task[]
   testimonials  Testimonial[]
   weeklyReports WeeklyReport[]
+  activityLogs  ActivityLog[]
+  taskLabels    TaskLabel[]
 
   @@map("projects")
 }
@@ -309,6 +347,7 @@ model Task {
   projectId       String        @map("project_id") @db.Uuid
   title           String
   description     String?
+  descriptionRich Json?         @map("description_rich")
   status          TaskStatus?   @default(TODO)
   priority        TaskPriority? @default(MEDIUM)
   dueDate         DateTime?     @map("due_date") @db.Timestamptz
@@ -319,9 +358,97 @@ model Task {
   type            TaskType?     @default(FEATURE)
   isClientVisible Boolean?      @default(false) @map("is_client_visible")
 
-  project Project @relation(fields: [projectId], references: [id])
+  project     Project               @relation(fields: [projectId], references: [id])
+  labels      TaskLabelAssignment[]
+  comments    TaskComment[]
+  attachments TaskAttachment[]
+  subtasks    TaskSubtask[]         @relation("TaskParentToSubtask")
+  parentLinks TaskSubtask[]         @relation("TaskChildToSubtask")
 
+  @@index([projectId, status, displayOrder])
+  @@index([projectId, createdAt])
   @@map("tasks")
+}
+
+model TaskLabel {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  projectId String   @map("project_id") @db.Uuid
+  name      String
+  color     String? // e.g. hex or token
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  project Project               @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  tasks   TaskLabelAssignment[]
+
+  @@unique([projectId, name])
+  @@index([projectId])
+  @@map("task_labels")
+}
+
+model TaskLabelAssignment {
+  taskId  String @map("task_id") @db.Uuid
+  labelId String @map("label_id") @db.Uuid
+
+  task  Task      @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  label TaskLabel @relation(fields: [labelId], references: [id], onDelete: Cascade)
+
+  @@id([taskId, labelId])
+  @@index([labelId])
+  @@map("task_label_assignments")
+}
+
+model TaskComment {
+  id             String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  taskId         String            @map("task_id") @db.Uuid
+  parentId       String?           @map("parent_id") @db.Uuid
+  authorType     ActivityActorType @map("author_type")
+  authorUserId   String?           @map("author_user_id")
+  authorClientId String?           @map("author_client_id") @db.Uuid
+  body           Json
+  createdAt      DateTime          @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt      DateTime          @default(now()) @map("updated_at") @db.Timestamptz
+  deletedAt      DateTime?         @map("deleted_at") @db.Timestamptz
+
+  task    Task          @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  parent  TaskComment?  @relation("TaskCommentToReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies TaskComment[] @relation("TaskCommentToReplies")
+
+  @@index([taskId, createdAt])
+  @@index([parentId])
+  @@map("task_comments")
+}
+
+model TaskAttachment {
+  id                 String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  taskId             String            @map("task_id") @db.Uuid
+  uploadedByType     ActivityActorType @map("uploaded_by_type")
+  uploadedByUserId   String?           @map("uploaded_by_user_id")
+  uploadedByClientId String?           @map("uploaded_by_client_id") @db.Uuid
+  filePath           String            @map("file_path")
+  url                String
+  fileName           String            @map("file_name")
+  mimeType           String?           @map("mime_type")
+  sizeBytes          Int?              @map("size_bytes")
+  createdAt          DateTime          @default(now()) @map("created_at") @db.Timestamptz
+
+  task Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
+  @@index([taskId, createdAt])
+  @@map("task_attachments")
+}
+
+model TaskSubtask {
+  parentTaskId String   @map("parent_task_id") @db.Uuid
+  childTaskId  String   @map("child_task_id") @db.Uuid
+  displayOrder Int?     @default(0) @map("display_order")
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  parentTask Task @relation("TaskParentToSubtask", fields: [parentTaskId], references: [id], onDelete: Cascade)
+  childTask  Task @relation("TaskChildToSubtask", fields: [childTaskId], references: [id], onDelete: Cascade)
+
+  @@id([parentTaskId, childTaskId])
+  @@index([childTaskId])
+  @@map("task_subtasks")
 }
 
 model Testimonial {
@@ -352,7 +479,66 @@ model WeeklyReport {
   createdAt DateTime      @default(now()) @map("created_at") @db.Timestamptz
   updatedAt DateTime      @default(now()) @map("updated_at") @db.Timestamptz
 
-  project Project @relation(fields: [projectId], references: [id])
+  project     Project                  @relation(fields: [projectId], references: [id])
+  attachments WeeklyReportAttachment[]
+  comments    WeeklyReportComment[]
 
+  @@index([projectId, createdAt])
   @@map("weekly_reports")
+}
+
+model WeeklyReportAttachment {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  reportId  String   @map("report_id") @db.Uuid
+  filePath  String   @map("file_path")
+  url       String
+  fileName  String   @map("file_name")
+  mimeType  String?  @map("mime_type")
+  sizeBytes Int?     @map("size_bytes")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  report WeeklyReport @relation(fields: [reportId], references: [id], onDelete: Cascade)
+
+  @@index([reportId, createdAt])
+  @@map("weekly_report_attachments")
+}
+
+model WeeklyReportComment {
+  id             String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  reportId       String            @map("report_id") @db.Uuid
+  parentId       String?           @map("parent_id") @db.Uuid
+  authorType     ActivityActorType @map("author_type")
+  authorUserId   String?           @map("author_user_id")
+  authorClientId String?           @map("author_client_id") @db.Uuid
+  body           Json
+  createdAt      DateTime          @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt      DateTime          @default(now()) @map("updated_at") @db.Timestamptz
+  deletedAt      DateTime?         @map("deleted_at") @db.Timestamptz
+
+  report  WeeklyReport          @relation(fields: [reportId], references: [id], onDelete: Cascade)
+  parent  WeeklyReportComment?  @relation("WeeklyReportCommentToReplies", fields: [parentId], references: [id], onDelete: Cascade)
+  replies WeeklyReportComment[] @relation("WeeklyReportCommentToReplies")
+
+  @@index([reportId, createdAt])
+  @@index([parentId])
+  @@map("weekly_report_comments")
+}
+
+model ActivityLog {
+  id            String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  projectId     String             @map("project_id") @db.Uuid
+  entityType    ActivityEntityType @map("entity_type")
+  entityId      String             @map("entity_id") @db.Uuid
+  action        ActivityAction
+  actorType     ActivityActorType  @map("actor_type")
+  actorUserId   String?            @map("actor_user_id")
+  actorClientId String?            @map("actor_client_id") @db.Uuid
+  diff          Json?              @map("diff")
+  createdAt     DateTime           @default(now()) @map("created_at") @db.Timestamptz
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@index([projectId, createdAt])
+  @@index([entityType, entityId])
+  @@map("activity_logs")
 }

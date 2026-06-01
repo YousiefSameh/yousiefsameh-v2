@@ -1,11 +1,10 @@
-// app/admin/projects/[id]/edit/page.tsx
 import { ProjectForm } from "@/components/organisms/projects/ProjectForm";
 import prisma from "@/lib/prisma";
 import { notFound } from "next/navigation";
 
 type Params = { params: Promise<{ id: string }> };
 
-export default async function EditProjectPage({ params }: Params) {
+export default async function ProjectSettingsPage({ params }: Params) {
   const { id } = await params;
 
   const [project, clients] = await Promise.all([
@@ -18,9 +17,9 @@ export default async function EditProjectPage({ params }: Params) {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold">Edit Project</h1>
-        <p className="text-muted-foreground mt-1">
-          Update your project details
+        <h2 className="text-xl font-semibold">Project settings</h2>
+        <p className="text-muted-foreground mt-1 text-sm">
+          Update project details, client assignment, and display settings.
         </p>
       </div>
       <ProjectForm project={project} clients={clients} />

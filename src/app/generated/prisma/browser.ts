@@ -83,6 +83,31 @@ export type Skill = Prisma.SkillModel
  */
 export type Task = Prisma.TaskModel
 /**
+ * Model TaskLabel
+ * 
+ */
+export type TaskLabel = Prisma.TaskLabelModel
+/**
+ * Model TaskLabelAssignment
+ * 
+ */
+export type TaskLabelAssignment = Prisma.TaskLabelAssignmentModel
+/**
+ * Model TaskComment
+ * 
+ */
+export type TaskComment = Prisma.TaskCommentModel
+/**
+ * Model TaskAttachment
+ * 
+ */
+export type TaskAttachment = Prisma.TaskAttachmentModel
+/**
+ * Model TaskSubtask
+ * 
+ */
+export type TaskSubtask = Prisma.TaskSubtaskModel
+/**
  * Model Testimonial
  * 
  */
@@ -92,3 +117,18 @@ export type Testimonial = Prisma.TestimonialModel
  * 
  */
 export type WeeklyReport = Prisma.WeeklyReportModel
+/**
+ * Model WeeklyReportAttachment
+ * 
+ */
+export type WeeklyReportAttachment = Prisma.WeeklyReportAttachmentModel
+/**
+ * Model WeeklyReportComment
+ * 
+ */
+export type WeeklyReportComment = Prisma.WeeklyReportCommentModel
+/**
+ * Model ActivityLog
+ * 
+ */
+export type ActivityLog = Prisma.ActivityLogModel
