@@ -52,7 +52,7 @@ export const KanbanColumn = forwardRef<HTMLDivElement, KanbanColumnProps>(
     return (
       <div
         className={cn(
-          "group/column flex w-72 shrink-0 flex-col rounded-xl p-2",
+          "group/column flex lg:w-64 w-full shrink-0 flex-col rounded-xl p-2",
           "border border-transparent bg-muted/40",
           "transition-colors duration-150",
           isOver && "border-primary/30 bg-primary/5",

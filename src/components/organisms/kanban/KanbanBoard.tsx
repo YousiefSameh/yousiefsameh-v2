@@ -158,8 +158,7 @@ export function KanbanBoard({
       onDragOver={onDragOver}
       onDragEnd={onDragEnd}
     >
-      {/* Horizontal scrolling column strip */}
-      <div className="flex h-full gap-3 overflow-x-auto pb-4 pr-2">
+      {/* Horizontal scrolling column strip */}      <div className="grid grid-cols-1 lg:grid-cols-5 gap-3 pb-4 pr-2">
         {KANBAN_COLUMN_ORDER.map((status) => (
           <DroppableColumn
             key={status}
