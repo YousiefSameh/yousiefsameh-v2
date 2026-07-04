@@ -61,7 +61,7 @@ export const KanbanCard = forwardRef<HTMLDivElement, KanbanCardProps>(
         className={cn(
           // Base
           "group relative flex flex-col gap-2.5 rounded-lg border",
-          "bg-card p-3 text-card-foreground shadow-sm",
+          "bg-card lg:w-56 w-full p-3 text-card-foreground shadow-sm",
           // Interaction
           "cursor-grab select-none outline-none",
           "transition-all duration-150",

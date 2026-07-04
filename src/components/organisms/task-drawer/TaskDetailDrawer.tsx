@@ -36,11 +36,11 @@ export function TaskDetailDrawer({ projectId }: TaskDetailDrawerProps) {
           </div>
         ) : task ? (
           <>
-            <TaskDetailHeader task={task} onClose={close} />
+            <TaskDetailHeader task={task} projectId={projectId} onClose={close} />
             <div className="flex flex-1 overflow-hidden">
               <TaskDetailBody task={task} />
               <div className="w-[340px] shrink-0 border-l border-border bg-muted/10 overflow-y-auto">
-                <TaskDetailSidebar task={task} />
+                <TaskDetailSidebar task={task} projectId={projectId} />
               </div>
             </div>
           </>
