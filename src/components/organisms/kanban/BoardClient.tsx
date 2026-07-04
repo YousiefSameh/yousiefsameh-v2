@@ -7,6 +7,8 @@ import { KanbanBoard } from "./KanbanBoard";
 import { KanbanToolbar } from "./KanbanToolbar";
 import { CreateTaskSheet } from "./CreateTaskSheet";
 
+import { useTaskDrawer } from "@/features/admin/tasks/drawer/hooks/useTaskDrawer";
+
 interface BoardClientProps {
   projectId: string;
   onCardClick?: (task: TaskWithMeta) => void;
@@ -14,6 +16,7 @@ interface BoardClientProps {
 
 export function BoardClient({ projectId, onCardClick }: BoardClientProps) {
   const [filterParams, setFilterParams] = useState<GetTasksParams>({});
+  const { open } = useTaskDrawer();
 
   const [sheetOpen, setSheetOpen] = useState(false);
   const [sheetStatus, setSheetStatus] = useState<TaskStatus>("BACKLOG");
@@ -37,7 +40,10 @@ export function BoardClient({ projectId, onCardClick }: BoardClientProps) {
       <KanbanBoard
         projectId={projectId}
         params={filterParams}
-        onCardClick={onCardClick}
+        onCardClick={(task) => {
+          open(task.id);
+          if (onCardClick) onCardClick(task);
+        }}
         onAddTask={handleAddTask}
       />
     </>

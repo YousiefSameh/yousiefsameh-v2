@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { BoardClient } from "@/components/organisms/kanban/BoardClient";
+import { TaskDetailDrawer } from "@/components/organisms/task-drawer/TaskDetailDrawer";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -26,6 +27,7 @@ export default async function ProjectBoardPage({ params }: Props) {
 
       <div className="flex flex-1 flex-col gap-4 overflow-hidden">
         <BoardClient projectId={id} />
+        <TaskDetailDrawer projectId={id} />
       </div>
     </div>
   );
