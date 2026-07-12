@@ -33,9 +33,6 @@ export function TaskDetailSidebar({ task, projectId }: TaskDetailSidebarProps) {
 
   const currentLabelIds = task.labels.map(({ label }) => label.id);
 
-  console.log(TYPE_OPTIONS)
-  console.log(PRIORITY_OPTIONS)
-
   return (
     <div className="p-6 space-y-6">
       <div className="space-y-5">

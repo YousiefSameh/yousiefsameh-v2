@@ -34,8 +34,6 @@ export async function GET(request: Request): Promise<APIResult<Project[]>> {
       parsed.data;
     const skip = (page - 1) * limit;
 
-    console.log("featured", featured, typeof featured);
-
     const where: Prisma.ProjectWhereInput = {
       ...(search && {
         OR: [

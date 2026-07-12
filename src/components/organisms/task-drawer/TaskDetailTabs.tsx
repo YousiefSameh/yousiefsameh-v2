@@ -9,6 +9,7 @@ import {
 } from "@/components/atoms/tabs";
 import { MessageSquare, ListTodo, Paperclip, Activity } from "lucide-react";
 import { TaskCommentThread } from "@/components/organisms/comments/TaskCommentThread";
+import { TaskAttachmentList } from "@/components/organisms/attachments/TaskAttachmentList";
 
 const TRIGGER_CLASS =
   "rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none px-4 h-full";
@@ -52,9 +53,7 @@ export function TaskDetailTabs({ task, projectId }: TaskDetailTabsProps) {
         </TabsContent>
 
         <TabsContent value="attachments" className="mt-0">
-          <div className="py-4 text-center text-sm text-muted-foreground border border-dashed border-border rounded-md">
-            Attachments tab content (placeholder)
-          </div>
+          <TaskAttachmentList projectId={projectId} taskId={task.id} />
         </TabsContent>
 
         <TabsContent value="activity" className="mt-0">

@@ -20,7 +20,13 @@ import { TechStackCard } from "@/components/organisms/projects/TechStackCard";
 import { ImagesCard } from "@/components/organisms/projects/ImagesCard";
 import { DescriptionCard } from "@/components/organisms/projects/DescriptionCard";
 import { DisplaySettingsCard } from "@/components/organisms/projects/DisplaySettingsCard";
-import { Client, Project, ProjectCategory, ProjectStatus, ProjectType } from "@/app/generated/prisma/browser";
+import {
+  Client,
+  Project,
+  ProjectCategory,
+  ProjectStatus,
+  ProjectType,
+} from "@/app/generated/prisma/browser";
 
 interface ProjectFormProps {
   project?: Project;

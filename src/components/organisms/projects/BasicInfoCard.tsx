@@ -53,10 +53,6 @@ export function BasicInfoCard({ form, clients }: BasicInfoCardProps) {
     form.setValue("slug", generateSlug(title), { shouldValidate: true });
   }
 
-  useEffect(() => {
-    console.log("BasicInfoCard perceived type:", projectType);
-  }, [projectType]);
-
   return (
     <Card>
       <CardHeader>
