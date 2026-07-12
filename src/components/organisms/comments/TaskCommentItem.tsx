@@ -74,7 +74,7 @@ export function TaskCommentItem({
 
         <div className="flex-1 min-w-0">
           {/* Header */}
-          <div className="flex items-center gap-2 mb-1">
+          <div className="flex items-center gap-2 -mb-3">
             <span className="text-sm font-medium">Admin</span>
             <span className="text-xs text-muted-foreground">
               {formatDistanceToNow(new Date(comment.createdAt), {

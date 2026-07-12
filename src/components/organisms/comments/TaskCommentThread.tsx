@@ -1,6 +1,6 @@
 "use client";
 
-import { Loader2, MessageSquare } from "lucide-react";
+import { MessageSquare } from "lucide-react";
 import { Skeleton } from "@/components/atoms/skeleton";
 import { useTaskComments } from "@/features/admin/tasks/comments/hooks";
 import { TaskCommentItem } from "./TaskCommentItem";
