@@ -41,10 +41,16 @@ export type TaskMovePayload = z.infer<typeof taskMoveSchema>;
 
 export const taskCommentCreateSchema = z.object({
   parentId: z.string().uuid().optional().nullable(),
-  body: z.string().min(1),
+  body: z.any(),
 });
 
 export type TaskCommentCreateValues = z.infer<typeof taskCommentCreateSchema>;
+
+export const taskCommentUpdateSchema = z.object({
+  body: z.any(),
+});
+
+export type TaskCommentUpdateValues = z.infer<typeof taskCommentUpdateSchema>;
 
 export const taskLabelSchema = z.object({
   projectId: z.string().uuid(),

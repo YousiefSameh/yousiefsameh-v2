@@ -8,51 +8,41 @@ import {
   TabsTrigger,
 } from "@/components/atoms/tabs";
 import { MessageSquare, ListTodo, Paperclip, Activity } from "lucide-react";
+import { TaskCommentThread } from "@/components/organisms/comments/TaskCommentThread";
+
+const TRIGGER_CLASS =
+  "rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none px-4 h-full";
 
 interface TaskDetailTabsProps {
   task: TaskWithMeta;
+  projectId: string;
 }
 
-export function TaskDetailTabs({ task }: TaskDetailTabsProps) {
+export function TaskDetailTabs({ task, projectId }: TaskDetailTabsProps) {
   return (
     <Tabs defaultValue="comments" className="w-full">
       <div className="flex flex-col gap-2 w-full">
         <TabsList className="w-full justify-start border-b border-border rounded-none bg-transparent p-0 h-10 mb-4">
-          <TabsTrigger
-            value="subtasks"
-            className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none px-4 h-full"
-          >
+          <TabsTrigger value="subtasks" className={TRIGGER_CLASS}>
             <ListTodo className="size-4 mr-2" />
             Subtasks
           </TabsTrigger>
-          <TabsTrigger
-            value="comments"
-            className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none px-4 h-full"
-          >
+          <TabsTrigger value="comments" className={TRIGGER_CLASS}>
             <MessageSquare className="size-4 mr-2" />
             Comments
           </TabsTrigger>
-
-          <TabsTrigger
-            value="attachments"
-            className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none px-4 h-full"
-          >
+          <TabsTrigger value="attachments" className={TRIGGER_CLASS}>
             <Paperclip className="size-4 mr-2" />
             Attachments
           </TabsTrigger>
-          <TabsTrigger
-            value="activity"
-            className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none px-4 h-full"
-          >
+          <TabsTrigger value="activity" className={TRIGGER_CLASS}>
             <Activity className="size-4 mr-2" />
             Activity
           </TabsTrigger>
         </TabsList>
 
         <TabsContent value="comments" className="mt-0">
-          <div className="py-4 text-center text-sm text-muted-foreground border border-dashed border-border rounded-md">
-            Comments tab content (placeholder)
-          </div>
+          <TaskCommentThread projectId={projectId} taskId={task.id} />
         </TabsContent>
 
         <TabsContent value="subtasks" className="mt-0">

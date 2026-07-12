@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { TaskComment } from "@/app/generated/prisma/client";
-import { TaskCommentCreateValues } from "@/validations/tasks.validation";
+import { TaskCommentCreateValues, TaskCommentUpdateValues } from "@/validations/tasks.validation";
 import {
   createComment,
   deleteComment,
@@ -55,7 +55,7 @@ export function useUpdateComment(projectId: string, taskId: string) {
       payload,
     }: {
       commentId: string;
-      payload: { body: string };
+      payload: TaskCommentUpdateValues;
     }) => updateComment(projectId, taskId, commentId, payload),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: commentKeys.list(projectId, taskId) });

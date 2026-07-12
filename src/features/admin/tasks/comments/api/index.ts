@@ -2,7 +2,7 @@ import axios from "axios";
 import { APIResponse } from "@/lib/types";
 import axiosErrorHandler from "@/lib/axiosErrorHandler";
 import { TaskComment } from "@/app/generated/prisma/client";
-import { TaskCommentCreateValues } from "@/validations/tasks.validation";
+import { TaskCommentCreateValues, TaskCommentUpdateValues } from "@/validations/tasks.validation";
 
 const api = (projectId: string, taskId: string) =>
   axios.create({
@@ -63,7 +63,7 @@ export async function updateComment(
   projectId: string,
   taskId: string,
   commentId: string,
-  payload: { body: string },
+  payload: TaskCommentUpdateValues,
 ): Promise<CommentResponse> {
   try {
     const { data } = await api(projectId, taskId).patch<CommentResponse>(

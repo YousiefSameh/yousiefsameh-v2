@@ -101,7 +101,7 @@ export function TaskDetailBody({ task, projectId }: TaskDetailBodyProps) {
 
           {/* Tabs */}
           <div className="pt-4">
-            <TaskDetailTabs task={task} />
+            <TaskDetailTabs task={task} projectId={projectId} />
           </div>
         </div>
       </div>
