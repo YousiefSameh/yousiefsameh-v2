@@ -13,9 +13,14 @@ import { TaskDetailTabs } from "./TaskDetailTabs";
 interface TaskDetailBodyProps {
   task: TaskWithMeta;
   projectId: string;
+  onOpenTask: (taskId: string) => void;
 }
 
-export function TaskDetailBody({ task, projectId }: TaskDetailBodyProps) {
+export function TaskDetailBody({
+  task,
+  projectId,
+  onOpenTask,
+}: TaskDetailBodyProps) {
   const [isEditing, setIsEditing] = useState(false);
 
   const descriptionRich = useInlineTaskField(projectId, task.id, "descriptionRich");
@@ -101,7 +106,11 @@ export function TaskDetailBody({ task, projectId }: TaskDetailBodyProps) {
 
           {/* Tabs */}
           <div className="pt-4">
-            <TaskDetailTabs task={task} projectId={projectId} />
+            <TaskDetailTabs
+              task={task}
+              projectId={projectId}
+              onOpenTask={onOpenTask}
+            />
           </div>
         </div>
       </div>

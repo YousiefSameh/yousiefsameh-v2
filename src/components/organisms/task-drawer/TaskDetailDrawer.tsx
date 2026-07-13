@@ -13,7 +13,7 @@ interface TaskDetailDrawerProps {
 }
 
 export function TaskDetailDrawer({ projectId }: TaskDetailDrawerProps) {
-  const { isOpen, taskId, close } = useTaskDrawer();
+  const { isOpen, taskId, close, open } = useTaskDrawer();
 
   const { data: taskResponse, isLoading, isError } = useAdminTask(projectId, taskId ?? "");
   const task = taskResponse?.data;
@@ -38,7 +38,11 @@ export function TaskDetailDrawer({ projectId }: TaskDetailDrawerProps) {
           <>
             <TaskDetailHeader task={task} projectId={projectId} onClose={close} />
             <div className="flex flex-1 overflow-hidden">
-              <TaskDetailBody task={task} projectId={projectId} />
+              <TaskDetailBody
+                task={task}
+                projectId={projectId}
+                onOpenTask={open}
+              />
               <div className="w-[340px] shrink-0 border-l border-border bg-muted/10 overflow-y-auto">
                 <TaskDetailSidebar task={task} projectId={projectId} />
               </div>

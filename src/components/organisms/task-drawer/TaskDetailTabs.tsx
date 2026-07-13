@@ -10,6 +10,7 @@ import {
 import { MessageSquare, ListTodo, Paperclip, Activity } from "lucide-react";
 import { TaskCommentThread } from "@/components/organisms/comments/TaskCommentThread";
 import { TaskAttachmentList } from "@/components/organisms/attachments/TaskAttachmentList";
+import { TaskSubtaskList } from "../subtasks/TaskSubtaskList";
 
 const TRIGGER_CLASS =
   "rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none px-4 h-full";
@@ -17,9 +18,14 @@ const TRIGGER_CLASS =
 interface TaskDetailTabsProps {
   task: TaskWithMeta;
   projectId: string;
+  onOpenTask: (taskId: string) => void;
 }
 
-export function TaskDetailTabs({ task, projectId }: TaskDetailTabsProps) {
+export function TaskDetailTabs({
+  task,
+  projectId,
+  onOpenTask,
+}: TaskDetailTabsProps) {
   return (
     <Tabs defaultValue="comments" className="w-full">
       <div className="flex flex-col gap-2 w-full">
@@ -47,9 +53,11 @@ export function TaskDetailTabs({ task, projectId }: TaskDetailTabsProps) {
         </TabsContent>
 
         <TabsContent value="subtasks" className="mt-0">
-          <div className="py-4 text-center text-sm text-muted-foreground border border-dashed border-border rounded-md">
-            Subtasks tab content (placeholder)
-          </div>
+          <TaskSubtaskList
+            projectId={projectId}
+            taskId={task.id}
+            onOpenTask={onOpenTask}
+          />
         </TabsContent>
 
         <TabsContent value="attachments" className="mt-0">
