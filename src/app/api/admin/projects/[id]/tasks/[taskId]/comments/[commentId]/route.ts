@@ -2,8 +2,12 @@ import prisma from "@/lib/prisma";
 import { requireAdmin } from "@/lib/requireAdmin";
 import { apiError, apiSuccess } from "@/lib/api";
 import { taskCommentCreateSchema } from "@/validations/tasks.validation";
+import { ActivityAction } from "@/app/generated/prisma/enums";
+import { logTaskActivity } from "@/lib/activity/logTaskActivity";
 
-type Params = { params: Promise<{ id: string; taskId: string; commentId: string }> };
+type Params = {
+  params: Promise<{ id: string; taskId: string; commentId: string }>;
+};
 
 /**
  * @summary: Update a specific comment
@@ -32,26 +36,43 @@ export async function PATCH(request: Request, { params }: Params) {
     if (!comment) return apiError("Comment not found", 404);
 
     const body = await request.json();
-    const validation = taskCommentCreateSchema.pick({ body: true }).safeParse(body);
+    const validation = taskCommentCreateSchema
+      .pick({ body: true })
+      .safeParse(body);
 
     if (!validation.success) {
       return apiError(
         validation.error.issues.map((i) => i.message).join(", "),
-        400
+        400,
       );
     }
 
-    const updatedComment = await prisma.taskComment.update({
-      where: { id: commentId },
-      data: {
-        body: validation.data.body,
-        updatedAt: new Date(),
-      },
+    const updatedComment = await prisma.$transaction(async (tx) => {
+      const updated = await tx.taskComment.update({
+        where: { id: commentId },
+        data: {
+          body: validation.data.body,
+          updatedAt: new Date(),
+        },
+      });
+
+      await logTaskActivity(tx, {
+        projectId,
+        taskId,
+        action: ActivityAction.COMMENT_UPDATED,
+        actorUserId: user.id,
+        diff: { body: { from: comment.body, to: validation.data.body } },
+      });
+
+      return updated;
     });
 
     return apiSuccess(updatedComment, "Comment updated successfully", 200);
   } catch (error) {
-    console.error("[PATCH /api/admin/projects/:id/tasks/:taskId/comments/:commentId]", error);
+    console.error(
+      "[PATCH /api/admin/projects/:id/tasks/:taskId/comments/:commentId]",
+      error,
+    );
     return apiError("Failed to update comment", 500);
   }
 }
@@ -91,7 +112,10 @@ export async function DELETE(_request: Request, { params }: Params) {
 
     return apiSuccess(true, "Comment deleted successfully", 200);
   } catch (error) {
-    console.error("[DELETE /api/admin/projects/:id/tasks/:taskId/comments/:commentId]", error);
+    console.error(
+      "[DELETE /api/admin/projects/:id/tasks/:taskId/comments/:commentId]",
+      error,
+    );
     return apiError("Failed to delete comment", 500);
   }
 }

@@ -11,6 +11,7 @@ import { MessageSquare, ListTodo, Paperclip, Activity } from "lucide-react";
 import { TaskCommentThread } from "@/components/organisms/comments/TaskCommentThread";
 import { TaskAttachmentList } from "@/components/organisms/attachments/TaskAttachmentList";
 import { TaskSubtaskList } from "../subtasks/TaskSubtaskList";
+import { TaskActivityLog } from "../activity/TaskActivityLog";
 
 const TRIGGER_CLASS =
   "rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none px-4 h-full";
@@ -65,9 +66,7 @@ export function TaskDetailTabs({
         </TabsContent>
 
         <TabsContent value="activity" className="mt-0">
-          <div className="py-4 text-center text-sm text-muted-foreground border border-dashed border-border rounded-md">
-            Activity tab content (placeholder)
-          </div>
+          <TaskActivityLog projectId={projectId} taskId={task.id} />
         </TabsContent>
       </div>
     </Tabs>

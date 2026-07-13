@@ -2,7 +2,11 @@ import prisma from "@/lib/prisma";
 import { requireAdmin } from "@/lib/requireAdmin";
 import { apiError, apiSuccess } from "@/lib/api";
 import { taskAttachmentCreateSchema } from "@/validations/tasks.validation";
-import { ActivityActorType } from "@/app/generated/prisma/enums";
+import {
+  ActivityAction,
+  ActivityActorType,
+} from "@/app/generated/prisma/enums";
+import { logTaskActivity } from "@/lib/activity/logTaskActivity";
 
 type Params = { params: Promise<{ id: string; taskId: string }> };
 
@@ -19,7 +23,6 @@ export async function GET(_req: Request, { params }: Params) {
 
     const { id: projectId, taskId } = await params;
 
-    // Verify the task belongs to this project before returning attachments
     const task = await prisma.task.findFirst({
       where: { id: taskId, projectId },
       select: { id: true },
@@ -43,8 +46,7 @@ export async function GET(_req: Request, { params }: Params) {
 
 /**
  * @summary Create an attachment record after the client has uploaded to S3.
- * The client is responsible for the S3 upload (via presigned URL from storage
- * server actions). This endpoint only persists the metadata.
+ * Emits a FILE_UPLOADED activity log entry inside the same transaction.
  * @param id - The ID of the project
  * @param taskId - The ID of the task
  * @param request - { filePath, url, fileName, mimeType?, sizeBytes? }
@@ -66,20 +68,31 @@ export async function POST(request: Request, { params }: Params) {
       );
     }
 
-    // Verify the task belongs to this project before creating attachment
     const task = await prisma.task.findFirst({
       where: { id: taskId, projectId },
       select: { id: true },
     });
     if (!task) return apiError("Task not found", 404);
 
-    const attachment = await prisma.taskAttachment.create({
-      data: {
+    const attachment = await prisma.$transaction(async (tx) => {
+      const created = await tx.taskAttachment.create({
+        data: {
+          taskId,
+          uploadedByType:   ActivityActorType.ADMIN,
+          uploadedByUserId: user.id,
+          ...validation.data,
+        },
+      });
+
+      await logTaskActivity(tx, {
+        projectId,
         taskId,
-        uploadedByType: ActivityActorType.ADMIN,
-        uploadedByUserId: user.id,
-        ...validation.data,
-      },
+        action:      ActivityAction.FILE_UPLOADED,
+        actorUserId: user.id,
+        diff:        { fileName: { from: null, to: validation.data.fileName } },
+      });
+
+      return created;
     });
 
     return apiSuccess(attachment, "Attachment created successfully", 201);

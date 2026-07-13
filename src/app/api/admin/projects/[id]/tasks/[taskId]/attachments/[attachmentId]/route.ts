@@ -2,18 +2,19 @@ import prisma from "@/lib/prisma";
 import { requireAdmin } from "@/lib/requireAdmin";
 import { apiError, apiSuccess } from "@/lib/api";
 import { deleteImage } from "@/lib/upload";
+import { ActivityAction } from "@/app/generated/prisma/enums";
+import { logTaskActivity } from "@/lib/activity/logTaskActivity";
 
 type Params = { params: Promise<{ id: string; taskId: string; attachmentId: string }> };
 
 /**
  * @summary Delete an attachment by ID.
- * Verifies the attachment belongs to the task and project before deleting.
- * The DB record is deleted first; S3 cleanup is fire-and-forget so the
- * response is never blocked by a slow S3 call.
- * @param id - The ID of the project
- * @param taskId - The ID of the task
- * @param attachmentId - The ID of the attachment
- * @returns Success status or an error message
+ * Emits a FILE_DELETED activity log entry inside the same transaction as the
+ * DB delete. S3 cleanup remains fire-and-forget after the transaction commits.
+ * @param id           - The project ID
+ * @param taskId       - The task ID
+ * @param attachmentId - The attachment ID
+ * @returns 200 on success, 404 if not found
  */
 export async function DELETE(_req: Request, { params }: Params) {
   try {
@@ -22,23 +23,30 @@ export async function DELETE(_req: Request, { params }: Params) {
 
     const { id: projectId, taskId, attachmentId } = await params;
 
-    // Verify ownership: attachment → task → project
     const attachment = await prisma.taskAttachment.findFirst({
       where: {
         id: attachmentId,
         taskId,
         task: { projectId },
       },
-      select: { id: true, filePath: true },
+      select: { id: true, filePath: true, fileName: true },
     });
     if (!attachment) return apiError("Attachment not found", 404);
 
-    // Delete DB record first — client gets a response immediately
-    await prisma.taskAttachment.delete({ where: { id: attachmentId } });
+    // Delete DB record and write activity log atomically
+    await prisma.$transaction(async (tx) => {
+      await tx.taskAttachment.delete({ where: { id: attachmentId } });
 
-    // Fire-and-forget S3 cleanup: do not await, do not block the response.
-    // If S3 deletion fails, the orphaned object is harmless and can be cleaned
-    // up via S3 lifecycle rules.
+      await logTaskActivity(tx, {
+        projectId,
+        taskId,
+        action:      ActivityAction.FILE_DELETED,
+        actorUserId: user.id,
+        diff:        { fileName: { from: attachment.fileName, to: null } },
+      });
+    });
+
+    // Fire-and-forget S3 cleanup after transaction commits
     void deleteImage(attachment.filePath).catch((err) =>
       console.error("[DELETE attachment S3 cleanup]", err),
     );

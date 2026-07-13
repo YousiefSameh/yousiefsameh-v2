@@ -2,6 +2,8 @@ import prisma from "@/lib/prisma";
 import { requireAdmin } from "@/lib/requireAdmin";
 import { apiError, apiSuccess } from "@/lib/api";
 import { taskCommentCreateSchema } from "@/validations/tasks.validation";
+import { ActivityAction, ActivityActorType } from "@/app/generated/prisma/enums";
+import { logTaskActivity } from "@/lib/activity/logTaskActivity";
 
 type Params = { params: Promise<{ id: string; taskId: string }> };
 
@@ -32,7 +34,10 @@ export async function GET(_request: Request, { params }: Params) {
 
     return apiSuccess(comments, "Comments fetched successfully", 200);
   } catch (error) {
-    console.error("[GET /api/admin/projects/:id/tasks/:taskId/comments]", error);
+    console.error(
+      "[GET /api/admin/projects/:id/tasks/:taskId/comments]",
+      error,
+    );
     return apiError("Failed to fetch comments", 500);
   }
 }
@@ -63,23 +68,38 @@ export async function POST(request: Request, { params }: Params) {
     if (!validation.success) {
       return apiError(
         validation.error.issues.map((i) => i.message).join(", "),
-        400
+        400,
       );
     }
 
-    const comment = await prisma.taskComment.create({
-      data: {
+    const comment = await prisma.$transaction(async (tx) => {
+      const created = await tx.taskComment.create({
+        data: {
+          taskId,
+          parentId: validation.data.parentId || null,
+          authorType: ActivityActorType.ADMIN,
+          authorUserId: user.id,
+          body: validation.data.body,
+        },
+      });
+
+      await logTaskActivity(tx, {
+        projectId,
         taskId,
-        parentId: validation.data.parentId || null,
-        authorType: "ADMIN",
-        authorUserId: user.id,
-        body: validation.data.body,
-      },
+        action: ActivityAction.COMMENT_ADDED,
+        actorUserId: user.id,
+        diff: { body: { from: null, to: validation.data.body } },
+      });
+
+      return created;
     });
 
     return apiSuccess(comment, "Comment created successfully", 201);
   } catch (error) {
-    console.error("[POST /api/admin/projects/:id/tasks/:taskId/comments]", error);
+    console.error(
+      "[POST /api/admin/projects/:id/tasks/:taskId/comments]",
+      error,
+    );
     return apiError("Failed to create comment", 500);
   }
 }
