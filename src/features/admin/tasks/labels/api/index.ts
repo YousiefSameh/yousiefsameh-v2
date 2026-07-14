@@ -30,9 +30,9 @@ export async function getProjectLabels(
 }
 
 /**
- * @summary Create a new label for a project
+ * @summary Create a new label
  * @param projectId - The ID of the project
- * @param payload - The label fields (name, color)
+ * @param payload   - { name, color? }
  * @returns The created label data or an error message
  */
 export async function createLabel(
@@ -50,9 +50,8 @@ export async function createLabel(
 /**
  * @summary Update a label
  * @param projectId - The ID of the project
- * @param labelId - The ID of the label
- * @param payload - The updated fields (name, color)
- * @returns The updated label data or an error message
+ * @param labelId   - The ID of the label
+ * @param payload   - Partial { name, color }
  */
 export async function updateLabel(
   projectId: string,
@@ -71,10 +70,9 @@ export async function updateLabel(
 }
 
 /**
- * @summary Delete a label
+ * @summary Delete a label (cascades to label assignments)
  * @param projectId - The ID of the project
- * @param labelId - The ID of the label
- * @returns void or an error message
+ * @param labelId   - The ID of the label
  */
 export async function deleteLabel(
   projectId: string,

@@ -8,6 +8,8 @@ import { KanbanToolbar } from "./KanbanToolbar";
 import { CreateTaskSheet } from "./CreateTaskSheet";
 
 import { useTaskDrawer } from "@/features/admin/tasks/drawer/hooks/useTaskDrawer";
+import { LabelManager } from "@/components/molecules/labels/LabelManager";
+import { Button } from "@/components/atoms/button";
 
 interface BoardClientProps {
   projectId: string;
@@ -36,6 +38,12 @@ export function BoardClient({ projectId, onCardClick }: BoardClientProps) {
           defaultStatus={sheetStatus}
           onOpenChange={setSheetOpen}
         />
+        <Button onClick={() => setSheetOpen(true)}>
+          Create Tasks
+        </Button>
+        <LabelManager projectId={projectId}>
+          <Button variant="outline">Manage Labels</Button>
+        </LabelManager>
       </div>
       <KanbanBoard
         projectId={projectId}

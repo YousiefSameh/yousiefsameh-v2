@@ -1,116 +1,120 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Plus, Loader2 } from "lucide-react";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/atoms/popover";
-import { Checkbox } from "@/components/atoms/checkbox";
+import { useState } from "react";
+import { Check, ChevronsUpDown, Tag } from "lucide-react";
+import { TaskLabel } from "@/app/generated/prisma/client";
 import { TaskLabelChip } from "@/components/atoms/TaskLabelChip";
-import { useProjectLabels } from "@/features/admin/tasks/labels/hooks";
+import { Button } from "@/components/atoms/button";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/atoms/popover";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/atoms/command";
+import { cn } from "@/lib/utils";
 
 interface LabelSelectProps {
-  projectId: string;
-  currentLabelIds: string[];
-  onLabelsChange: (labelIds: string[]) => void;
+  labels: TaskLabel[];
+  value: string[];
+  onChange: (ids: string[]) => void;
   disabled?: boolean;
 }
 
+/**
+ * Multi-select label picker backed by a Popover + Command list.
+ * Renders selected labels as `TaskLabelChip` pills above the trigger button.
+ * Toggling a label adds/removes it from the selected IDs array.
+ */
 export function LabelSelect({
-  projectId,
-  currentLabelIds,
-  onLabelsChange,
-  disabled,
+  labels,
+  value,
+  onChange,
+  disabled = false,
 }: LabelSelectProps) {
-  const { data: labelsResponse, isLoading } = useProjectLabels(projectId);
-  const labels = labelsResponse?.data ?? [];
-
   const [open, setOpen] = useState(false);
-  const [selectedIds, setSelectedIds] = useState<string[]>(currentLabelIds);
 
-  // Sync internal state when opened
-  useEffect(() => {
-    if (open) {
-      setSelectedIds(currentLabelIds);
+  const selectedLabels = labels.filter((l) => value.includes(l.id));
+
+  function toggle(labelId: string) {
+    if (value.includes(labelId)) {
+      onChange(value.filter((id) => id !== labelId));
     } else {
-      // When closing, if selectedIds differ from currentLabelIds, trigger onLabelsChange
-      const changed =
-        selectedIds.length !== currentLabelIds.length ||
-        selectedIds.some((id) => !currentLabelIds.includes(id));
-      
-      if (changed) {
-        onLabelsChange(selectedIds);
-      }
+      onChange([...value, labelId]);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open]);
-
-  // Keep in sync if currentLabelIds change externally while closed
-  useEffect(() => {
-    if (!open) {
-      setSelectedIds(currentLabelIds);
-    }
-  }, [currentLabelIds, open]);
-
-  const toggleLabel = (id: string) => {
-    setSelectedIds((prev) =>
-      prev.includes(id) ? prev.filter((l) => l !== id) : [...prev, id]
-    );
-  };
-
-  const selectedLabels = labels.filter((l) => currentLabelIds.includes(l.id));
+  }
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild disabled={disabled}>
-        <button
-          type="button"
-          className="flex flex-wrap items-center gap-1.5 min-h-[32px] p-1.5 rounded-md border border-dashed border-border hover:bg-muted/50 transition-colors text-left disabled:opacity-50 disabled:pointer-events-none"
-        >
-          {selectedLabels.length > 0 ? (
-            selectedLabels.map((label) => (
-              <TaskLabelChip key={label.id} label={label} />
-            ))
-          ) : (
-            <span className="flex items-center text-xs text-muted-foreground px-1">
-              <Plus className="size-3.5 mr-1" />
-              Add label
-            </span>
-          )}
-        </button>
-      </PopoverTrigger>
-      <PopoverContent className="w-56 p-0" align="start">
-        <div className="p-2 border-b border-border">
-          <h4 className="font-medium text-xs text-muted-foreground">Assign labels</h4>
-        </div>
-        <div className="max-h-[240px] overflow-y-auto p-1">
-          {isLoading ? (
-            <div className="flex justify-center p-4">
-              <Loader2 className="size-4 animate-spin text-muted-foreground" />
+    <div className="flex flex-col gap-2">
+      {/* Selected label chips */}
+      {selectedLabels.length > 0 && (
+        <div className="flex flex-wrap gap-1.5" role="list" aria-label="Selected labels">
+          {selectedLabels.map((label) => (
+            <div key={label.id} role="listitem">
+              <TaskLabelChip label={label} />
             </div>
-          ) : labels.length === 0 ? (
-            <p className="text-xs text-muted-foreground text-center py-4">
-              No labels found.
-            </p>
-          ) : (
-            labels.map((label) => {
-              const isChecked = selectedIds.includes(label.id);
-              return (
-                <div
-                  key={label.id}
-                  className="flex items-center space-x-2 p-1.5 rounded-md hover:bg-muted/50 cursor-pointer"
-                  onClick={() => toggleLabel(label.id)}
-                >
-                  <Checkbox
-                    checked={isChecked}
-                    onCheckedChange={() => toggleLabel(label.id)}
-                    className="pointer-events-none" // let the parent div handle the click
-                  />
-                  <TaskLabelChip label={label} />
-                </div>
-              );
-            })
-          )}
+          ))}
         </div>
-      </PopoverContent>
-    </Popover>
+      )}
+
+      {/* Picker trigger */}
+      <Popover open={open} onOpenChange={setOpen}>
+        <PopoverTrigger asChild>
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            disabled={disabled}
+            aria-label="Select labels"
+            aria-expanded={open}
+            className="w-full justify-between font-normal"
+          >
+            <span className="flex items-center gap-2 text-muted-foreground">
+              <Tag className="size-3.5" aria-hidden />
+              {selectedLabels.length > 0
+                ? `${selectedLabels.length} label${selectedLabels.length > 1 ? "s" : ""} selected`
+                : "Add labels"}
+            </span>
+            <ChevronsUpDown className="size-3.5 shrink-0 opacity-50" aria-hidden />
+          </Button>
+        </PopoverTrigger>
+
+        <PopoverContent className="w-56 p-0" align="start">
+          <Command>
+            <CommandInput placeholder="Search labels…" />
+            <CommandList>
+              <CommandEmpty>No labels found.</CommandEmpty>
+              <CommandGroup>
+                {labels.map((label) => {
+                  const isSelected = value.includes(label.id);
+                  return (
+                    <CommandItem
+                      key={label.id}
+                      value={label.name}
+                      onSelect={() => toggle(label.id)}
+                    >
+                      <Check
+                        className={cn(
+                          "mr-2 size-4 shrink-0",
+                          isSelected ? "opacity-100" : "opacity-0",
+                        )}
+                        aria-hidden
+                      />
+                      <TaskLabelChip label={label} />
+                    </CommandItem>
+                  );
+                })}
+              </CommandGroup>
+            </CommandList>
+          </Command>
+        </PopoverContent>
+      </Popover>
+    </div>
   );
 }

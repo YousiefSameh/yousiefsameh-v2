@@ -9,6 +9,7 @@ import { InlineEditSelect } from "@/components/molecules/task-drawer/InlineEditS
 import { InlineEditDate } from "@/components/molecules/task-drawer/InlineEditDate";
 import { LabelSelect } from "@/components/molecules/labels/LabelSelect";
 import { useInlineTaskField } from "@/features/admin/tasks/drawer/hooks/useInlineTaskField";
+import { useProjectLabels } from "@/features/admin/tasks/labels/hooks";
 
 const PRIORITY_OPTIONS = Object.values(TaskPriority).map((p) => ({
   value: p,
@@ -26,11 +27,14 @@ interface TaskDetailSidebarProps {
 }
 
 export function TaskDetailSidebar({ task, projectId }: TaskDetailSidebarProps) {
+  const { data: labelsData } = useProjectLabels(projectId);
+  const labels = labelsData?.data ?? [];
+
   const priority = useInlineTaskField(projectId, task.id, "priority");
   const type = useInlineTaskField(projectId, task.id, "type");
   const dueDate = useInlineTaskField(projectId, task.id, "dueDate");
   const labelIds = useInlineTaskField(projectId, task.id, "labelIds");
-
+  
   const currentLabelIds = task.labels.map(({ label }) => label.id);
 
   return (
@@ -101,10 +105,11 @@ export function TaskDetailSidebar({ task, projectId }: TaskDetailSidebarProps) {
           <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
             Labels
           </span>
-          <LabelSelect
-            projectId={projectId}
-            currentLabelIds={currentLabelIds}
-            onLabelsChange={(ids) => labelIds.updateField(ids)}
+
+          <LabelSelect 
+            labels={labels}
+            value={currentLabelIds}
+            onChange={(ids) => labelIds.updateField(ids)}
             disabled={labelIds.isPending}
           />
         </div>

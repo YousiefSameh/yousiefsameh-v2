@@ -46,12 +46,6 @@ export const taskCommentCreateSchema = z.object({
 
 export type TaskCommentCreateValues = z.infer<typeof taskCommentCreateSchema>;
 
-export const taskCommentUpdateSchema = z.object({
-  body: z.any(),
-});
-
-export type TaskCommentUpdateValues = z.infer<typeof taskCommentUpdateSchema>;
-
 export const taskLabelSchema = z.object({
   projectId: z.string().uuid(),
   name: z.string().min(1),
@@ -64,11 +58,11 @@ export const createTaskFormSchema = z.object({
   title: z.string().min(1, "Title is required").max(255),
   status: z.nativeEnum(TaskStatus),
   priority: z.nativeEnum(TaskPriority),
+  type: z.nativeEnum(TaskType),
   labelIds: z.array(z.string()),
 });
 
 export type CreateTaskFormValues = z.infer<typeof createTaskFormSchema>;
-
 export const taskAttachmentCreateSchema = z.object({
   filePath: z.string().min(1, "File path is required"),
   url: z.string().url("Must be a valid URL"),

@@ -10,29 +10,26 @@ import {
 } from "../api";
 
 export const labelKeys = {
-  all: (projectId: string) =>
-    ["admin", "projects", projectId, "labels"] as const,
-  list: (projectId: string) =>
-    [...labelKeys.all(projectId), "list"] as const,
+  all:  (projectId: string) => ["admin", "projects", projectId, "labels"] as const,
+  list: (projectId: string) => [...labelKeys.all(projectId), "list"] as const,
 };
 
 /**
  * Fetch all labels for a project.
- * Used by: LabelSelect (drawer sidebar), LabelManager (toolbar), Kanban toolbar filter
+ * 5-minute staleTime — labels are low-churn data that don't need refetching
+ * every time the drawer opens/closes or a new component mounts.
  */
 export function useProjectLabels(projectId: string) {
   return useQuery({
     queryKey: labelKeys.list(projectId),
-    queryFn: () => getProjectLabels(projectId),
-    enabled: projectId.length > 0,
+    queryFn:  () => getProjectLabels(projectId),
+    enabled:  projectId.length > 0,
     staleTime: 5 * 60 * 1000,
   });
 }
 
 /**
- * Create a new label.
- * Appends the new label to the cached list optimistically so the UI
- * reflects the addition before the server responds.
+ * Create a new label and append it to the cached list directly.
  */
 export function useCreateLabel(projectId: string) {
   const qc = useQueryClient();
@@ -48,15 +45,13 @@ export function useCreateLabel(projectId: string) {
       });
     },
     onError: () => {
-      // Full invalidation on error to ensure cache reflects server truth.
       qc.invalidateQueries({ queryKey: labelKeys.all(projectId) });
     },
   });
 }
 
 /**
- * Update an existing label (name and/or color).
- * Updates the label in-place in the cached list.
+ * Update an existing label in-place in the cached list.
  */
 export function useUpdateLabel(projectId: string) {
   const qc = useQueryClient();
@@ -89,9 +84,8 @@ export function useUpdateLabel(projectId: string) {
 }
 
 /**
- * Delete a label.
- * Optimistically removes the label from the cached list.
- * Rolls back if the server call fails.
+ * Delete a label optimistically — removes it from the cached list immediately
+ * and rolls back on error.
  */
 export function useDeleteLabel(projectId: string) {
   const qc = useQueryClient();
@@ -100,22 +94,14 @@ export function useDeleteLabel(projectId: string) {
     mutationFn: (labelId: string) => deleteLabel(projectId, labelId),
     onMutate: async (labelId) => {
       await qc.cancelQueries({ queryKey: labelKeys.list(projectId) });
-
-      const previous = qc.getQueryData<LabelsResponse>(
-        labelKeys.list(projectId),
-      );
-
+      const previous = qc.getQueryData<LabelsResponse>(labelKeys.list(projectId));
       qc.setQueryData<LabelsResponse>(labelKeys.list(projectId), (old) => {
         if (!old?.data) return old;
-        return {
-          ...old,
-          data: old.data.filter((l: TaskLabel) => l.id !== labelId),
-        };
+        return { ...old, data: old.data.filter((l: TaskLabel) => l.id !== labelId) };
       });
-
       return { previous };
     },
-    onError: (_err, _labelId, ctx) => {
+    onError: (_err, _id, ctx) => {
       if (ctx?.previous) {
         qc.setQueryData(labelKeys.list(projectId), ctx.previous);
       }

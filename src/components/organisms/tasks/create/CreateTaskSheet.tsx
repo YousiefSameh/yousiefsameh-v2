@@ -1,7 +1,11 @@
 "use client";
 
 import { useEffect } from "react";
-import { TaskStatus, TaskPriority, TaskType } from "@/app/generated/prisma/client";
+import {
+  TaskStatus,
+  TaskPriority,
+  TaskType,
+} from "@/app/generated/prisma/client";
 import { KANBAN_COLUMN_LABELS } from "@/lib/kanban/constants";
 import { useCreateTaskForm } from "@/features/admin/tasks/create/hooks/useCreateTaskForm";
 import { LabelSelect } from "@/components/molecules/labels/LabelSelect";
@@ -34,36 +38,36 @@ import { Button } from "@/components/atoms/button";
 // ─── Option lists ──────────────────────────────────────────────────────────────
 
 const STATUS_OPTIONS: { value: TaskStatus; label: string }[] = [
-  { value: "BACKLOG",     label: "Backlog" },
-  { value: "TODO",        label: "To Do" },
+  { value: "BACKLOG", label: "Backlog" },
+  { value: "TODO", label: "To Do" },
   { value: "IN_PROGRESS", label: "In Progress" },
-  { value: "REVIEW",      label: "Review" },
-  { value: "DONE",        label: "Done" },
+  { value: "REVIEW", label: "Review" },
+  { value: "DONE", label: "Done" },
 ];
 
 const PRIORITY_OPTIONS: { value: TaskPriority; label: string }[] = [
   { value: "URGENT", label: "Urgent" },
-  { value: "HIGH",   label: "High" },
+  { value: "HIGH", label: "High" },
   { value: "MEDIUM", label: "Medium" },
-  { value: "LOW",    label: "Low" },
+  { value: "LOW", label: "Low" },
 ];
 
 const TYPE_OPTIONS: { value: TaskType; label: string }[] = [
-  { value: "FEATURE",  label: "Feature" },
-  { value: "BUG",      label: "Bug" },
-  { value: "CHORE",    label: "Chore" },
+  { value: "FEATURE", label: "Feature" },
+  { value: "BUG", label: "Bug" },
+  { value: "CHORE", label: "Chore" },
   { value: "REFACTOR", label: "Refactor" },
-  { value: "MEETING",  label: "Meeting" },
-  { value: "OTHER",    label: "Other" },
+  { value: "MEETING", label: "Meeting" },
+  { value: "OTHER", label: "Other" },
 ];
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
 interface CreateTaskSheetProps {
-  projectId:     string;
-  open:          boolean;
+  projectId: string;
+  open: boolean;
   defaultStatus: TaskStatus;
-  onOpenChange:  (open: boolean) => void;
+  onOpenChange: (open: boolean) => void;
 }
 
 export function CreateTaskSheet({
@@ -81,7 +85,7 @@ export function CreateTaskSheet({
   // Reset form to the new defaultStatus whenever the sheet opens
   useEffect(() => {
     if (open) reset(defaultStatus);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open, defaultStatus]);
 
   function handleOpenChange(next: boolean) {

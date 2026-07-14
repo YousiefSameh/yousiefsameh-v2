@@ -8,34 +8,23 @@ import { TaskPriorityIcon } from "@/components/atoms/TaskPriorityIcon";
 import { TaskLabelChip } from "@/components/atoms/TaskLabelChip";
 import { TaskCountBadge } from "@/components/atoms/TaskCountBadge";
 import { cn } from "@/lib/utils";
+import { DeleteTaskDialog } from "@/components/molecules/tasks/DeleteTaskDialog";
 
 const MAX_VISIBLE_LABELS = 3;
-
 const TERMINAL_STATUSES = new Set(["REVIEW", "DONE"] as const);
 
 interface KanbanCardProps {
   task: TaskWithMeta;
+  projectId: string;
   onClick?: (task: TaskWithMeta) => void;
   isOverlay?: boolean;
   isDragging?: boolean;
   className?: string;
 }
 
-/**
- * A single task card on the Kanban board.
- *
- * Design decisions:
- * - No DnD imports. The ref is forwarded so the DnD layer (KanbanBoard,
- *   Commit 6) can attach useDraggable externally. This keeps the card
- *   pure, testable, and reusable outside the board context.
- * - `isOverlay` and `isDragging` are separate props. They map to two
- *   distinct visual states: the floating clone and the source ghost.
- *   Both can theoretically be true at the same time during a drag, but in
- *   practice isDragging is never true on the overlay instance.
- */
 export const KanbanCard = forwardRef<HTMLDivElement, KanbanCardProps>(
   (
-    { task, onClick, isOverlay = false, isDragging = false, className },
+    { task, projectId, onClick, isOverlay = false, isDragging = false, className },
     ref,
   ) => {
     const isOverdue =
@@ -77,14 +66,20 @@ export const KanbanCard = forwardRef<HTMLDivElement, KanbanCardProps>(
           className,
         )}
       >
-        {/* Row 1: Priority + Task type */}
+        {/* Row 1: Priority + Task type + Delete Button */}
         <div className="flex items-center justify-between gap-2">
           <TaskPriorityIcon priority={task.priority} showLabel />
-          {task.type && (
-            <span className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
-              {task.type.replaceAll("_", " ")}
-            </span>
+          {!isOverlay && (
+            <DeleteTaskDialog projectId={projectId} taskId={task.id} taskTitle={task.title} />
           )}
+          
+          <div className="flex items-center gap-1.5 ml-auto">
+            {task.type && (
+              <span className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
+                {task.type.replaceAll("_", " ")}
+              </span>
+            )}
+          </div>
         </div>
 
         {/* Row 2: Title */}
