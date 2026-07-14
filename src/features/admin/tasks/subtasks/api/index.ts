@@ -2,7 +2,7 @@ import axios from "axios";
 import { APIResponse } from "@/lib/types";
 import axiosErrorHandler from "@/lib/axiosErrorHandler";
 import { Task, TaskSubtask } from "@/app/generated/prisma/client";
-import { TaskSubtaskCreateValues } from "@/validations/tasks.validation";
+import { TaskSubtaskCreateValues } from "@/features/admin/tasks/validations";
 
 const api = (projectId: string, taskId: string) =>
   axios.create({
@@ -16,7 +16,6 @@ export type SubtaskWithChild = TaskSubtask & {
 
 export type SubtaskResponse = APIResponse<SubtaskWithChild>;
 export type SubtasksResponse = APIResponse<SubtaskWithChild[]>;
-
 
 /**
  * @summary Get all subtasks for a task

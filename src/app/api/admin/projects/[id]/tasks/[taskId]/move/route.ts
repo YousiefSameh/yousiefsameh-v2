@@ -1,7 +1,7 @@
 import prisma from "@/lib/prisma";
 import { requireAdmin } from "@/lib/requireAdmin";
 import { apiError, apiSuccess } from "@/lib/api";
-import { taskMoveSchema } from "@/validations/tasks.validation";
+import { taskMoveSchema } from "@/features/admin/tasks/validations";
 import { ActivityAction } from "@/app/generated/prisma/enums";
 import { logTaskActivity } from "@/lib/activity/logTaskActivity";
 

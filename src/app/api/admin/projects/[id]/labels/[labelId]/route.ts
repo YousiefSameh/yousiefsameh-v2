@@ -1,7 +1,7 @@
 import prisma from "@/lib/prisma";
 import { requireAdmin } from "@/lib/requireAdmin";
 import { apiError, apiSuccess } from "@/lib/api";
-import { labelBaseSchema } from "@/validations/labels.validation";
+import { labelBaseSchema } from "@/features/admin/tasks/validations";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 
 type Params = { params: Promise<{ id: string; labelId: string }> };

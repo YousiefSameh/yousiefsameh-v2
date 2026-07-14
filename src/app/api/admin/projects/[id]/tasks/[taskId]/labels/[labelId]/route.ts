@@ -1,7 +1,7 @@
 import prisma from "@/lib/prisma";
 import { requireAdmin } from "@/lib/requireAdmin";
 import { apiError, apiSuccess } from "@/lib/api";
-import { labelBaseSchema } from "@/validations/labels.validation";
+import { labelBaseSchema } from "@/features/admin/tasks/validations";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 
 type Params = { params: Promise<{ id: string; labelId: string }> };
@@ -45,7 +45,8 @@ export async function PATCH(request: Request, { params }: Params) {
   } catch (error) {
     if (error instanceof PrismaClientKnownRequestError) {
       if (error.code === "P2025") return apiError("Label not found", 404);
-      if (error.code === "P2002") return apiError("A label with this name already exists", 409);
+      if (error.code === "P2002")
+        return apiError("A label with this name already exists", 409);
     }
     console.error("[PATCH /api/admin/projects/:id/labels/:labelId]", error);
     return apiError("Failed to update label", 500);

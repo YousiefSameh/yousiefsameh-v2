@@ -2,7 +2,7 @@ import axios from "axios";
 import { APIResponse } from "@/lib/types";
 import axiosErrorHandler from "@/lib/axiosErrorHandler";
 import { TaskAttachment } from "@/app/generated/prisma/client";
-import { TaskAttachmentCreateValues } from "@/validations/tasks.validation";
+import { TaskAttachmentCreateValues } from "@/features/admin/tasks/validations";
 
 const api = (projectId: string, taskId: string) =>
   axios.create({

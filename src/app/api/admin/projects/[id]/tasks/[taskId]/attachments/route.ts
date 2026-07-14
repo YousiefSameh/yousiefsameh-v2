@@ -1,7 +1,7 @@
 import prisma from "@/lib/prisma";
 import { requireAdmin } from "@/lib/requireAdmin";
 import { apiError, apiSuccess } from "@/lib/api";
-import { taskAttachmentCreateSchema } from "@/validations/tasks.validation";
+import { taskAttachmentCreateSchema } from "@/features/admin/tasks/validations";
 import {
   ActivityAction,
   ActivityActorType,
@@ -78,7 +78,7 @@ export async function POST(request: Request, { params }: Params) {
       const created = await tx.taskAttachment.create({
         data: {
           taskId,
-          uploadedByType:   ActivityActorType.ADMIN,
+          uploadedByType: ActivityActorType.ADMIN,
           uploadedByUserId: user.id,
           ...validation.data,
         },
@@ -87,9 +87,9 @@ export async function POST(request: Request, { params }: Params) {
       await logTaskActivity(tx, {
         projectId,
         taskId,
-        action:      ActivityAction.FILE_UPLOADED,
+        action: ActivityAction.FILE_UPLOADED,
         actorUserId: user.id,
-        diff:        { fileName: { from: null, to: validation.data.fileName } },
+        diff: { fileName: { from: null, to: validation.data.fileName } },
       });
 
       return created;

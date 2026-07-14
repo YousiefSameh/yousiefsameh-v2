@@ -1,7 +1,7 @@
 import prisma from "@/lib/prisma";
 import { requireAdmin } from "@/lib/requireAdmin";
 import { apiError, apiSuccess } from "@/lib/api";
-import { taskSubtaskCreateSchema } from "@/validations/tasks.validation";
+import { taskSubtaskCreateSchema } from "@/features/admin/tasks/validations";
 
 type Params = { params: Promise<{ id: string; taskId: string }> };
 

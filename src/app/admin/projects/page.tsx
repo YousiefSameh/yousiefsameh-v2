@@ -12,7 +12,7 @@ import {
   SelectValue,
 } from "@/components/atoms/select";
 import { Plus, Search, X } from "lucide-react";
-import { ProjectsTable } from "@/components/organisms/projects/ProjectsTable";
+import { ProjectsTable } from "@/features/admin/projects/components";
 import { ProjectsErrorAlert } from "@/components/molecules/projects/ProjectsErrorAlert";
 import { useAdminProjects } from "@/features/admin/projects/hooks";
 import { Pagination } from "@/components/molecules/Pagination";

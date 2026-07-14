@@ -2,14 +2,14 @@
 
 import { useCallback } from "react";
 import { useUpdateTask } from "@/features/admin/tasks/hooks";
-import { TaskFormValues } from "@/validations/tasks.validation";
+import { TaskFormValues } from "@/features/admin/tasks/validations";
 
 type UpdatableTaskFields = Omit<TaskFormValues, "projectId">;
 
 export function useInlineTaskField<K extends keyof UpdatableTaskFields>(
   projectId: string,
   taskId: string,
-  field: K
+  field: K,
 ) {
   const mutation = useUpdateTask(projectId, taskId);
 
@@ -17,7 +17,7 @@ export function useInlineTaskField<K extends keyof UpdatableTaskFields>(
     (value: UpdatableTaskFields[K]) => {
       mutation.mutate({ [field]: value } as Partial<UpdatableTaskFields>);
     },
-    [mutation, field]
+    [mutation, field],
   );
 
   return {

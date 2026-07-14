@@ -2,7 +2,7 @@ import axios from "axios";
 import { APIResponse } from "@/lib/types";
 import axiosErrorHandler from "@/lib/axiosErrorHandler";
 import { TaskLabel } from "@/app/generated/prisma/client";
-import { LabelFormValues } from "@/validations/labels.validation";
+import { LabelFormValues } from "@/features/admin/tasks/validations";
 
 const api = (projectId: string) =>
   axios.create({

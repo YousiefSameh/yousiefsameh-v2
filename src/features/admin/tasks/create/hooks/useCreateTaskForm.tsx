@@ -6,12 +6,12 @@ import { useProjectLabels } from "@/features/admin/tasks/labels/hooks";
 import {
   createTaskFormSchema,
   CreateTaskFormValues,
-} from "@/validations/tasks.validation";
+} from "@/features/admin/tasks/validations";
 
 export interface UseCreateTaskFormOptions {
-  projectId:      string;
+  projectId: string;
   defaultStatus?: TaskStatus;
-  onSuccess?:     () => void;
+  onSuccess?: () => void;
 }
 
 function buildDefaults(status: TaskStatus): CreateTaskFormValues {
@@ -49,7 +49,7 @@ export function useCreateTaskForm({
   const labels = labelsData?.data ?? [];
 
   const form = useForm<CreateTaskFormValues>({
-    resolver:      zodResolver(createTaskFormSchema),
+    resolver: zodResolver(createTaskFormSchema),
     defaultValues: buildDefaults(defaultStatus),
   });
 
@@ -69,7 +69,7 @@ export function useCreateTaskForm({
 
   return {
     form,
-    onSubmit:  form.handleSubmit(handleSubmit),
+    onSubmit: form.handleSubmit(handleSubmit),
     isPending,
     labels,
     reset,

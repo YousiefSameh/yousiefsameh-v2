@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { TaskLabel } from "@/app/generated/prisma/client";
-import { LabelFormValues } from "@/validations/labels.validation";
+import { LabelFormValues } from "@/features/admin/tasks/validations";
 import {
   createLabel,
   deleteLabel,
@@ -10,7 +10,8 @@ import {
 } from "../api";
 
 export const labelKeys = {
-  all:  (projectId: string) => ["admin", "projects", projectId, "labels"] as const,
+  all: (projectId: string) =>
+    ["admin", "projects", projectId, "labels"] as const,
   list: (projectId: string) => [...labelKeys.all(projectId), "list"] as const,
 };
 
@@ -22,8 +23,8 @@ export const labelKeys = {
 export function useProjectLabels(projectId: string) {
   return useQuery({
     queryKey: labelKeys.list(projectId),
-    queryFn:  () => getProjectLabels(projectId),
-    enabled:  projectId.length > 0,
+    queryFn: () => getProjectLabels(projectId),
+    enabled: projectId.length > 0,
     staleTime: 5 * 60 * 1000,
   });
 }
@@ -94,10 +95,15 @@ export function useDeleteLabel(projectId: string) {
     mutationFn: (labelId: string) => deleteLabel(projectId, labelId),
     onMutate: async (labelId) => {
       await qc.cancelQueries({ queryKey: labelKeys.list(projectId) });
-      const previous = qc.getQueryData<LabelsResponse>(labelKeys.list(projectId));
+      const previous = qc.getQueryData<LabelsResponse>(
+        labelKeys.list(projectId),
+      );
       qc.setQueryData<LabelsResponse>(labelKeys.list(projectId), (old) => {
         if (!old?.data) return old;
-        return { ...old, data: old.data.filter((l: TaskLabel) => l.id !== labelId) };
+        return {
+          ...old,
+          data: old.data.filter((l: TaskLabel) => l.id !== labelId),
+        };
       });
       return { previous };
     },

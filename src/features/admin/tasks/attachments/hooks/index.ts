@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { TaskAttachment } from "@/app/generated/prisma/client";
-import { TaskAttachmentCreateValues } from "@/validations/tasks.validation";
+import { TaskAttachmentCreateValues } from "@/features/admin/tasks/validations";
 import {
   AttachmentsResponse,
   createAttachment,
@@ -8,12 +8,10 @@ import {
   getTaskAttachments,
 } from "../api";
 
-
 export const attachmentKeys = {
   all: (projectId: string, taskId: string) =>
     ["admin", "projects", projectId, "tasks", taskId, "attachments"] as const,
 };
-
 
 /**
  * Fetch all attachments for a task.
@@ -26,7 +24,6 @@ export function useTaskAttachments(projectId: string, taskId: string) {
     enabled: projectId.length > 0 && taskId.length > 0,
   });
 }
-
 
 /**
  * Create an attachment record.
@@ -82,9 +79,7 @@ export function useDeleteAttachment(projectId: string, taskId: string) {
           if (!old?.data) return old;
           return {
             ...old,
-            data: old.data.filter(
-              (a: TaskAttachment) => a.id !== attachmentId,
-            ),
+            data: old.data.filter((a: TaskAttachment) => a.id !== attachmentId),
           };
         },
       );
@@ -94,10 +89,7 @@ export function useDeleteAttachment(projectId: string, taskId: string) {
 
     onError: (_err, _attachmentId, ctx) => {
       if (ctx?.previous) {
-        qc.setQueryData(
-          attachmentKeys.all(projectId, taskId),
-          ctx.previous,
-        );
+        qc.setQueryData(attachmentKeys.all(projectId, taskId), ctx.previous);
       }
     },
 

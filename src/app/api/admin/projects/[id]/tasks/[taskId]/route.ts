@@ -1,7 +1,7 @@
 import prisma from "@/lib/prisma";
 import { requireAdmin } from "@/lib/requireAdmin";
 import { apiError, apiSuccess } from "@/lib/api";
-import { taskBaseSchema } from "@/validations/tasks.validation";
+import { taskBaseSchema } from "@/features/admin/tasks/validations";
 import { Prisma } from "@/app/generated/prisma/client";
 import { ActivityAction } from "@/app/generated/prisma/enums";
 import { logTaskActivity, ActivityDiff } from "@/lib/activity/logTaskActivity";
@@ -28,11 +28,11 @@ const taskInclude = {
  * back to the generic TASK_UPDATED action.
  */
 const FIELD_TO_ACTION: Partial<Record<string, ActivityAction>> = {
-  status:          ActivityAction.TASK_STATUS_CHANGED,
-  priority:        ActivityAction.TASK_PRIORITY_CHANGED,
-  type:            ActivityAction.TASK_TYPE_CHANGED,
-  assigneeId:      ActivityAction.TASK_ASSIGNEE_CHANGED,
-  dueDate:         ActivityAction.TASK_DUE_DATE_CHANGED,
+  status: ActivityAction.TASK_STATUS_CHANGED,
+  priority: ActivityAction.TASK_PRIORITY_CHANGED,
+  type: ActivityAction.TASK_TYPE_CHANGED,
+  assigneeId: ActivityAction.TASK_ASSIGNEE_CHANGED,
+  dueDate: ActivityAction.TASK_DUE_DATE_CHANGED,
   isClientVisible: ActivityAction.TASK_VISIBILITY_CHANGED,
 };
 
@@ -99,11 +99,11 @@ export async function PATCH(request: Request, { params }: Params) {
       const before = await tx.task.findFirst({
         where: { id: taskId, projectId },
         select: {
-          status:          true,
-          priority:        true,
-          type:            true,
-          assigneeId:      true,
-          dueDate:         true,
+          status: true,
+          priority: true,
+          type: true,
+          assigneeId: true,
+          dueDate: true,
           isClientVisible: true,
         },
       });
@@ -136,13 +136,27 @@ export async function PATCH(request: Request, { params }: Params) {
         const toValue = (data as Record<string, unknown>)[field];
 
         // Skip if value didn't actually change (avoids noise in the log)
-        const fromStr = fromValue instanceof Date ? fromValue.toISOString() : String(fromValue ?? "");
-        const toStr   = toValue   instanceof Date ? toValue.toISOString()   : String(toValue   ?? "");
+        const fromStr =
+          fromValue instanceof Date
+            ? fromValue.toISOString()
+            : String(fromValue ?? "");
+        const toStr =
+          toValue instanceof Date
+            ? toValue.toISOString()
+            : String(toValue ?? "");
         if (fromStr === toStr) continue;
 
-        const diff: ActivityDiff = { [field]: { from: fromValue, to: toValue } };
+        const diff: ActivityDiff = {
+          [field]: { from: fromValue, to: toValue },
+        };
         logPromises.push(
-          logTaskActivity(tx, { projectId, taskId, action: action!, actorUserId: user.id, diff }),
+          logTaskActivity(tx, {
+            projectId,
+            taskId,
+            action: action!,
+            actorUserId: user.id,
+            diff,
+          }),
         );
       }
 
@@ -170,7 +184,10 @@ export async function PATCH(request: Request, { params }: Params) {
     if (error instanceof Error && error.message === "TASK_NOT_FOUND") {
       return apiError("Task not found", 404);
     }
-    console.error("[PATCH /api/admin/projects/:projectId/tasks/:taskId]", error);
+    console.error(
+      "[PATCH /api/admin/projects/:projectId/tasks/:taskId]",
+      error,
+    );
     return apiError("Failed to update task", 500);
   }
 }
@@ -197,7 +214,10 @@ export async function DELETE(_request: Request, { params }: Params) {
     await prisma.task.delete({ where: { id: taskId } });
     return apiSuccess(true, "Task deleted successfully", 200);
   } catch (error) {
-    console.error("[DELETE /api/admin/projects/:projectId/tasks/:taskId]", error);
+    console.error(
+      "[DELETE /api/admin/projects/:projectId/tasks/:taskId]",
+      error,
+    );
     return apiError("Failed to delete task", 500);
   }
 }

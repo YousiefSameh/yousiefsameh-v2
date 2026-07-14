@@ -1,4 +1,4 @@
-import { ClientForm } from "@/components/organisms/clients/ClientForm";
+import { ClientForm } from "@/features/admin/clients/components";
 
 export default function NewClientPage() {
   return (

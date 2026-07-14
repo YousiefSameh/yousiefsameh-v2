@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { TaskStatus } from "@/app/generated/prisma/enums";
-import { TaskSubtaskCreateValues } from "@/validations/tasks.validation";
+import { TaskSubtaskCreateValues } from "@/features/admin/tasks/validations";
 import { updateTask } from "@/features/admin/tasks/api";
 import { taskKeys } from "@/features/admin/tasks/hooks";
 import {
@@ -143,7 +143,10 @@ export function useToggleSubtaskDone(projectId: string, parentTaskId: string) {
             ...old,
             data: old.data.map((s: SubtaskWithChild) =>
               s.childTaskId === childTaskId
-                ? { ...s, childTask: { ...s.childTask, status: updatedTask.status } }
+                ? {
+                    ...s,
+                    childTask: { ...s.childTask, status: updatedTask.status },
+                  }
                 : s,
             ),
           };
@@ -159,7 +162,9 @@ export function useToggleSubtaskDone(projectId: string, parentTaskId: string) {
 
     onError: () => {
       // On error revalidate the subtask list to restore the correct state
-      qc.invalidateQueries({ queryKey: subtaskKeys.all(projectId, parentTaskId) });
+      qc.invalidateQueries({
+        queryKey: subtaskKeys.all(projectId, parentTaskId),
+      });
     },
   });
 }

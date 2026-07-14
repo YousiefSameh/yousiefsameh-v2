@@ -6,14 +6,14 @@ import {
   TaskFormValues,
   TaskMovePayload,
   TaskQuery,
-} from "@/validations/tasks.validation";
+} from "@/features/admin/tasks/validations";
 
 const api = (projectId: string) => {
   return axios.create({
     baseURL: `/api/admin/projects/${projectId}/tasks`,
     headers: { "Content-Type": "application/json" },
   });
-}
+};
 
 export type TaskLabelAssignmentShape = {
   label: TaskLabel;
@@ -28,8 +28,6 @@ export type TasksResponse = APIResponse<TaskWithMeta[]>;
 export type TaskResponse = APIResponse<TaskWithMeta>;
 
 export type GetTasksParams = Partial<TaskQuery>;
-
-
 
 /**
  * @summary Get all tasks (for admin)
@@ -150,4 +148,3 @@ export async function moveTask(
     throw new Error(axiosErrorHandler(err));
   }
 }
-

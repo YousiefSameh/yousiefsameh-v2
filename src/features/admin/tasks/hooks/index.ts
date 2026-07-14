@@ -15,10 +15,14 @@ import {
   TaskResponse,
   TasksResponse,
 } from "../api";
-import { TaskFormValues, TaskMovePayload } from "@/validations/tasks.validation";
+import {
+  TaskFormValues,
+  TaskMovePayload,
+} from "@/features/admin/tasks/validations";
 
 export const taskKeys = {
-  all: (projectId: string) => ["admin", "projects", projectId, "tasks"] as const,
+  all: (projectId: string) =>
+    ["admin", "projects", projectId, "tasks"] as const,
   list: (projectId: string, p?: GetTasksParams) =>
     [...taskKeys.all(projectId), "list", p] as const,
   detail: (projectId: string, taskId: string) =>
@@ -74,7 +78,10 @@ export function useUpdateTask(projectId: string, taskId: string) {
     mutationFn: (payload: Partial<Omit<TaskFormValues, "projectId">>) =>
       updateTask(projectId, taskId, payload),
     onSuccess: (response) => {
-      qc.setQueryData<TaskResponse>(taskKeys.detail(projectId, taskId), response);
+      qc.setQueryData<TaskResponse>(
+        taskKeys.detail(projectId, taskId),
+        response,
+      );
       qc.invalidateQueries({ queryKey: taskKeys.all(projectId) });
     },
   });
@@ -103,7 +110,8 @@ export function useMoveTask(projectId: string, taskId: string) {
   const qc = useQueryClient();
 
   return useMutation({
-    mutationFn: (payload: TaskMovePayload) => moveTask(projectId, taskId, payload),
+    mutationFn: (payload: TaskMovePayload) =>
+      moveTask(projectId, taskId, payload),
     onMutate: async (payload) => {
       await qc.cancelQueries({ queryKey: taskKeys.all(projectId) });
 
@@ -140,4 +148,3 @@ export function useMoveTask(projectId: string, taskId: string) {
     },
   });
 }
-

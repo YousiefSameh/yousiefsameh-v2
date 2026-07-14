@@ -1,6 +1,9 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { TaskComment } from "@/app/generated/prisma/client";
-import { TaskCommentCreateValues, TaskCommentUpdateValues } from "@/validations/tasks.validation";
+import {
+  TaskCommentCreateValues,
+  TaskCommentUpdateValues,
+} from "@/features/admin/tasks/validations";
 import {
   createComment,
   deleteComment,
@@ -71,7 +74,8 @@ export function useDeleteComment(projectId: string, taskId: string) {
   const qc = useQueryClient();
 
   return useMutation({
-    mutationFn: (commentId: string) => deleteComment(projectId, taskId, commentId),
+    mutationFn: (commentId: string) =>
+      deleteComment(projectId, taskId, commentId),
     onMutate: async (commentId) => {
       await qc.cancelQueries({ queryKey: commentKeys.list(projectId, taskId) });
 
@@ -79,16 +83,19 @@ export function useDeleteComment(projectId: string, taskId: string) {
         commentKeys.list(projectId, taskId),
       );
 
-      qc.setQueryData<CommentsResponse>(commentKeys.list(projectId, taskId), (old) => {
-        if (!old?.data) return old;
-        // Soft-delete: update deletedAt field optimistically
-        return {
-          ...old,
-          data: old.data.map((c: TaskComment) =>
-            c.id === commentId ? { ...c, deletedAt: new Date() } : c
-          ),
-        };
-      });
+      qc.setQueryData<CommentsResponse>(
+        commentKeys.list(projectId, taskId),
+        (old) => {
+          if (!old?.data) return old;
+          // Soft-delete: update deletedAt field optimistically
+          return {
+            ...old,
+            data: old.data.map((c: TaskComment) =>
+              c.id === commentId ? { ...c, deletedAt: new Date() } : c,
+            ),
+          };
+        },
+      );
 
       return { previous };
     },

@@ -5,29 +5,35 @@ import { useState } from "react";
 import { Button } from "@/components/atoms/button";
 import { Input } from "@/components/atoms/input";
 import { Plus, Search, X } from "lucide-react";
-import { ClientsTable } from "@/components/organisms/clients/ClientsTable";
+import { ClientsTable } from "@/features/admin/clients/components";
 import { useAdminClients } from "@/features/admin/clients/hooks";
 import { Pagination } from "@/components/molecules/Pagination";
 import { useDebounce } from "@/hooks/useDebounce";
 import { ClientsErrorAlert } from "@/components/molecules/clients/ClientsErrorAlert";
 
-const COMMON_TAGS = ["vip", "high-budget", "slow-payer", "repeat-client", "lead"];
+const COMMON_TAGS = [
+  "vip",
+  "high-budget",
+  "slow-payer",
+  "repeat-client",
+  "lead",
+];
 
 export default function AdminClientsPage() {
-  const [page, setPage]   = useState(1);
+  const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
-  const [tag, setTag]     = useState<string | undefined>(undefined);
+  const [tag, setTag] = useState<string | undefined>(undefined);
 
   const debouncedSearch = useDebounce(search, 400);
 
   const { data, isPending, isError } = useAdminClients({
     page,
-    limit:  10,
+    limit: 10,
     search: debouncedSearch || undefined,
     tag,
   });
 
-  const clients    = data?.data ?? [];
+  const clients = data?.data ?? [];
   const pagination = data?.pagination;
 
   const hasActiveFilters = search || tag;
@@ -69,7 +75,9 @@ export default function AdminClientsPage() {
           <Input
             placeholder="Search by name, email, or company..."
             value={search}
-            onChange={(e) => handleFilterChange(() => setSearch(e.target.value))}
+            onChange={(e) =>
+              handleFilterChange(() => setSearch(e.target.value))
+            }
             className="pl-9"
           />
         </div>
