@@ -34,11 +34,11 @@ export default function AdminTemplate({
   if (!user) return null;
 
   return (
-    <div className="flex min-h-screen bg-secondary/30">
+    <div className="flex h-screen w-screen overflow-x-hidden bg-secondary/30">
       <AdminSidebar />
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col min-h-0 overflow-x-hidden">
         <AdminHeader user={user} />
-        <main className="flex-1 p-6 ml-0 lg:ml-64">
+        <main className="flex-1 flex flex-col min-h-0 overflow-x-hidden p-6 ml-0 lg:ml-64">
           <QueryProvider>{children}</QueryProvider>
         </main>
       </div>

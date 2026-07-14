@@ -158,7 +158,7 @@ export function KanbanBoard({
       onDragOver={onDragOver}
       onDragEnd={onDragEnd}
     >
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-3 pb-4 pr-2">
+      <div className="flex h-full w-full gap-4 overflow-x-auto pb-4 pr-2 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-border">
         {KANBAN_COLUMN_ORDER.map((status) => (
           <DroppableColumn
             key={status}
