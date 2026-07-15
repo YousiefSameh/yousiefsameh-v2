@@ -20,7 +20,7 @@ import {
 } from "@/components/atoms/select";
 import { Textarea } from "@/components/atoms/textarea";
 import { UseFormReturn } from "react-hook-form";
-import { ClientFormValues } from "@/validations/clients.validation";
+import { ClientFormValues } from "@/features/admin/clients/validations/clients.validation";
 import { PreferredContact } from "@/app/generated/prisma/enums";
 import { ClientTagsInput } from "@/components/molecules/clients/ClientTagsInput";
 

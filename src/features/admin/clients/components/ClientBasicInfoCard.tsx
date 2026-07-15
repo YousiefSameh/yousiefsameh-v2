@@ -5,7 +5,7 @@ import {
   CardTitle,
 } from "@/components/atoms/card";
 import { UseFormReturn } from "react-hook-form";
-import { ClientFormValues } from "@/validations/clients.validation";
+import { ClientFormValues } from "@/features/admin/clients/validations/clients.validation";
 import { FormInput } from "@/components/molecules/form-input";
 import {
   FormControl,

@@ -10,7 +10,7 @@ import {
 } from "@/components/atoms/form";
 import { RadioGroup, RadioGroupItem } from "@/components/atoms/radio-group";
 import { UseFormReturn } from "react-hook-form";
-import { ProjectFormValues } from "@/validations/projects.validation";
+import { ProjectFormValues } from "@/features/admin/projects/validations/projects.validation";
 
 interface ProjectTypeSelectorProps {
   form: UseFormReturn<ProjectFormValues>;

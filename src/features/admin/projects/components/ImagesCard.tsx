@@ -10,7 +10,7 @@ import {
   FormMessage,
 } from "@/components/atoms/form";
 import { UseFormReturn } from "react-hook-form";
-import { ProjectFormValues } from "@/validations/projects.validation";
+import { ProjectFormValues } from "@/features/admin/projects/validations/projects.validation";
 import { ImageUpload } from "@/components/molecules/upload-images/ImageUpload"; 
 import { MultiImageUpload } from "@/components/molecules/upload-images/MultiImageUpload";
 

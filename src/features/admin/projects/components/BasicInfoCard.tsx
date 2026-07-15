@@ -20,7 +20,7 @@ import {
   FormMessage,
 } from "@/components/atoms/form";
 import { Input } from "@/components/atoms/input";
-import { ProjectFormValues } from "@/validations/projects.validation";
+import { ProjectFormValues } from "@/features/admin/projects/validations/projects.validation";
 import { UseFormReturn, useWatch } from "react-hook-form";
 import { Button } from "@/components/atoms/button";
 import { Wand2 } from "lucide-react";

@@ -9,7 +9,7 @@ import { Loader2 } from "lucide-react";
 import {
   clientBaseSchema,
   ClientFormValues,
-} from "@/validations/clients.validation";
+} from "@/features/admin/clients/validations/clients.validation";
 import {
   useCreateClient,
   useUpdateClient,

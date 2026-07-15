@@ -9,7 +9,7 @@ import {
   FormMessage,
 } from "@/components/atoms/form";
 import { UseFormReturn } from "react-hook-form";
-import { ProjectFormValues } from "@/validations/projects.validation";
+import { ProjectFormValues } from "@/features/admin/projects/validations/projects.validation";
 import { RichTextEditor } from "@/components/molecules/rich-text-editor/Editor";
 
 interface DescriptionCardProps {

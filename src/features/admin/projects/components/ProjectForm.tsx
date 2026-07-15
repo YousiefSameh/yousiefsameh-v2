@@ -9,7 +9,7 @@ import { Loader2 } from "lucide-react";
 import {
   ProjectFormValues,
   projectSchema,
-} from "@/validations/projects.validation";
+} from "@/features/admin/projects/validations/projects.validation";
 import {
   useCreateProject,
   useUpdateProject,

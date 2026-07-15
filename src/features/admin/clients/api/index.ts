@@ -2,7 +2,10 @@
 import axios from "axios";
 import { Client } from "@/app/generated/prisma/client";
 import { APIResponse } from "@/lib/types";
-import { ClientFormValues, ClientQuery } from "@/validations/clients.validation";
+import {
+  ClientFormValues,
+  ClientQuery,
+} from "@/features/admin/clients/validations/clients.validation";
 import axiosErrorHandler from "@/lib/axiosErrorHandler";
 
 const api = axios.create({
@@ -28,7 +31,7 @@ type ClientWithProjects = Client & {
 };
 
 export type ClientsResponse = APIResponse<ClientWithCount[]>;
-export type ClientResponse  = APIResponse<ClientWithProjects>;
+export type ClientResponse = APIResponse<ClientWithProjects>;
 
 export type GetClientsParams = Partial<ClientQuery>;
 

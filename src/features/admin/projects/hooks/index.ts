@@ -14,7 +14,7 @@ import {
   ProjectResponse,
   ProjectsResponse,
 } from "../api";
-import { ProjectFormValues } from "@/validations/projects.validation";
+import { ProjectFormValues } from "@/features/admin/projects/validations/projects.validation";
 import { Project } from "@/app/generated/prisma/client";
 
 export const projectKeys = {

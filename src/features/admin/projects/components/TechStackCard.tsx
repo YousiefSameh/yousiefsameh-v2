@@ -9,7 +9,7 @@ import {
 } from "@/components/atoms/card";
 import { Input } from "@/components/atoms/input";
 import { UseFormReturn } from "react-hook-form";
-import { ProjectFormValues } from "@/validations/projects.validation";
+import { ProjectFormValues } from "@/features/admin/projects/validations/projects.validation";
 import { FormInput } from "@/components/molecules/form-input";
 
 interface TechStackCardProps {

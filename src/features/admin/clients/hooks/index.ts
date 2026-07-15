@@ -15,7 +15,7 @@ import {
   ClientResponse,
   ClientsResponse,
 } from "../api";
-import { ClientFormValues } from "@/validations/clients.validation";
+import { ClientFormValues } from "@/features/admin/clients/validations/clients.validation";
 import { Client } from "@/app/generated/prisma/client";
 
 type ClientWithCount = Client & {

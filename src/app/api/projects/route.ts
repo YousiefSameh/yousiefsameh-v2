@@ -1,7 +1,7 @@
 import prisma from "@/lib/prisma";
 import { apiSuccess, apiError } from "@/lib/api";
 import { parseQueryParams } from "@/lib/parseQueryParams";
-import { publicProjectQuerySchema } from "@/validations/projects.validation";
+import { publicProjectQuerySchema } from "@/features/admin/projects/validations/projects.validation";
 import { Prisma } from "@/app/generated/prisma/client";
 
 /**
