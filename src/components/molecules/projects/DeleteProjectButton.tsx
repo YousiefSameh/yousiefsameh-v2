@@ -50,7 +50,8 @@ export function DeleteProjectButton({ projectId }: DeleteProjectButtonProps) {
         <AlertDialogHeader>
           <AlertDialogTitle>Delete Project</AlertDialogTitle>
           <AlertDialogDescription>
-            Are you sure you want to delete this project? This action cannot be undone.
+            Are you sure you want to delete this project? This action cannot be
+            undone.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
@@ -60,7 +61,11 @@ export function DeleteProjectButton({ projectId }: DeleteProjectButtonProps) {
             className="bg-destructive hover:bg-destructive/90"
             disabled={isPending}
           >
-            {isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : "Delete"}
+            {isPending ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              "Delete"
+            )}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

@@ -16,7 +16,7 @@ import {
   SelectValue,
 } from "@/components/atoms/select";
 import { UseFormReturn } from "react-hook-form";
-import { ProjectFormValues } from "@/validations/projects.validation";
+import { ProjectFormValues } from "@/features/admin/projects/validations/projects.validation";
 
 interface ClientSelectorProps {
   form: UseFormReturn<ProjectFormValues>;

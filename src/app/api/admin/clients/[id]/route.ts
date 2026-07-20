@@ -1,7 +1,7 @@
 // src/app/api/admin/clients/[id]/route.ts
 import prisma from "@/lib/prisma";
 import { requireAdmin } from "@/lib/requireAdmin";
-import { clientBaseSchema } from "@/validations/clients.validation";
+import { clientBaseSchema } from "@/features/admin/clients/validations/clients.validation";
 import { apiSuccess, apiError } from "@/lib/api";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 import crypto from "crypto";

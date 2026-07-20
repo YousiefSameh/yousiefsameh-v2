@@ -1,4 +1,4 @@
-import { ClientForm } from "@/components/organisms/clients/ClientForm";
+import { ClientForm } from "@/features/admin/clients/components";
 import prisma from "@/lib/prisma";
 import { notFound } from "next/navigation";
 

@@ -1,15 +1,18 @@
 import prisma from "@/lib/prisma";
 import { requireAdmin } from "@/lib/requireAdmin";
 import { apiError, apiSuccess } from "@/lib/api";
-import { taskMoveSchema } from "@/validations/tasks.validation";
+import { taskMoveSchema } from "@/features/admin/tasks/validations";
+import { ActivityAction } from "@/app/generated/prisma/enums";
+import { logTaskActivity } from "@/lib/activity/logTaskActivity";
 
 type Params = { params: Promise<{ id: string; taskId: string }> };
 
 /**
- * @summary: Move a task
+ * @summary: Move a task to a new status column and reorder tasks within it.
+ * Emits a TASK_MOVED activity log entry recording the before/after status.
  * @param: id - The ID of the project
- * @param: taskId - The ID of the task
- * @param: request - the payload for the move
+ * @param: taskId - The ID of the task being moved
+ * @param: request - { status, orderedTaskIds }
  * @returns: A success status or error message
  */
 export async function POST(request: Request, { params }: Params) {
@@ -36,7 +39,7 @@ export async function POST(request: Request, { params }: Params) {
     await prisma.$transaction(async (tx) => {
       const existing = await tx.task.findFirst({
         where: { id: taskId, projectId },
-        select: { id: true },
+        select: { id: true, status: true },
       });
       if (!existing) throw new Error("TASK_NOT_FOUND");
 
@@ -48,6 +51,18 @@ export async function POST(request: Request, { params }: Params) {
           }),
         ),
       );
+
+      // Only log if the status actually changed (reordering within same column
+      // should not produce a TASK_MOVED entry)
+      if (existing.status !== status) {
+        await logTaskActivity(tx, {
+          projectId,
+          taskId,
+          action: ActivityAction.TASK_MOVED,
+          actorUserId: user.id,
+          diff: { status: { from: existing.status, to: status } },
+        });
+      }
     });
 
     return apiSuccess(true, "Task moved successfully", 200);

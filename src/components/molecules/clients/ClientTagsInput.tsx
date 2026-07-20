@@ -11,7 +11,7 @@ import {
   FormMessage,
 } from "@/components/atoms/form";
 import { UseFormReturn } from "react-hook-form";
-import { ClientFormValues } from "@/validations/clients.validation";
+import { ClientFormValues } from "@/features/admin/clients/validations/clients.validation";
 
 const SUGGESTED_TAGS = [
   "vip",

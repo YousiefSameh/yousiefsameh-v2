@@ -1,4 +1,4 @@
-import { ProjectForm } from "@/components/organisms/projects/ProjectForm";
+import { ProjectForm } from "@/features/admin/projects/components";
 import prisma from "@/lib/prisma";
 import { notFound } from "next/navigation";
 

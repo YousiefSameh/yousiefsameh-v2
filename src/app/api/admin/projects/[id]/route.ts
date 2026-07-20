@@ -2,7 +2,7 @@ import prisma from "@/lib/prisma";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 import { requireAdmin } from "@/lib/requireAdmin";
 import { apiError, apiSuccess } from "@/lib/api";
-import { projectBaseSchema } from "@/validations/projects.validation";
+import { projectBaseSchema } from "@/features/admin/projects/validations/projects.validation";
 
 type Params = { params: Promise<{ id: string }> };
 

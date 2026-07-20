@@ -1,7 +1,10 @@
 import axios from "axios";
 import { Project } from "@/app/generated/prisma/client";
 import { APIResponse } from "@/lib/types";
-import { ProjectFormValues, ProjectQuery } from "@/validations/projects.validation";
+import {
+  ProjectFormValues,
+  ProjectQuery,
+} from "@/features/admin/projects/validations/projects.validation";
 import axiosErrorHandler from "@/lib/axiosErrorHandler";
 
 const api = axios.create({

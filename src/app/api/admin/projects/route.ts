@@ -1,12 +1,12 @@
 import prisma from "@/lib/prisma";
 import { Prisma, Project } from "@/app/generated/prisma/client";
 import { requireAdmin } from "@/lib/requireAdmin";
-import { projectBaseSchema } from "@/validations/projects.validation";
+import { projectBaseSchema } from "@/features/admin/projects/validations/projects.validation";
 import { APIResult } from "@/lib/types";
 import { apiSuccess, apiError } from "@/lib/api";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/client";
 import { parseQueryParams } from "@/lib/parseQueryParams";
-import { projectQuerySchema } from "@/validations/projects.validation";
+import { projectQuerySchema } from "@/features/admin/projects/validations/projects.validation";
 
 /**
  * @summary Get all projects (for admin)
@@ -34,14 +34,12 @@ export async function GET(request: Request): Promise<APIResult<Project[]>> {
       parsed.data;
     const skip = (page - 1) * limit;
 
-    console.log("featured", featured, typeof featured);
-
     const where: Prisma.ProjectWhereInput = {
       ...(search && {
         OR: [
-          { title:            { contains: search, mode: "insensitive" } },
+          { title: { contains: search, mode: "insensitive" } },
           { shortDescription: { contains: search, mode: "insensitive" } },
-          { slug:             { contains: search, mode: "insensitive" } },
+          { slug: { contains: search, mode: "insensitive" } },
         ],
       }),
       ...(featured !== undefined && { isFeatured: featured }),

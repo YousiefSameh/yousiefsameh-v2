@@ -4,7 +4,7 @@ import { requireAdmin } from "@/lib/requireAdmin";
 import {
   clientBaseSchema,
   clientQuerySchema,
-} from "@/validations/clients.validation";
+} from "@/features/admin/clients/validations/clients.validation";
 import { APIResult } from "@/lib/types";
 import { apiSuccess, apiError } from "@/lib/api";
 import { parseQueryParams } from "@/lib/parseQueryParams";

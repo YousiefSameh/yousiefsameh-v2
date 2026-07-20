@@ -12,59 +12,66 @@ import {
   SelectValue,
 } from "@/components/atoms/select";
 import { Plus, Search, X } from "lucide-react";
-import { ProjectsTable } from "@/components/organisms/projects/ProjectsTable";
+import { ProjectsTable } from "@/features/admin/projects/components";
 import { ProjectsErrorAlert } from "@/components/molecules/projects/ProjectsErrorAlert";
 import { useAdminProjects } from "@/features/admin/projects/hooks";
 import { Pagination } from "@/components/molecules/Pagination";
-import { ProjectCategory, ProjectStatus, ProjectType } from "@/app/generated/prisma/enums";
+import {
+  ProjectCategory,
+  ProjectStatus,
+  ProjectType,
+} from "@/app/generated/prisma/enums";
 import { useDebounce } from "@/hooks/useDebounce";
 
 const categoryLabels: Record<ProjectCategory, string> = {
-  WEB_APP:      "Web App",
-  SAAS:         "SaaS",
-  MOBILE:       "Mobile",
+  WEB_APP: "Web App",
+  SAAS: "SaaS",
+  MOBILE: "Mobile",
   LANDING_PAGE: "Landing Page",
-  E_COMMERCE:   "E-commerce",
-  OTHER:        "Other",
+  E_COMMERCE: "E-commerce",
+  OTHER: "Other",
 };
 
 const statusLabels: Record<ProjectStatus, string> = {
-  COMPLETED:         "Completed",
-  IN_PROGRESS:       "In Progress",
+  COMPLETED: "Completed",
+  IN_PROGRESS: "In Progress",
   UNDER_DEVELOPMENT: "Under Development",
 };
 
 const typeLabels: Record<ProjectType, string> = {
   PORTFOLIO: "Portfolio",
-  CLIENT:    "Client",
+  CLIENT: "Client",
 };
 
 export default function AdminProjectsPage() {
-  const [page, setPage]         = useState(1);
-  const [search, setSearch]     = useState("");
+  const [page, setPage] = useState(1);
+  const [search, setSearch] = useState("");
   const [category, setCategory] = useState<ProjectCategory | "ALL">("ALL");
-  const [status, setStatus]     = useState<ProjectStatus | "ALL">("ALL");
-  const [type, setType]         = useState<ProjectType | "ALL">("ALL");
+  const [status, setStatus] = useState<ProjectStatus | "ALL">("ALL");
+  const [type, setType] = useState<ProjectType | "ALL">("ALL");
   const [featured, setFeatured] = useState<"ALL" | "true" | "false">("ALL");
 
   const debouncedSearch = useDebounce(search, 400);
 
   const { data, isPending, isError } = useAdminProjects({
     page,
-    limit:    10,
-    search:   debouncedSearch || undefined,
+    limit: 10,
+    search: debouncedSearch || undefined,
     category: category === "ALL" ? undefined : category,
-    status:   status   === "ALL" ? undefined : status,
-    type:     type     === "ALL" ? undefined : type,
+    status: status === "ALL" ? undefined : status,
+    type: type === "ALL" ? undefined : type,
     featured: featured === "ALL" ? undefined : featured === "true",
   });
 
-  const projects  = data?.data ?? [];
+  const projects = data?.data ?? [];
   const pagination = data?.pagination;
 
   const hasActiveFilters =
-    search || category !== "ALL" || status !== "ALL" ||
-    type !== "ALL" || featured !== "ALL";
+    search ||
+    category !== "ALL" ||
+    status !== "ALL" ||
+    type !== "ALL" ||
+    featured !== "ALL";
 
   function resetFilters() {
     setSearch("");
@@ -106,7 +113,9 @@ export default function AdminProjectsPage() {
           <Input
             placeholder="Search projects..."
             value={search}
-            onChange={(e) => handleFilterChange(() => setSearch(e.target.value))}
+            onChange={(e) =>
+              handleFilterChange(() => setSearch(e.target.value))
+            }
             className="pl-9"
           />
         </div>
@@ -124,7 +133,9 @@ export default function AdminProjectsPage() {
           <SelectContent>
             <SelectItem value="ALL">All Categories</SelectItem>
             {Object.entries(categoryLabels).map(([value, label]) => (
-              <SelectItem key={value} value={value}>{label}</SelectItem>
+              <SelectItem key={value} value={value}>
+                {label}
+              </SelectItem>
             ))}
           </SelectContent>
         </Select>
@@ -142,7 +153,9 @@ export default function AdminProjectsPage() {
           <SelectContent>
             <SelectItem value="ALL">All Statuses</SelectItem>
             {Object.entries(statusLabels).map(([value, label]) => (
-              <SelectItem key={value} value={value}>{label}</SelectItem>
+              <SelectItem key={value} value={value}>
+                {label}
+              </SelectItem>
             ))}
           </SelectContent>
         </Select>
@@ -160,7 +173,9 @@ export default function AdminProjectsPage() {
           <SelectContent>
             <SelectItem value="ALL">All Types</SelectItem>
             {Object.entries(typeLabels).map(([value, label]) => (
-              <SelectItem key={value} value={value}>{label}</SelectItem>
+              <SelectItem key={value} value={value}>
+                {label}
+              </SelectItem>
             ))}
           </SelectContent>
         </Select>
@@ -184,7 +199,12 @@ export default function AdminProjectsPage() {
 
         {/* Reset */}
         {hasActiveFilters && (
-          <Button variant="destructive" size="default" onClick={resetFilters} className="gap-2">
+          <Button
+            variant="destructive"
+            size="default"
+            onClick={resetFilters}
+            className="gap-2"
+          >
             <X className="h-4 w-4" />
             Reset
           </Button>

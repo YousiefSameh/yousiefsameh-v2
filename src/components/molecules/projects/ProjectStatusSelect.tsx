@@ -16,11 +16,11 @@ import {
   SelectValue,
 } from "@/components/atoms/select";
 import { UseFormReturn } from "react-hook-form";
-import { ProjectFormValues } from "@/validations/projects.validation";
+import { ProjectFormValues } from "@/features/admin/projects/validations/projects.validation";
 
 const statusLabels: Record<ProjectStatus, string> = {
-  COMPLETED:         "Completed",
-  IN_PROGRESS:       "In Progress",
+  COMPLETED: "Completed",
+  IN_PROGRESS: "In Progress",
   UNDER_DEVELOPMENT: "Under Development",
 };
 

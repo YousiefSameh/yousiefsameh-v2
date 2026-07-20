@@ -5,7 +5,7 @@ import { parseQueryParams } from "@/lib/parseQueryParams";
 import {
   taskBaseSchema,
   taskQuerySchema,
-} from "@/validations/tasks.validation";
+} from "@/features/admin/tasks/validations";
 import { Prisma } from "@/app/generated/prisma/client";
 
 type Params = { params: Promise<{ id: string }> };
@@ -62,7 +62,11 @@ export async function GET(request: Request, { params }: Params) {
     const tasks = await prisma.task.findMany({
       where,
       include: taskInclude,
-      orderBy: [{ status: "asc" }, { displayOrder: "asc" }, { createdAt: "asc" }],
+      orderBy: [
+        { status: "asc" },
+        { displayOrder: "asc" },
+        { createdAt: "asc" },
+      ],
     });
 
     return apiSuccess(tasks, "Tasks fetched successfully", 200);

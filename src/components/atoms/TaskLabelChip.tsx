@@ -42,8 +42,8 @@ export function TaskLabelChip({ label, className }: TaskLabelChipProps) {
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-full px-2 py-0.5",
-        "text-[10px] font-medium leading-none whitespace-nowrap",
+        "inline-flex items-center rounded-full px-3 py-1",
+        "text-[12px] font-medium leading-none whitespace-nowrap",
         !hasColor && "text-muted-foreground",
         className,
       )}
