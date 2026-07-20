@@ -45,6 +45,7 @@ export function Menubar({ editor }: MenubarProps) {
                 onPressedChange={() =>
                   editor.chain().focus().toggleBold().run()
                 }
+                onMouseDown={(e) => e.preventDefault()}
                 className={cn(
                   editor.isActive("bold") && "bg-muted text-muted-foreground"
                 )}
@@ -63,6 +64,7 @@ export function Menubar({ editor }: MenubarProps) {
                 onPressedChange={() =>
                   editor.chain().focus().toggleItalic().run()
                 }
+                onMouseDown={(e) => e.preventDefault()}
                 className={cn(
                   editor.isActive("italic") && "bg-muted text-muted-foreground"
                 )}
@@ -81,6 +83,7 @@ export function Menubar({ editor }: MenubarProps) {
                 onPressedChange={() =>
                   editor.chain().focus().toggleStrike().run()
                 }
+                onMouseDown={(e) => e.preventDefault()}
                 className={cn(
                   editor.isActive("strike") && "bg-muted text-muted-foreground"
                 )}
@@ -99,6 +102,7 @@ export function Menubar({ editor }: MenubarProps) {
                 onPressedChange={() =>
                   editor.chain().focus().toggleHeading({ level: 1 }).run()
                 }
+                onMouseDown={(e) => e.preventDefault()}
                 className={cn(
                   editor.isActive("heading", { level: 1 }) &&
                     "bg-muted text-muted-foreground"
@@ -118,6 +122,7 @@ export function Menubar({ editor }: MenubarProps) {
                 onPressedChange={() =>
                   editor.chain().focus().toggleHeading({ level: 2 }).run()
                 }
+                onMouseDown={(e) => e.preventDefault()}
                 className={cn(
                   editor.isActive("heading", { level: 2 }) &&
                     "bg-muted text-muted-foreground"
@@ -137,6 +142,7 @@ export function Menubar({ editor }: MenubarProps) {
                 onPressedChange={() =>
                   editor.chain().focus().toggleHeading({ level: 3 }).run()
                 }
+                onMouseDown={(e) => e.preventDefault()}
                 className={cn(
                   editor.isActive("heading", { level: 3 }) &&
                     "bg-muted text-muted-foreground"
@@ -156,6 +162,7 @@ export function Menubar({ editor }: MenubarProps) {
                 onPressedChange={() =>
                   editor.chain().focus().toggleBulletList().run()
                 }
+                onMouseDown={(e) => e.preventDefault()}
                 className={cn(
                   editor.isActive("bulletList") &&
                     "bg-muted text-muted-foreground"
@@ -175,6 +182,7 @@ export function Menubar({ editor }: MenubarProps) {
                 onPressedChange={() =>
                   editor.chain().focus().toggleOrderedList().run()
                 }
+                onMouseDown={(e) => e.preventDefault()}
                 className={cn(
                   editor.isActive("orderedList") &&
                     "bg-muted text-muted-foreground"
@@ -198,6 +206,7 @@ export function Menubar({ editor }: MenubarProps) {
                 onPressedChange={() =>
                   editor.chain().focus().setTextAlign("left").run()
                 }
+                onMouseDown={(e) => e.preventDefault()}
                 className={cn(
                   editor.isActive({ textAlign: "left" }) &&
                     "bg-muted text-muted-foreground"
@@ -217,6 +226,7 @@ export function Menubar({ editor }: MenubarProps) {
                 onPressedChange={() =>
                   editor.chain().focus().setTextAlign("center").run()
                 }
+                onMouseDown={(e) => e.preventDefault()}
                 className={cn(
                   editor.isActive({ textAlign: "center" }) &&
                     "bg-muted text-muted-foreground"
@@ -236,6 +246,7 @@ export function Menubar({ editor }: MenubarProps) {
                 onPressedChange={() =>
                   editor.chain().focus().setTextAlign("right").run()
                 }
+                onMouseDown={(e) => e.preventDefault()}
                 className={cn(
                   editor.isActive({ textAlign: "right" }) &&
                     "bg-muted text-muted-foreground"
@@ -255,6 +266,7 @@ export function Menubar({ editor }: MenubarProps) {
                 onPressedChange={() =>
                   editor.chain().focus().setTextAlign("justify").run()
                 }
+                onMouseDown={(e) => e.preventDefault()}
                 className={cn(
                   editor.isActive({ textAlign: "justify" }) &&
                     "bg-muted text-muted-foreground"
@@ -277,6 +289,7 @@ export function Menubar({ editor }: MenubarProps) {
                 variant="ghost"
                 type="button"
                 onClick={() => editor.chain().focus().undo().run()}
+                onMouseDown={(e) => e.preventDefault()}
                 disabled={!editor.can().undo()}
               >
                 <Undo />
@@ -292,6 +305,7 @@ export function Menubar({ editor }: MenubarProps) {
                 variant="ghost"
                 type="button"
                 onClick={() => editor.chain().focus().redo().run()}
+                onMouseDown={(e) => e.preventDefault()}
                 disabled={!editor.can().redo()}
               >
                 <Redo />

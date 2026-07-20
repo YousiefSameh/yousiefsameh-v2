@@ -18,3 +18,7 @@ export const reportQuerySchema = z.object({
 
 export type ReportQuery = z.infer<typeof reportQuerySchema>;
 
+export const createReportSchema = z.object({
+  title: z.string().min(2, "Title must be at least 2 characters").max(255),
+});
+export type CreateReportValues = z.infer<typeof createReportSchema>;
