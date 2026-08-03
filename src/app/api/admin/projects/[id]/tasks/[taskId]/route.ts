@@ -211,7 +211,18 @@ export async function DELETE(_request: Request, { params }: Params) {
     });
     if (!existing) return apiError("Task not found", 404);
 
-    await prisma.task.delete({ where: { id: taskId } });
+    await prisma.$transaction(async (tx) => {
+      // Log deletion event before actually deleting
+      await logTaskActivity(tx, {
+        projectId,
+        taskId,
+        action: ActivityAction.TASK_DELETED,
+        actorUserId: user.id,
+      });
+
+      // Now delete the task
+      await tx.task.delete({ where: { id: taskId } });
+    });
     return apiSuccess(true, "Task deleted successfully", 200);
   } catch (error) {
     console.error(

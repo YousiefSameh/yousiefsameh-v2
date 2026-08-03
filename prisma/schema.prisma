@@ -125,6 +125,7 @@ enum ActivityAction {
   TASK_LABELS_CHANGED     @map("task_labels_changed")
   TASK_VISIBILITY_CHANGED @map("task_visibility_changed")
   TASK_MOVED              @map("task_moved")
+  TASK_DELETED            @map("task_deleted")
 
   COMMENT_ADDED   @map("comment_added")
   COMMENT_UPDATED @map("comment_updated")
@@ -136,6 +137,7 @@ enum ActivityAction {
   REPORT_CREATED   @map("report_created")
   REPORT_UPDATED   @map("report_updated")
   REPORT_PUBLISHED @map("report_published")
+  REPORT_DELETED   @map("report_deleted")
 }
 
 // -----------------------------------------------------------------------------

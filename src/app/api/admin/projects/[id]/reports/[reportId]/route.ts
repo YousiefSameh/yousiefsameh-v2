@@ -9,6 +9,7 @@ import {
   ActivityActorType,
 } from "@/app/generated/prisma/enums";
 import { buildActivityCreateData } from "@/lib/activity/log";
+import { logReportActivity } from "@/lib/activity/logReportActivity";
 
 type Params = { params: Promise<{ id: string; reportId: string }> };
 
@@ -126,7 +127,18 @@ export async function DELETE(_req: Request, { params }: Params) {
     });
     if (!existing) return apiError("Report not found", 404);
 
-    await prisma.weeklyReport.delete({ where: { id: reportId } });
+    await prisma.$transaction(async (tx) => {
+      // Log deletion event before actually deleting
+      await logReportActivity(tx, {
+        projectId,
+        reportId,
+        action: ActivityAction.REPORT_DELETED,
+        actorUserId: user.id,
+      });
+
+      // Now delete the report
+      await tx.weeklyReport.delete({ where: { id: reportId } });
+    });
 
     return apiSuccess(null, "Report deleted successfully", 200);
   } catch (error) {
