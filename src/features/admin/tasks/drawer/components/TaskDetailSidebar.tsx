@@ -9,6 +9,8 @@ import { InlineEditDate } from "@/components/molecules/InlineEditDate";
 import { LabelSelect } from "@/features/admin/tasks/labels/components";
 import { useInlineTaskField } from "@/features/admin/tasks/drawer/hooks/useInlineTaskField";
 import { useProjectLabels } from "@/features/admin/tasks/labels/hooks";
+import { DeleteTaskDialog } from "../../components";
+import { useTaskDrawer } from "../hooks/useTaskDrawer";
 
 const PRIORITY_OPTIONS = Object.values(TaskPriority).map((p) => ({
   value: p,
@@ -28,6 +30,7 @@ interface TaskDetailSidebarProps {
 export function TaskDetailSidebar({ task, projectId }: TaskDetailSidebarProps) {
   const { data: labelsData } = useProjectLabels(projectId);
   const labels = labelsData?.data ?? [];
+  const { close } = useTaskDrawer();
 
   const priority = useInlineTaskField(projectId, task.id, "priority");
   const type = useInlineTaskField(projectId, task.id, "type");
@@ -113,6 +116,19 @@ export function TaskDetailSidebar({ task, projectId }: TaskDetailSidebarProps) {
             value={currentLabelIds}
             onChange={(ids) => labelIds.updateField(ids)}
             disabled={labelIds.isPending}
+          />
+        </div>
+        <div className="flex flex-col gap-1.5">
+          <span className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+            Delete
+          </span>
+
+          <DeleteTaskDialog
+            projectId={projectId}
+            taskId={task.id}
+            taskTitle={task.title}
+            showText={true}
+            onDeleted={close}
           />
         </div>
       </div>

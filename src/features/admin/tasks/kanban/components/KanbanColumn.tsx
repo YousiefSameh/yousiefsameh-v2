@@ -46,8 +46,7 @@ export const KanbanColumn = forwardRef<HTMLDivElement, KanbanColumnProps>(
       onAddTask,
       onCardClick,
       renderCard,
-      className,
-      projectId
+      className
     },
     ref,
   ) => {
@@ -101,7 +100,7 @@ export const KanbanColumn = forwardRef<HTMLDivElement, KanbanColumnProps>(
           ) : (
             // Default static renderer
             tasks.map((task) => (
-              <KanbanCard projectId={projectId} key={task.id} task={task} onClick={onCardClick} />
+              <KanbanCard key={task.id} task={task} onClick={onCardClick} />
             ))
           )}
         </div>
