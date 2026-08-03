@@ -19,17 +19,24 @@ import {
 interface DeleteReportButtonProps {
   projectId: string;
   reportId:  string;
+  onDeleted?: () => void;
+  fullWidth?: boolean;
 }
 
 export function DeleteReportButton({
   projectId,
   reportId,
+  onDeleted,
+  fullWidth = false,
 }: DeleteReportButtonProps) {
   const { mutate: deleteReport, isPending } = useDeleteReport(projectId);
 
   function handleDelete() {
     deleteReport(reportId, {
-      onSuccess: () => toast.success("Report deleted"),
+      onSuccess: () => {
+        toast.success("Report deleted");
+        onDeleted?.();
+      },
       onError:   (err) => toast.error(err.message),
     });
   }
@@ -38,15 +45,21 @@ export function DeleteReportButton({
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button
-          variant="ghost"
-          size="icon"
-          className="text-destructive hover:text-destructive"
+          variant={fullWidth ? "destructive" : "ghost"}
+          size={fullWidth ? "default" : "icon"}
+          className={fullWidth ? "w-full gap-2" : "text-destructive hover:text-destructive"}
           disabled={isPending}
         >
           {isPending ? (
-            <Loader2 className="h-4 w-4 animate-spin" />
+            <>
+              <Loader2 className="h-4 w-4 animate-spin" />
+              {fullWidth && <span className="hidden lg:inline">Deleting...</span>}
+            </>
           ) : (
-            <Trash2 className="h-4 w-4" />
+            <>
+              <Trash2 className="h-4 w-4" />
+              {fullWidth && <span className="hidden lg:inline">Delete Report</span>}
+            </>
           )}
         </Button>
       </AlertDialogTrigger>

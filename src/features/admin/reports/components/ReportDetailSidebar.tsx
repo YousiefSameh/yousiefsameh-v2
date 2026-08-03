@@ -1,14 +1,15 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { formatDistanceToNow, format } from "date-fns";
-import { Globe, EyeOff, Loader2, Trash } from "lucide-react";
+import { Globe, EyeOff, Loader2 } from "lucide-react";
 import { ReportWithMeta } from "@/features/admin/reports/api";
 import { usePublishReport } from "@/features/admin/reports/hooks";
 import { ReportStatusBadge } from "@/features/admin/reports/components/ReportStatusBadge";
+import { DeleteReportButton } from "@/features/admin/reports/components/DeleteReportButton";
 import { Button } from "@/components/atoms/button";
 import { Separator } from "@/components/atoms/separator";
 import { toast } from "sonner";
-import Link from "next/link";
 
 interface ReportDetailSidebarProps {
   report: ReportWithMeta;
@@ -19,6 +20,7 @@ export function ReportDetailSidebar({
   report,
   projectId,
 }: ReportDetailSidebarProps) {
+  const router = useRouter();
   const { mutate: togglePublish, isPending: isPublishing } = usePublishReport(
     projectId,
     report.id,
@@ -109,17 +111,14 @@ export function ReportDetailSidebar({
 
       <Separator />
 
-      <Button
-        asChild
-        variant="destructive"
-        size="default"
-        className="w-full gap-2"
-      >
-        <Link href={`/admin/projects/${projectId}/reports`}>
-          <Trash className="size-4" />
-          Delete
-        </Link>
-      </Button>
+      <DeleteReportButton
+        projectId={projectId}
+        reportId={report.id}
+        fullWidth
+        onDeleted={() =>
+          router.push(`/admin/projects/${projectId}/reports`)
+        }
+      />
     </div>
   );
 }
