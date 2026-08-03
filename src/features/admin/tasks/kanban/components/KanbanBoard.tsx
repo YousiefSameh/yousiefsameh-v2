@@ -28,12 +28,11 @@ interface KanbanBoardProps {
  * Thin wrapper that attaches useDraggable to a KanbanCard.
  */
 interface DraggableCardProps {
-  projectId: string;
   task: TaskWithMeta;
   onClick?: (task: TaskWithMeta) => void;
 }
 
-function DraggableCard({ projectId, task, onClick }: DraggableCardProps) {
+function DraggableCard({ task, onClick }: DraggableCardProps) {
   const { ref, isDragging } = useDraggable({
     id: task.id,
     data: task,
@@ -41,7 +40,6 @@ function DraggableCard({ projectId, task, onClick }: DraggableCardProps) {
 
   return (
     <KanbanCard
-      projectId={projectId}
       ref={ref}
       task={task}
       isDragging={isDragging}
@@ -87,7 +85,7 @@ function DroppableColumn({
       onCardClick={onCardClick}
       projectId={projectId}
       renderCard={(task) => (
-        <DraggableCard key={task.id} projectId={projectId} task={task} onClick={onCardClick} />
+        <DraggableCard key={task.id} task={task} onClick={onCardClick} />
       )}
     />
   );
@@ -180,7 +178,7 @@ export function KanbanBoard({
 
       <DragOverlay dropAnimation={null}>
         {dragState.activeTask ? (
-          <KanbanCard projectId={projectId} task={dragState.activeTask} isOverlay />
+          <KanbanCard task={dragState.activeTask} isOverlay />
         ) : null}
       </DragOverlay>
     </DragDropProvider>

@@ -20,7 +20,7 @@ export function TaskDetailDrawer({ projectId }: TaskDetailDrawerProps) {
   
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && close()}>
-      <DialogContent className="max-w-7xl! h-[85vh] p-0 gap-0 overflow-hidden flex flex-col bg-background" aria-describedby="task-detail-description">
+      <DialogContent className="group max-w-7xl! h-[85vh] p-0 gap-0 overflow-hidden flex flex-col bg-background" aria-describedby="task-detail-description">
         <DialogTitle className="sr-only">Task Details</DialogTitle>
         <DialogDescription id="task-detail-description" className="sr-only">
           Detailed view and editing interface for the selected task.
@@ -43,7 +43,7 @@ export function TaskDetailDrawer({ projectId }: TaskDetailDrawerProps) {
                 projectId={projectId}
                 onOpenTask={open}
               />
-              <div className="w-[340px] shrink-0 border-l border-border bg-muted/10 overflow-y-auto">
+              <div className="w-85 shrink-0 border-l border-border bg-muted/10 overflow-y-auto">
                 <TaskDetailSidebar task={task} projectId={projectId} />
               </div>
             </div>

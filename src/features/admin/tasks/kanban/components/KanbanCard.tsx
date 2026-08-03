@@ -8,14 +8,12 @@ import { TaskPriorityIcon } from "@/components/atoms/TaskPriorityIcon";
 import { TaskLabelChip } from "@/components/atoms/TaskLabelChip";
 import { TaskCountBadge } from "@/components/atoms/TaskCountBadge";
 import { cn } from "@/lib/utils";
-import { DeleteTaskDialog } from "@/features/admin/tasks/components";
 
 const MAX_VISIBLE_LABELS = 3;
 const TERMINAL_STATUSES = new Set(["REVIEW", "DONE"] as const);
 
 interface KanbanCardProps {
   task: TaskWithMeta;
-  projectId: string;
   onClick?: (task: TaskWithMeta) => void;
   isOverlay?: boolean;
   isDragging?: boolean;
@@ -24,7 +22,7 @@ interface KanbanCardProps {
 
 export const KanbanCard = forwardRef<HTMLDivElement, KanbanCardProps>(
   (
-    { task, projectId, onClick, isOverlay = false, isDragging = false, className },
+    { task, onClick, isOverlay = false, isDragging = false, className },
     ref,
   ) => {
     const isOverdue =
@@ -69,9 +67,6 @@ export const KanbanCard = forwardRef<HTMLDivElement, KanbanCardProps>(
         {/* Row 1: Priority + Task type + Delete Button */}
         <div className="flex items-center justify-between gap-2">
           <TaskPriorityIcon priority={task.priority} showLabel />
-          {!isOverlay && (
-            <DeleteTaskDialog projectId={projectId} taskId={task.id} taskTitle={task.title} />
-          )}
           
           <div className="flex items-center gap-1.5 ml-auto">
             {task.type && (

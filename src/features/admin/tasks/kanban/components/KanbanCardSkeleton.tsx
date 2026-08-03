@@ -33,7 +33,7 @@ export function KanbanCardSkeleton({
   return (
     <div
       className={cn(
-        "flex flex-col gap-2.5 lg:w-62 w-full rounded-lg border bg-card p-3",
+        "flex flex-col gap-2.5 lg:w-64 w-full rounded-lg border bg-card p-3",
         className,
       )}
       aria-hidden="true"

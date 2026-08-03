@@ -82,7 +82,7 @@ export function TaskDetailBody({
               <div
                 role="button"
                 tabIndex={0}
-                className="min-h-[80px] rounded-md px-3 py-2 -mx-3 hover:bg-muted/40 transition-colors cursor-text"
+                className="min-h-20 rounded-md px-3 py-2 -mx-3 hover:bg-muted/40 transition-colors cursor-text"
                 onClick={() => setIsEditing(true)}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
