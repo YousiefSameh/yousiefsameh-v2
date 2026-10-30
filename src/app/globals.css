@@ -85,6 +85,7 @@
 @theme inline {
   --font-sans: "Inter", "Inter Fallback", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", "Geist Mono", monospace;
+  --font-arabic: "Tajawal", system-ui, sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -360,6 +361,14 @@
 }
 
 /* Prose styling for blog */
+.tiptap {
+  @apply font-arabic!;
+}
+
+.tiptap * {
+  @apply font-arabic!;
+}
+
 .prose-custom {
   @apply text-foreground leading-relaxed;
 }
@@ -390,7 +399,7 @@
 }
 
 .prose-custom code {
-  @apply bg-muted px-1.5 py-0.5 rounded text-sm font-mono;
+  @apply bg-muted px-1.5 py-0.5 rounded text-sm font-arabic;
 }
 
 .prose-custom pre {

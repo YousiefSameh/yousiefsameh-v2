@@ -1,10 +1,18 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Inter, JetBrains_Mono } from "next/font/google"
-import "./globals.css"
+import type React from "react";
+import type { Metadata } from "next";
+import { Inter, JetBrains_Mono, Tajawal } from "next/font/google";
+import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
-const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains" })
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains",
+});
+const tajawal = Tajawal({
+  subsets: ["latin"],
+  weight: ["200", "300", "400", "500", "700", "800", "900"],
+  variable: "--font-arabic",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -13,7 +21,15 @@ export const metadata: Metadata = {
   },
   description:
     "Building high-quality web experiences with modern technologies. A young, ambitious engineer turning complex problems into elegant solutions.",
-  keywords: ["Full-Stack Developer", "React", "Next.js", "TypeScript", "Web Development", "SaaS", "Frontend Engineer"],
+  keywords: [
+    "Full-Stack Developer",
+    "React",
+    "Next.js",
+    "TypeScript",
+    "Web Development",
+    "SaaS",
+    "Frontend Engineer",
+  ],
   authors: [{ name: "Yousief Sameh" }],
   creator: "Yousief Sameh",
   openGraph: {
@@ -21,29 +37,33 @@ export const metadata: Metadata = {
     locale: "en_US",
     siteName: "Yousief Sameh",
     title: "Yousief Sameh | Full-Stack Developer",
-    description: "Building high-quality web experiences with modern technologies.",
+    description:
+      "Building high-quality web experiences with modern technologies.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Yousief Sameh | Full-Stack Developer",
-    description: "Building high-quality web experiences with modern technologies.",
+    description:
+      "Building high-quality web experiences with modern technologies.",
   },
   robots: {
     index: true,
     follow: true,
   },
-}
+};
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+      <body
+        className={`${inter.variable} ${jetbrainsMono.variable} ${tajawal.variable} font-sans antialiased`}
+      >
         {children}
       </body>
     </html>
-  )
+  );
 }

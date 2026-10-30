@@ -11,6 +11,44 @@ interface RouteParams {
 }
 
 /**
+ * GET /api/admin/blogs/[blogId]
+ * -----------------------------
+ * Retrieves a single blog post by its unique identifier (UUID).
+ *
+ * Route Parameters:
+ * @param {string} blogId - UUID of the target blog post.
+ *
+ * @returns {Promise<APIResult<BlogPost>>} The requested blog post entity.
+ */
+
+export async function GET(
+  _request: Request,
+  { params }: RouteParams
+): Promise<APIResult<BlogPost>> {
+  try {
+    const user = await requireAdmin();
+    if (!user) {
+      return apiError("Unauthorized", 401);
+    }
+
+    const { blogId } = await params;
+
+    const blog = await prisma.blogPost.findUnique({
+      where: { id: blogId },
+    });
+
+    if (!blog) {
+      return apiError("Blog post not found", 404);
+    }
+
+    return apiSuccess(blog, "Blog fetched successfully", 200);
+  } catch (error: unknown) {
+    console.error(`[GET /api/admin/blogs/[blogId]]`, error);
+    return apiError("Failed to fetch blog post", 500);
+  }
+}
+
+/**
  * PATCH /api/admin/blogs/[blogId]
  * ------------------------------
  * Updates an existing blog post by its unique identifier (UUID).

@@ -25,7 +25,7 @@ export function ImageUpload({
   options,
   className,
   preview = true,
-  label = "Upload Image",
+  label,
 }: ImageUploadProps) {
   const [uploading, setUploading] = useState(false);
   const [previewUrl, setPreviewUrl] = useState<string | undefined>(value);

@@ -24,20 +24,11 @@ import { ProjectFormValues } from "@/features/admin/projects/validations/project
 import { UseFormReturn, useWatch } from "react-hook-form";
 import { Button } from "@/components/atoms/button";
 import { Wand2 } from "lucide-react";
+import { generateSlug } from "@/lib/utils";
 
 interface BasicInfoCardProps {
   form: UseFormReturn<ProjectFormValues>;
   clients: Client[];
-}
-
-function generateSlug(title: string): string {
-  return title
-    .toLowerCase()
-    .trim()
-    .replace(/[^\w\s-]/g, "")
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-")
-    .replace(/^-|-$/g, "");
 }
 
 export function BasicInfoCard({ form, clients }: BasicInfoCardProps) {

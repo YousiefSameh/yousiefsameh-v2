@@ -1,4 +1,5 @@
 import { BlogPostCategory } from "@/app/generated/prisma/enums";
+import { type JSONContent } from "@tiptap/react";
 import z from "zod";
 
 export const blogPostBaseSchema = z.object({
@@ -12,7 +13,7 @@ export const blogPostBaseSchema = z.object({
   excerpt: z
     .string()
     .min(10, { message: "Excerpt must be at least 10 characters." }),
-  content: z.custom<Record<string, unknown> | Array<unknown> | string | number | boolean>((val) => val !== undefined && val !== null, {
+  content: z.custom<JSONContent>((val) => val !== undefined || val !== null, {
     message: "Content is required.",
   }),
   featuredImageUrl: z
